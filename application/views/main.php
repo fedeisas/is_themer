@@ -73,11 +73,13 @@
             <h3>Image Widget</h3>
             <div class="imageupload">
               <div class="media-grid">
-                <a href="#">
+                <a href="#" data-original-title="Click to change">
                   <img src="http://placehold.it/935x110" class="thumbnail" width="748" height="88" />
                 </a> 
               </div>
-              <input type="file" name="header" id="header" class="inputfile" />
+              <input type="file" name="header" id="header" class="inputfile" style="display:none;"/>
+              <br/>
+              <input type="text" name="theme[header]" id="header_image" class="disabled" disabled style="display:none;" />
               <span class="help-block">
                 <strong>Note:</strong> Works best with 935x110 images.
               </span>

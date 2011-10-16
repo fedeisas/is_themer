@@ -17,18 +17,21 @@ class Upload extends CI_Controller {
 			$status = "error";
 			$data = $this->upload->display_errors('', '');
 			$url = "";
+			$filename = "";
 		}
 		else
 		{
 			$status = "ok";
 			$data = $this->upload->data();
 			$url = site_url("uploads/".$data["file_name"]);
+			$filename = "uploads/".$data["file_name"];
 		}
 		
 		echo json_encode(
 			array(
 				'status' => $status,
-				'url' => $url
+				'url' => $url,
+				'filename' => $filename
 			)
 		);
 	}
