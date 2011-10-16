@@ -30,21 +30,7 @@ return this.each(function(){var $this=$(this)
 if(typeof options=='string'){return $this.data('alert')[options]()}
 $(this).data('alert',new Alert(this,options))})}
 $.fn.alert.defaults={selector:'.close'}
-$(document).ready(function(){new Alert($('body'),{selector:'.alert-message[data-alert] .close'})})}(window.jQuery||window.ender);!function($){var Popover=function(element,options){this.$element=$(element)
-this.options=options
-this.enabled=true
-this.fixTitle()}
-Popover.prototype=$.extend({},$.fn.twipsy.Twipsy.prototype,{setContent:function(){var $tip=this.tip()
-$tip.find('.title')[this.options.html?'html':'text'](this.getTitle())
-$tip.find('.content p')[this.options.html?'html':'text'](this.getContent())
-$tip[0].className='popover'},getContent:function(){var content,$e=this.$element,o=this.options
-if(typeof this.options.content=='string'){content=$e.attr(o.content)}else if(typeof this.options.content=='function'){content=this.options.content.call(this.$element[0])}
-return content},tip:function(){if(!this.$tip){this.$tip=$('<div class="popover" />').html('<div class="arrow"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')}
-return this.$tip}})
-$.fn.popover=function(options){if(typeof options=='object')options=$.extend({},$.fn.popover.defaults,options)
-$.fn.twipsy.initWith.call(this,options,Popover,'popover')
-return this}
-$.fn.popover.defaults=$.extend({},$.fn.twipsy.defaults,{content:'data-content',placement:'right'})}(window.jQuery||window.ender);!function($){var transitionEnd
+$(document).ready(function(){new Alert($('body'),{selector:'.alert-message[data-alert] .close'})})}(window.jQuery||window.ender);!function($){var transitionEnd
 $(document).ready(function(){$.support.transition=(function(){var thisBody=document.body||document.documentElement,thisStyle=thisBody.style,support=thisStyle.transition!==undefined||thisStyle.WebkitTransition!==undefined||thisStyle.MozTransition!==undefined||thisStyle.MsTransition!==undefined||thisStyle.OTransition!==undefined
 return support})()
 if($.support.transition){transitionEnd="TransitionEnd"
@@ -111,7 +97,21 @@ this[binder](eventIn,enter)[binder](eventOut,leave)}
 return this}
 $.fn.twipsy.Twipsy=Twipsy
 $.fn.twipsy.defaults={animate:true,delayIn:0,delayOut:0,fallback:'',placement:'above',html:false,live:false,offset:0,title:'title',trigger:'hover'}
-$.fn.twipsy.elementOptions=function(ele,options){return $.metadata?$.extend({},options,$(ele).metadata()):options}}(window.jQuery||window.ender);!function($){$.fn.dropdown=function(selector){return this.each(function(){$(this).delegate(selector||d,'click',function(e){var li=$(this).parent('li'),isActive=li.hasClass('open')
+$.fn.twipsy.elementOptions=function(ele,options){return $.metadata?$.extend({},options,$(ele).metadata()):options}}(window.jQuery||window.ender);!function($){var Popover=function(element,options){this.$element=$(element)
+this.options=options
+this.enabled=true
+this.fixTitle()}
+Popover.prototype=$.extend({},$.fn.twipsy.Twipsy.prototype,{setContent:function(){var $tip=this.tip()
+$tip.find('.title')[this.options.html?'html':'text'](this.getTitle())
+$tip.find('.content p')[this.options.html?'html':'text'](this.getContent())
+$tip[0].className='popover'},getContent:function(){var content,$e=this.$element,o=this.options
+if(typeof this.options.content=='string'){content=$e.attr(o.content)}else if(typeof this.options.content=='function'){content=this.options.content.call(this.$element[0])}
+return content},tip:function(){if(!this.$tip){this.$tip=$('<div class="popover" />').html('<div class="arrow"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')}
+return this.$tip}})
+$.fn.popover=function(options){if(typeof options=='object')options=$.extend({},$.fn.popover.defaults,options)
+$.fn.twipsy.initWith.call(this,options,Popover,'popover')
+return this}
+$.fn.popover.defaults=$.extend({},$.fn.twipsy.defaults,{content:'data-content',placement:'right'})}(window.jQuery||window.ender);!function($){$.fn.dropdown=function(selector){return this.each(function(){$(this).delegate(selector||d,'click',function(e){var li=$(this).parent('li'),isActive=li.hasClass('open')
 clearMenus()!isActive&&li.toggleClass('open')
 return false})})}
 var d='a.menu, .dropdown-toggle'
@@ -260,4 +260,6 @@ else if(h<360){rgb.r=t1;rgb.g=t2;rgb.b=t1-t3;}
 else{rgb.r=0;rgb.g=0;rgb.b=0;}}
 return{r:Math.round(rgb.r),g:Math.round(rgb.g),b:Math.round(rgb.b)};};var rgb2hex=function(rgb){var hex=[rgb.r.toString(16),rgb.g.toString(16),rgb.b.toString(16)];$.each(hex,function(nr,val){if(val.length==1)hex[nr]='0'+val;});return hex.join('');};var hex2rgb=function(hex){var hex=parseInt(((hex.indexOf('#')>-1)?hex.substring(1):hex),16);return{r:hex>>16,g:(hex&0x00FF00)>>8,b:(hex&0x0000FF)};};var rgb2hsb=function(rgb){var hsb={h:0,s:0,b:0};var min=Math.min(rgb.r,rgb.g,rgb.b);var max=Math.max(rgb.r,rgb.g,rgb.b);var delta=max-min;hsb.b=max;hsb.s=max!=0?255*delta/max:0;if(hsb.s!=0){if(rgb.r==max){hsb.h=(rgb.g-rgb.b)/delta;}else if(rgb.g==max){hsb.h=2+(rgb.b-rgb.r)/delta;}else{hsb.h=4+(rgb.r-rgb.g)/delta;}}else{hsb.h=-1;}
 hsb.h*=60;if(hsb.h<0){hsb.h+=360;}
-hsb.s*=100/255;hsb.b*=100/255;return hsb;};var hex2hsb=function(hex){var hsb=rgb2hsb(hex2rgb(hex));if(hsb.s===0)hsb.h=360;return hsb;};var hsb2hex=function(hsb){return rgb2hex(hsb2rgb(hsb));};switch(o){case'readonly':$(this).each(function(){$(this).attr('readonly',data);});return $(this);break;case'disabled':$(this).each(function(){if(data){disable($(this));}else{enable($(this));}});return $(this);case'value':$(this).each(function(){$(this).val(data).trigger('keyup');});return $(this);break;case'destroy':$(this).each(function(){destroy($(this));});return $(this);default:if(!o)o={};$(this).each(function(){if($(this)[0].tagName.toLowerCase()!=='input')return;if($(this).data('trigger'))return;create($(this),o,data);});return $(this);}}});})(jQuery);$(document).ready(function(){$(".colors").miniColors();});
+hsb.s*=100/255;hsb.b*=100/255;return hsb;};var hex2hsb=function(hex){var hsb=rgb2hsb(hex2rgb(hex));if(hsb.s===0)hsb.h=360;return hsb;};var hsb2hex=function(hsb){return rgb2hex(hsb2rgb(hsb));};switch(o){case'readonly':$(this).each(function(){$(this).attr('readonly',data);});return $(this);break;case'disabled':$(this).each(function(){if(data){disable($(this));}else{enable($(this));}});return $(this);case'value':$(this).each(function(){$(this).val(data).trigger('keyup');});return $(this);break;case'destroy':$(this).each(function(){destroy($(this));});return $(this);default:if(!o)o={};$(this).each(function(){if($(this)[0].tagName.toLowerCase()!=='input')return;if($(this).data('trigger'))return;create($(this),o,data);});return $(this);}}});})(jQuery);$(document).ready(function(){$(".colors").miniColors();$(".imageupload input").change(function(){var elementID=$(this).attr('id');var fieldName=$(this).attr('name');var imageContainer=$(this).parent().children('.media-grid').children().children();$.ajaxFileUpload({url:'./upload/upload_file/',secureuri:false,fileElementId:elementID,dataType:'json',data:{'fieldName':fieldName},success:function(data,status)
+{console.log(data);if(data.status=='ok')
+{imageContainer.attr('src',data.url);}}});return false;});});
