@@ -4,6 +4,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
+		log_message('error', 'This works!');
 		$this->load->view('main');
 	}
 
