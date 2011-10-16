@@ -64,7 +64,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array();
+$autoload['helper'] = array('url');
 
 
 /*
@@ -111,6 +111,18 @@ $autoload['language'] = array();
 
 $autoload['model'] = array();
 
+
+/*
+| -------------------------------------------------------------------
+|  Auto-load Sparks
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	$autoload['sparks'] = array('example-spark/1.0.0');
+|
+*/
+
+$autoload['sparks'] = array('assets/0.6.3');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
