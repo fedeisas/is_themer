@@ -443,7 +443,7 @@ if(jQuery) (function($) {
 				
 				return { x: x - 5, y: y - 5 };
 				
-			}
+			};
 			
 			
 			var getHuePositionFromHSB = function(hsb) {
@@ -454,7 +454,7 @@ if(jQuery) (function($) {
 				
 				return { y: y - 1 };
 				
-			}
+			};
 			
 			
 			var cleanHex = function(hex) {
