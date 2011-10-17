@@ -9,8 +9,6 @@ $(document).ready( function() {
 
 	$(".imageupload input").live('change', function(e){
 
-		console.log('change');
-
 		e.preventDefault();
 
 		var elementID = $(this).attr('id');
@@ -35,6 +33,20 @@ $(document).ready( function() {
 			   }
 			}
 		});
+		return false;
+	});
+
+
+	$(".multiplechoice a").click(function(e){
+		e.preventDefault();
+		var  e = $(this);
+		var choice = e.attr('id');
+		e.parent().parent().children('li').each(function(){
+			$(this).children('a').removeClass('selected');
+		});
+		e.addClass('selected');
+		$(this).parent().parent().siblings('input').val(choice);
+
 		return false;
 	});
 });

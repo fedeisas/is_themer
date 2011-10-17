@@ -178,4 +178,5 @@ p{text-align:center}.container{width:820px}.content{background-color:#fff;paddin
 .content
 .span4{min-height:500px}.content
 .span4{margin-left:0;padding-left:19px;border-left:1px solid #eee}.topbar
-.btn{border:0}
+.btn{border:0}a,a:visited,a:hover,a:focus,input,input:visited,input:hover,input:focus{outline:none !important}.media-grid
+.selected{border-color:#0069D6 !important;box-shadow:0 1px 4px rgba(0, 105, 214, 0.25) !important}

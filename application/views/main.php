@@ -64,34 +64,60 @@
         </div>
         <div class="row">
           <div class="span14">
+            
+            <?=form_open('generator')?>
 
-            <h3>Color Widget</h3>
+            <h4>Color Widget</h4>
             <input type="text" name="color3" class="colors" size="7" value="#005294" />
 
             <hr>
 
-            <h3>Image Widget</h3>
+            <h4>Image Widget</h4>
             <div class="imageupload">
+              <span class="help-block">
+                <strong>Note:</strong> Works best with 935x110 images.
+              </span>
               <div class="media-grid">
                 <a href="#" data-original-title="Click to change">
                   <img src="http://placehold.it/935x110" class="thumbnail" width="748" height="88" />
                 </a> 
               </div>
               <input type="file" name="header" id="header" class="inputfile" style="display:none;"/>
-              <br/>
-              <input type="text" name="theme[header]" id="header_image" class="disabled" disabled style="display:none;" />
-              <span class="help-block">
-                <strong>Note:</strong> Works best with 935x110 images.
-              </span>
+              <input type="text" name="header_filename" id="header_image" style="display:none;" />
             </div>
             
 
             <hr>
-                        
+            
+            <h4>Vote Widget Selector</h4>
+            <div class="multiplechoice">
+              <ul class="media-grid">
+                <li>
+                  <a href="#" id="button_1" class="selected">
+                    <img alt="" src="http://placehold.it/210x150" class="thumbnail">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" id="button_2">
+                    <img alt="" src="http://placehold.it/210x150" class="thumbnail">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" id="button_3">
+                    <img alt="" src="http://placehold.it/210x150" class="thumbnail">
+                  </a>
+                </li>
+              </ul>
+              <input type="text" name="vote_widget" id="vote_widget" style="display:none;" value="button_1" />
+            </div>
+
+            <hr>                        
 
             <div class="actions" style="padding-left:620px;">
               <input type="submit" class="btn success" value="Generate" />&nbsp;<a class="btn" href="<?=site_url()?>">Cancel</a>
             </div>
+
+            <?=form_close()?>
           </div>
         </div>
       </div>
