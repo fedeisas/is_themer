@@ -13,7 +13,7 @@ class Generator extends CI_Controller {
 		}
 
 		foreach ( $this->input->post('import') as $key => $val ) {
-    		$string.= "@import ".'"assets/scss/'."$val".'";'."\n";
+    		$string.= "@import ".'"'.FCPATH.'assets/scss/'."$val".'";'."\n";
 		}
 
 
@@ -23,8 +23,12 @@ class Generator extends CI_Controller {
 		}
 		else
 		{
-		    $this->load->helper('scss');
-		    render_scss('tmp/custom.scss', 'tmp/custom.css', '--style expanded');
+		    //$cmd = escapeshellcmd("sass --style expanded ".FCPATH."tmp/custom.scss");
+
+			//return shell_exec($cmd);
+			echo '<pre>';
+			echo shell_exec(escapeshellcmd('sass -t expanded --unix-newlines --no-cache '.FCPATH.'tmp/custom.scss'));
+			echo '</pre>';
 		}
 	}
 

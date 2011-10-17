@@ -98,17 +98,17 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#" id="main2">
+                  <a href="#" id="main_2">
                     <img alt="" src="http://placehold.it/210x150" class="thumbnail">
                   </a>
                 </li>
                 <li>
-                  <a href="#" id="main3">
+                  <a href="#" id="main_3">
                     <img alt="" src="http://placehold.it/210x150" class="thumbnail">
                   </a>
                 </li>
               </ul>
-              <input type="text" name="import[vote_widget]" id="vote_widget" style="display:none;" value="button_1" />
+              <input type="text" name="import[vote_widget]" id="vote_widget" style="display:none;" value="main" />
             </div>
 
             <hr>                        
