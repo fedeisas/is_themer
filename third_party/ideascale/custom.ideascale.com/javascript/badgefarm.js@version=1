@@ -1,0 +1,4 @@
+// TODO: Jeremy
+function loadContent(elementSelector, sourceUrl) {
+$(""+elementSelector+"").load("http://yoursite.com/"+sourceURL+"");
+}

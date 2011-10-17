@@ -1,0 +1,2470 @@
+/*jslint on: true */
+/*global $, confirm, window, setTimeout, alert, document, chipdist, Recaptcha, configureCategoryTree, configureCategoryTreeAdmin */
+
+JSON.__parse = JSON.parse;
+JSON.parse = function(msg) {
+  return (msg instanceof Object) ? msg : this.__parse(msg);
+};
+
+var onNyroModalRemoved = null;
+
+var IE = /*@cc_on!@*/false;
+var ie8orAbove = false;
+var ie8orBelow = false;
+var ie7orBelow = false;
+var ie6orBelow = false;
+var initInternetExplorerVersionFlags = function() {
+	if (navigator.appName == 'Microsoft Internet Explorer')
+	{
+		var ua = navigator.userAgent;
+		var re  = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
+		if (re.exec(ua) !== null) {
+			var rv = parseFloat( RegExp.$1 );
+			if (rv < 7.0) {
+				ie6orBelow = true;
+			}
+			if (rv < 8.0) {
+				ie7orBelow = true;
+			}
+			if (rv < 9.0) {
+				ie8orBelow = true;
+			}
+			if (rv >= 8.0) {
+				ie8orAbove = true;
+			}
+		}
+	}
+};
+$(function(){initInternetExplorerVersionFlags();});
+
+//Note: The select needs to be enclosed in a container which uses overflow:hidden, in order to hide the expanded part
+var selectDropDownIEbehavior = function(ctx) {
+	if (!$.browser.msie) {
+		return;
+	}
+
+	var expand = function() {
+		var width = this.style.width;
+		// Don't overwrite the stored original width,
+		// if the event occurs for a second time before contract()
+		if (width == "auto") {
+			return;
+		}
+
+		var select = $(this);
+
+		select.data("origWidth", width).css("width", "auto");
+	};
+
+	var contract = function() {
+		var width = this.style.width;
+		// Don't perform this twice
+		if (width != "auto") {
+			return;
+		}
+
+		var origWidth = $(this).data("origWidth");
+		// If the original width was not stored, abort
+		if (origWidth === undefined) {
+			return;
+		}
+
+		$(this).css("width", origWidth).data("origWidth", width);
+	};
+
+	$("select", ctx).each(function(index) {
+		var select = $(this);
+
+		var origWidthStyle = this.style.width;
+		var origWidth = select.width();
+
+		select.css('width', 'auto');
+
+		//if origWidth is 0, the select is invisible (display:none on it or its container), we will bind events anyway to be safe
+		if(origWidth == 0 || select.width() > origWidth) {
+			select.mousedown(expand).blur(contract).change(contract);
+		}
+
+		this.style.width = origWidthStyle;
+	});
+};
+
+var addIeHacks = function() {
+	if (IE && ie8orBelow) {
+	  selectDropDownIEbehavior(document);
+	  $(function() {
+		var zIndexNumber = 99;
+		$('li.idea').each(function() {
+			$(this).css('z-index', zIndexNumber--);
+		});
+		$('#ideas').css('z-index', 2);
+		$('.displaying').css('z-index', 1);
+		$('.pagination').css('z-index', 1);
+
+		$('#session').css('z-index',1);
+		$('#search').css('z-index',0);
+	  });
+	}
+};
+$(function(){addIeHacks();});
+
+var uniqueIdFeed = 0;
+function uniqueId() {
+  return 'uid-' + new Date().getTime() + '-' + ++uniqueIdFeed;
+}
+
+var accessibilityFocusOnSkiplink = function() {
+	$('#skip').focus();
+};
+$(function(){accessibilityFocusOnSkiplink();});
+
+var focus = function(scrollSelector,focusSelector) {
+  scrollIntoView($(scrollSelector));
+	$(focusSelector).focus();
+};
+
+var trackingFocus= true;
+var focusedElement = null;
+var trackFocus = function() {
+	$('*').focus(function(e) {
+		if (trackingFocus) {
+			focusedElement = e.target;
+		}
+	});
+};
+$(function($){trackFocus();});
+var pauseFocusTracking = function() {
+	trackingFocus = false;
+};
+var focusPopup = function() {
+	pauseFocusTracking();
+	$('.overlay .accessibility-focus').focus();
+};
+var resetFocus = function() {
+	trackingFocus = true;
+	if (focusedElement !== null) {
+		$(focusedElement).focus();
+	}
+};
+
+var stringTrim = function(str) {
+    str = str.replace(/^([ \r\n]+)([^ \r\n])/i, "$2");
+    str = str.replace(/([ \r\n]+)$/i, "");
+    return str;
+};
+
+var restoreIdealist;
+var showScreen = function(focus) {
+    var idea = $(focus);
+    var screenDimension = {"width":$(document).width(),"height":$(document).height()};
+
+    idea.addClass('screen-focus');
+
+    if(IE && ie8orBelow) {
+        var ideaTag = idea.get(0).tagName.toLowerCase();
+        var idealist = ideaTag === 'li' ? $('#ideas') : idea;
+        var offset = idealist.offset();
+
+        //create the placeholder div which is the same size as the idealist
+        var idealistPlaceHolder = $('<div>').css({
+            width: idealist.outerWidth(),
+            height: idealist.outerHeight(),
+            'margin-top': idealist.css('margin-top'),
+            'margin-bottom': idealist.css('margin-bottom'),
+            'margin-left': idealist.css('margin-left'),
+            'margin-right': idealist.css('margin-right')
+        }).insertBefore(idealist);
+
+        //We want idealist to be at the top level in the DOM tree, so it's not affected by IE's z-index bug.
+        //But because idealist has to update its position when we resize the window, it needs a positioning container
+        //So we create a dummyPage div to hold the idealist
+        var dummyPage = $('<div id="dummyPage" style="position: relative; margin: 0 auto; height: 0; z-index: 9999">').css('width', $('#page').width()).prependTo(document.body);
+
+        //prepare the restore steps
+        var idealistStyle = {
+            'top': idealist.css('top'),
+            'left': idealist.css('left')
+        };
+        var ideaZIndex = idea.css('z-index');
+        restoreIdealist = function (){
+            $('#screen').remove();
+
+            idealist.css(idealistStyle).removeClass('hanging').insertBefore(idealistPlaceHolder);
+            idea.css('z-index', ideaZIndex);
+
+            idealistPlaceHolder.remove();
+            dummyPage.remove();
+
+            restoreIdealist = null;//prevent memory leak
+        };
+
+        //move idealist into the top level dummyPage div
+        //use absolute positioning to keep it at the original position
+        idealist.css({
+            'width': idealist.width()
+        }).addClass('hanging').appendTo(dummyPage).css({
+            left: offset.left - dummyPage.offset().left,
+            top: offset.top - dummyPage.offset().top
+        });
+
+        //create the dummy li (when there's a list) or div (when there's only a single idea) which is used as screen
+        var screenOffset = idea !== idealist ? offset : dummyPage.offset();
+        $('<' + ideaTag + ' id="screen">').css(screenDimension).css({
+            left: '-' + (screenOffset.left + 1) + 'px',
+            top: '-' + (screenOffset.top + 1) + 'px',
+            opacity: 0.7
+        }).appendTo(idea.parent()).fadeIn('slow');
+
+        //put the focus li above the screen
+        idea.css('z-index', $('#screen').css('z-index') + 1);
+        return;
+    }
+
+	$('body').append('<div id="screen"></div>');
+	$('#screen').css(screenDimension).css('opacity', 0.7).fadeIn('slow');
+};
+var hideScreen = function() {
+	$('#screen').fadeOut('slow', function() {
+		$('.screen-focus').removeClass('screen-focus');
+
+        if(IE && ie8orBelow) {
+            if(restoreIdealist) {
+                restoreIdealist();
+            }
+            return;
+        }
+
+        $('#screen').remove();
+	});
+};
+
+var headerFadeins = function() {
+    $("#header").unbind().hover(
+        function(e) {$('a#client-link').fadeIn("fast");},
+        function() { $("a#client-link").fadeOut("fast");}
+    );
+};
+$(function($){headerFadeins();});
+
+var ideaFadeins = function() {
+    $(".idea").unbind().hover(
+        function(e) {
+            var id = e.currentTarget.id;
+            $('#' + id + ' a.report').fadeIn("fast");
+        },
+        function() {
+            $(".idea a.report").fadeOut("fast");
+        }
+    );
+};
+$(function($){ideaFadeins();});
+
+var commentFadeins = function() {
+    $(".comment").unbind().hover(
+        function(e) {
+            var id = e.currentTarget.id;
+            $('#' + id + '.comment .status .actions .report-abuse').fadeIn("fast");
+        },
+        function() {
+            $(".comment .status .actions .report-abuse").fadeOut("fast");
+        }
+    );
+};
+$(function($){commentFadeins();});
+
+var showMessage = function(selector, text, cssClass) {
+	$(selector).empty();
+	$(selector).append(text);
+	$(selector).removeClass('invisible success notice error');
+	$(selector).addClass(cssClass);
+  $(selector).initializeFeatures();
+};
+
+function removeFilterForIE(target) {
+  if (!$.browser.msie) {
+    return;
+  }
+  target.css('filter', null).css('zoom', null);
+}
+
+function flash(target) {
+  target.pulse({opacity: [0,1]}, {times:5,duration: 250,complete: function() {
+            removeFilterForIE(target);
+            target.attr("role", "alert");
+            setTimeout(function() {
+              target.removeAttr("role");
+            }, 5000);
+          }});
+}
+
+function formatMessage(message) {
+  var result = '';
+
+  if (message.title !== undefined) {
+    result += message.title;
+  }
+
+  result += '<p>';
+  result += message.text;
+
+  var action = message.action;
+
+  if (action !== undefined) {
+    result += "&nbsp;<a href=\"" + action.url + "\" title=\"" + action.title + '"';
+    if (action.actionClass) {
+      result += ' class="' + action.actionClass + '"';
+    }
+    var actionAttrs = action.actionAttrs;
+    if (actionAttrs) {
+      for (var key in actionAttrs) {
+        result += ' ' + key + '="' + actionAttrs[key] + '"';
+      }
+    }
+
+    result += ">" + action.text + "</a>";
+  }
+
+  result += '</p>';
+
+  return result;
+}
+
+var inform = function(selector, message) {
+  var msgBoard;
+  if (selector) {
+    msgBoard = $(selector);
+  }
+  else {
+    msgBoard = $('#nyroModalContent #message');
+    if (msgBoard.length === 0) {
+      msgBoard = $('#message-user');
+    }
+  }
+
+  msgBoard.empty();
+  msgBoard.append(formatMessage(message));
+  msgBoard.removeClass('invisible success notice error').addClass(message.type);
+
+  msgBoard.initializeFeatures();
+
+  scrollIntoView(msgBoard);
+};
+
+function scrollIntoView(object) {
+  if(object.length === 0) {
+    return;
+  }
+
+  //TODO: don't scroll if already visible in the viewport
+  $('html,body').animate({scrollTop : object.first().offset().top - $(window).height() / 2},'slow');
+  //$(window).scrollTop(object.first().offset().top - $(window).height() / 2);
+}
+
+function markAsChanged(selector) {
+  $(selector).attr('role', 'alert');
+}
+
+function notifyChange(container) {
+  var changedItem = $(container).find('[role="alert"]');
+  scrollIntoView(changedItem);
+  changedItem.removeAttr('role').effect('pulsate', 500);
+}
+
+var handleAjaxError = function (XMLHttpRequest, textStatus) {
+  showMessage('#message-user', "Unable to perform request (" + textStatus + ")", "error");
+  enableSubmitButton();
+
+  scrollIntoView($('#message-user'));
+};
+
+var denied = function(denial, selector) {
+  inform(selector, denial.data.message);
+};
+
+var more = function(ideaID) {
+	$('#idea-' + ideaID + "-summary").addClass('invisible');
+	$('#idea-' + ideaID + "-details").removeClass('invisible');
+};
+var less = function(ideaID) {
+	$('#idea-' + ideaID + "-details").addClass('invisible');
+	$('#idea-' + ideaID + "-summary").removeClass('invisible');
+};
+
+var handleGenericJSONResponse = function(json,selector) {
+	var data = json.data;
+
+	if (json.type == 'denied') {
+		denied(json, selector);
+	} else if (json.type == 'message' || json.type == 'error') {
+    inform(selector, data);
+	}
+
+	enableSubmitButton();
+};
+
+var hideMenus = function() {
+	$('.display-menu').removeClass('display-menu');
+	$('.admin-idea').fadeOut('fast');
+	$('.manage-chips').each(function(i) {
+		if (!$(this).hasClass('inprogress')) {
+			$(this).fadeOut('fast',function() {
+				$(this).empty();
+			});
+		}
+	});
+	hideScreen();
+	$('#page').removeClass('main-overflow-fix');
+};
+
+var moderateMenu = function() {
+	$(".moderate").click(function(event) {
+		event.preventDefault(); //stop default browser behaviour
+		$(this).toggleClass('display-menu');
+		if ($(this).hasClass('display-menu')) {
+			$(this).siblings('.moderate-menu').fadeIn("fast");
+		} else {
+			$(this).siblings('.moderate-menu').fadeOut("fast");
+		}
+	});
+};
+$(function($){moderateMenu();});
+
+var adminIdeaMenu = function() {
+	$(".moderate-idea").click(function(event) {
+		event.preventDefault(); //stop default browser behaviour
+
+		if ($(this).hasClass('display-menu')) {
+			$(this).removeClass('display-menu');
+			$(this).siblings('.admin-idea').fadeOut("fast");
+
+			if($('.display-menu').size() === 0) {
+				$('#page').removeClass('main-overflow-fix');
+			}
+		} else {
+			$('.moderate-idea.display-menu').removeClass('display-menu');
+			$('.admin-idea').fadeOut('fast');
+
+			$(this).addClass('display-menu');
+			$(this).siblings('.admin-idea').fadeIn("fast");
+			$('#page').addClass('main-overflow-fix');
+		}
+	});
+};
+
+$(function(){adminIdeaMenu();});
+
+function updateIdeaStatus(jsonData) {
+  var status = jsonData.idea.status;
+  $("#idea-" + jsonData.idea.id + "-status").removeClass().
+          addClass('idea-status').addClass(status.cssClass).
+          attr('title', status.name).html(status.name);
+}
+
+var ideaDelete = function(url,ideaID,prompt) {
+	var updatingsel = '#idea-' + ideaID + '-moderator-actions li a.delete';
+	$(updatingsel).removeClass();
+	$(updatingsel).addClass("updating-status");
+	if (!confirm(prompt)) { return; }
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: "topicID="+ideaID,
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual') {
+				inform('#message-user',data.message);
+				if (window.location.href.match(/\/dtd\//)) {
+					$('#main').fadeOut("slow");
+				} else {
+					$('#idea-' + data.id).fadeOut("slow");
+				}
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : handleAjaxError
+  });
+};
+
+var clearValidationErrors = function(formid) {
+    $('#'+formid+" .form-field").removeClass('validation-error');
+    $('#'+formid+" .form-field p.validation").remove();
+};
+
+var handleValidationErrors = function(formid,errors) {
+	clearValidationErrors(formid);
+	for (var errorIdx in errors) {
+		if (true) { // http://www.jslint.com/ said to do this
+		  var focused = false;
+		  var error = errors[errorIdx];
+		  for (var messageIdx in error.messages) {
+			  if (true) { // http://www.jslint.com/ said to do this
+				  var message = error.messages[messageIdx];
+				  var selector = '#'+formid+" [name='"+error.property+"']";
+				  if (!focused) {
+					  $(selector).focus();
+				  }
+				  $(selector).siblings('p.validation.aclaration').remove();
+				  $(selector).parent('.form-field').
+				    addClass('validation-error').
+				    append('<p class="validation aclaration" role="alert">'+message+'</p>');
+			  }
+		  }
+		}
+	}
+
+	enableSubmitButton(formid);
+};
+
+var handleNyroModalValidationErrors = function(formid, errors) {
+	handleValidationErrors(formid, errors);
+	$.nyroModalResize();
+};
+
+var ideaAction = function(url,formid) {
+	var form = $('#'+formid);
+	$.ajax({
+		type: "POST",
+		formid: formid,
+		url: url,
+		data: form.serialize(true),
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'errors') {
+				handleNyroModalValidationErrors(this.formid,data.errors);
+			} else if (json.type == 'redirect') {
+				window.location = data.url;
+			} else if (json.type == 'message' || json.type == 'denied') {
+				$.nyroModalRemove();
+				handleGenericJSONResponse(json);
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : handleAjaxError
+    });
+};
+
+var genericPostFormAction = function(url, formid) {
+  var form = $('#' + formid);
+  var data = form.serialize(true);
+
+  disableSubmitButton(form);
+
+  $.ajax({
+    type: "POST",
+    formid: formid,
+    url: url,
+    data: data,
+    success: function(msg, status, response) {
+      var json = JSON.parse(msg);
+      var data = json.data;
+      if (json.type == 'errors') {
+        handleValidationErrors(this.formid, data.errors);
+      } else if (json.type == 'redirect') {
+        window.location = data.url;
+      } else if (json.type == 'message' || json.type == 'denied') {
+        handleGenericJSONResponse(json);
+        enableSubmitButton(formid);
+      } else {
+        handleGenericJSONResponse(json);
+        enableSubmitButton(formid);
+      }
+    },
+    error : function(XMLHttpRequest, textStatus, errorThrown) {
+      handleAjaxError(XMLHttpRequest, textStatus, errorThrown);
+      enableSubmitButton(formid);
+    }
+  });
+
+  return false;
+};
+
+var flag = function(url,elementID) {
+	$.ajax({
+		type: "POST",
+		elementID: elementID,
+		url: url,
+		success: function(msg,status,response) {
+			$('#'+elementID).fadeOut(600, function() {
+				$(this).remove();
+			});
+			handleGenericJSONResponse(JSON.parse(msg));
+		},
+		error: handleAjaxError
+	});
+};
+
+function reloadPage() {
+	window.location.reload();
+}
+
+var redirect = function(url, selector, inseconds) {
+	if (inseconds === 0) {
+		window.location = url;
+	} else {
+		$(selector).empty();
+		$(selector).append(inseconds);
+		setTimeout(function() {redirect(url,selector,inseconds-1);},1000);
+	}
+};
+
+$(function() {
+	  $('#got-an-idea-sidebar').submit(function(e) {
+	    e.preventDefault();
+	    if ($("#got-an-idea-sidebar :text").val() !== '') {
+	      $('#got-an-idea-sidebar').nyroModalManual();
+	    } else {
+	      alert("Enter a value before going to " + $('#got-an-sidebar').attr("action"));
+	    }
+	    return false;
+	  });
+	});
+$(function() {
+	  $('#new-comment-form').submit(function(e) {
+	    e.preventDefault();
+	    return false;
+	  });
+	});
+
+var loadMemberActivity = function(url,memberID) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: "memberID="+memberID,
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			if (json.type == 'contextual') {
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+    error : handleAjaxError
+  });
+};
+
+var popupUrl = function(url) {
+  hideMenus();
+
+  $.nyroModalManual({
+    url: url + ((url.indexOf('?') === -1) ? '?' : '&') + 'cacheStopper=' + new Date().getTime()
+  });
+};
+
+var validateUSZip = function(url,field) {
+	$('input[name='+field.name+']').siblings('select[name='+field.name+'_district]').detach();
+	if (field.value.length != 5) {return;}
+	$.ajax({
+		field: field,
+		type: "GET",
+		url: url + field.value,
+		success: function(msg, status, response) {
+		  $('input[name='+field.name+']').after(msg);
+		},
+		error : function (XMLHttpRequest, textStatus, errorThrown) {
+			showMessage('.'+this.formid+' #message',"Unable to perform request ("+textStatus+")" ,"error");
+		}
+	});
+};
+
+var commentDelete = function(url,ideaID,commentID) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		commentID: commentID,
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'success') {
+				$('#comment-' + commentID + '.comment').fadeOut('slow');
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : handleAjaxError
+  });
+};
+
+
+var memberSetStatus = function(url,memberID,status) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		memberID: memberID,
+		data: "memberID="+memberID+"&approve="+status,
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual') {
+				if (data.member.membership.name === "banned") { // Banned
+					$('#member-' + memberID).removeClass('flagged');
+					$('#member-' + memberID + ' .status .actions a.reject').pulse(
+							{opacity: [0,1]},
+							{memberID:memberID,
+								times:3,
+								duration: 250,
+								complete: function() {
+								  $('#member-' + memberID).fadeOut('slow');
+								  }
+							});
+				} else if (data.member.membership.name === "member") { // Approved
+					$('#member-' + memberID).removeClass('flagged');
+					$('#member-' + memberID + " .status .actions a.approve").pulse(
+							{opacity: [0,1]},
+							{times:3,
+								duration: 250,
+								complete: function() {
+									  $('#member-' + memberID).fadeOut('slow');
+								  }
+							});
+				} // Else Shouldn't Happen
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+    error : handleAjaxError
+  });
+};
+
+var ideaTrack = function(url,ideaID) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		ideaID: ideaID,
+		data: "topicID="+ideaID,
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual') {
+				inform('#message-user',data.message);
+				$("li.track a").attr("href",data.link.href);
+				$("li.track a").attr("title",data.link.title);
+				$("li.track a").empty();
+				$("li.track a").append(data.link.content);
+				if (data.tracking) {
+					$("#enable-email-notifications").attr("checked","checked");
+				} else {
+					$("#enable-email-notifications").removeAttr("checked");
+				}
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+    error : handleAjaxError
+  });
+};
+
+var pokerChipsManage = function(url,ideaID) {
+	//alert("MANAGE: url=" + url + ",ideaID="+ideaID);
+	if ($('#idea-' + ideaID + " a.add-chips").hasClass('display-menu')) {
+		hideMenus(); // Hide this menu.
+		return;
+	}
+	$('#idea-' + ideaID + " a.add-chips").addClass('inprogress');
+	// Hide other menus if they are displayed.
+	hideMenus();
+	$.ajax({
+		type: "GET",
+		url: url,
+		ideaID: ideaID,
+		data: "topicID="+ideaID,
+		success: function(msg, status, response) {
+			try {
+				// Denied via JSON response.
+				handleGenericJSONResponse(JSON.parse(msg));
+				return;
+			} catch (exception) { /* Not JSON - got real response */ }
+			$('#page').addClass('main-overflow-fix');
+			showScreen('#idea-'+ideaID);
+			$('#idea-' + ideaID + " a.add-chips").removeClass('inprogress');
+			$('#idea-' + ideaID + " a.add-chips").siblings('.manage-chips').empty();
+			$('#idea-' + ideaID + " a.add-chips").siblings('.manage-chips').append(msg);
+			$('#idea-' + ideaID + " a.add-chips").toggleClass('display-menu');
+			$('#idea-' + ideaID + " a.add-chips").siblings('.manage-chips').fadeIn("fast");
+		},
+    error : handleAjaxError
+  });
+};
+var pokerChipsDisplay = function(chips,suffix) {
+	var chsel = "#" + chips.key + suffix;
+	$(chsel + " .chip-number").empty();
+	$(chsel + " .chip-number").append("" + chips.value);
+	if (chips.original === chips.value) {
+		$(chsel).removeClass('modified');
+	} else {
+		$(chsel).addClass('modified');
+	}
+	if (chips.value === 0) {
+		$(chsel).addClass('invisible');
+	} else {
+		$(chsel).removeClass('invisible');
+	}
+};
+var pokerChipsDisplayTotal = function(chips) {
+	if (chips.removed) {
+		return;
+	}
+	var selector = "#idea-" + chips.ideaID + " .votes span.vote-number";
+	$(selector).empty();
+	$(selector).append(chips.total);
+};
+var pokerChipsCancel = function(ideaID) {
+	var chsel = "#" + chipdist.chips.key + "-allocated";
+	$(chsel + " .chip-number").empty();
+	$(chsel + " .chip-number").append(chipdist.chips.original);
+	if(chipdist.chips.original === 0) {
+		$(chsel).addClass('invisible');
+	} else {
+		$(chsel).removeClass('invisible');
+	}
+	$(chsel).removeClass('modified');
+	hideMenus();
+	$('#idea-' + ideaID + " a.add-chips").focus();
+	chipdist.chips.value = chipdist.chips.original;
+	chipdist.unallocated = chipdist.originalUnallocated;
+	chipdist.chips.total = chipdist.chips.originalTotal;
+	pokerChipsDisplayTotal(chipdist.chips);
+	for (var chipsIdx in chipdist.allocations) {
+	  if (true) { // http://www.jslint.com/ said to do this
+		var chips = chipdist.allocations[chipsIdx];
+		chips.value = chips.original;
+		chips.total = chips.originalTotal;
+		pokerChipsDisplay(chips,"-allocated");
+		pokerChipsDisplayTotal(chips);
+	  }
+	}
+};
+var pokerChipsSaved = function(ideaID,newchipdist) {
+	var chsel = "#" + chipdist.chips.key + "-allocated";
+	$(chsel).removeClass('modified');
+	var newid = newchipdist.chips.key + "-allocated";
+	$(chsel).attr('id',newid);
+
+	chipdist = newchipdist;
+	pokerChipsDisplay(chipdist.chips,"-allocated");
+	pokerChipsDisplayTotal(chipdist.chips);
+	for (var chipsIdx in chipdist.allocations) {
+	  if (true) { // http://www.jslint.com/ said to do this
+		var chips = chipdist.allocations[chipsIdx];
+		pokerChipsDisplay(chips,"-allocated");
+		pokerChipsDisplayTotal(chipdist.chips);
+	  }
+	}
+	hideMenus();
+};
+var pokerChipsSave = function(url,ideaID) {
+	//alert("SAVE: url=" + url + ",ideaID="+ideaID);
+	$.ajax({
+		type: "POST",
+		url: url,
+		ideaID: ideaID,
+		data: "json="+JSON.stringify(chipdist),
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual') {
+				pokerChipsSaved(ideaID,data);
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+    error : handleAjaxError
+  });
+};
+var pokerChips = function(ideaID, chipsID) {
+  if (chipdist.chips.id === chipsID || chipdist.chips.ideaID === ideaID) {
+	return chipdist.chips;
+  }
+  for (var chipsIdx in chipdist.allocations) {
+	if (true) { // http://www.jslint.com/ said to do this
+	  var chips = chipdist.allocations[chipsIdx];
+	  if (chips.id === chipsID || chips.ideaID === ideaID) {
+	    return chips;
+	  }
+	}
+  }
+  return null;
+};
+var pokerChipsButtonIsAvailable = function(chips, quantity, direction) {
+  if (chips.removed) { // If idea has been removed, only allow 'reclaim all' button.
+    return direction < 0 && quantity === 0;
+  }
+  if (quantity === 0) {
+	if (direction > 0) {
+	  return chipdist.unallocated > 0;  // Can we move all unallocated chips to the idea?
+	} else {
+	  return chips.value > 0; // Can we move all allocated chips back to unallocated?
+	}
+  }
+  if (direction > 0) { // Can we allocate 'quantity' chips to the idea?
+    return chipdist.unallocated >= quantity;
+  } else { // Can we unallocate 'quantity' chips from the idea?
+    return chips.value >= quantity;
+  }
+};
+var pokerChipAllocateLink = function(chips,quantity,direction) {
+    if (pokerChipsButtonIsAvailable(chips, quantity, direction)) {
+        return "javascript:pokerChipsAllocate(" + chips.ideaID + "," + chips.id + "," + quantity + "," + direction + ");";
+    } else {
+        return "javascript:function(){return;};";
+    }
+};
+var pokerChipButtonReset = function(chips,quantity,direction,selector) {
+	var href = pokerChipAllocateLink(chips,quantity,direction);
+	$(selector + " a").attr("href",href);
+	if (pokerChipsButtonIsAvailable(chips,quantity,direction)) {
+		$(selector).removeClass('unavailable');
+	} else {
+		$(selector).addClass('unavailable');
+	}
+};
+var pokerChipsButtonPairReset = function(chips,quantity) {
+	if (quantity !== 0 && chipdist.max <= quantity) {
+	  // Button does not exist
+	  return;
+	}
+	var sel = "#" + chips.key + "-";
+	if (quantity === 0) {
+		sel += "all";
+	} else {
+		sel += quantity;
+	}
+	pokerChipButtonReset(chips,quantity,-1,sel+"m");
+	pokerChipButtonReset(chips,quantity, 1,sel+"p");
+};
+var pokerChipsButtonsReset = function(chips) {
+	pokerChipsButtonPairReset(chips,0); // All
+	pokerChipsButtonPairReset(chips,10);
+	pokerChipsButtonPairReset(chips,5);
+	pokerChipsButtonPairReset(chips,1);
+};
+var pokerChipsButtonsResetAll = function() {
+  pokerChipsButtonsReset(chipdist.chips);
+  for (var chipsIdx in chipdist.allocations) {
+    if (true) { // http://www.jslint.com/ said to do this
+      pokerChipsButtonsReset(chipdist.allocations[chipsIdx]);
+	}
+  }
+};
+var pokerChipQuantity = function(ideaID,chipsID,quantity,direction) {
+  if (quantity === 0) {
+	  if (direction > 0) {
+		  return chipdist.unallocated;
+	  } else {
+		  return pokerChips(ideaID,chipsID).value * -1;
+	  }
+  } else {
+    return quantity * direction;
+  }
+};
+var pokerChipsAllocate = function(ideaID,chipsID,quantity,direction) {
+	//alert("SAVE: ideaID="+ideaID + ",chipsID="+chipsID + ",quantity="+quantity + ",direction="+direction);
+	//alert("Max: " + chipdist.max);
+	var chips = pokerChips(ideaID,chipsID);
+	quantity = pokerChipQuantity(ideaID,chipsID,quantity,direction);
+	chipdist.unallocated -= quantity;
+	chips.value += quantity;
+	chips.total += quantity;
+
+	// Configure the display of the remaining chips
+	var unsel = "#" + chipdist.chips.key + "-remaining";
+	$(unsel).empty();
+	$(unsel).append("" + chipdist.unallocated);
+	if (chipdist.unallocated === chipdist.originalUnallocated) {
+		$('.remaining-chips').removeClass('modified');
+	} else {
+		$('.remaining-chips').addClass('modified');
+	}
+
+	// Configure the display of the allocated chips
+	pokerChipsDisplay(chips,"-allocated");
+	pokerChipsDisplay(chips,"-other-allocated");
+	pokerChipsDisplayTotal(chips);
+	pokerChipsButtonsResetAll();
+};
+
+
+function ideaUploadAttachment() {
+  var fileField = document.getElementById('idea-file-attachment-file');
+  if (fileField.value + '' === '') {
+    handleValidationErrors('idea-file-attachment-form', [
+      {'property': 'file', 'messages': [$(fileField.form).closest('form').attr('data-file-required-msg')]}
+    ]);
+    return false;
+  }
+
+  clearValidationErrors('idea-file-attachment-form');
+
+  disableSubmitButton($('#idea-file-attachment-form'));
+  //For webkit and IE, we have to call submit otherwise the form won't submit once the button is disabled
+  document.getElementById('idea-file-attachment-form').submit();
+
+  return false;
+}
+
+var ideaDeleteAttachment = function(url,ideaID,attachmentID) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		ideaID: ideaID,
+		attachmentID: attachmentID,
+		data: "discussionTopicID="+ideaID+"&discussionFileID="+attachmentID,
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'message' && data.type == 'success') {
+				var selector = '#attachment-'+attachmentID;
+				$(selector).fadeOut('slow', function() {
+					$(selector).remove();
+				});
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : handleAjaxError
+  });
+};
+
+function requestCurrentPosition() {
+  if (!navigator.geolocation) {
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var data = "latitude=" + position.coords.latitude +
+            "&longitude=" + position.coords.longitude +
+            "&accuracy=" + position.coords.accuracy;
+
+    //firefox returns 0 for altitude and altitudeAccuracy
+    if (position.coords.altitude !== null && !isNaN(position.coords.altitude) && position.coords.altitude !== 0) {
+      data += "&altitude=" + position.coords.altitude;
+    }
+
+    if (position.coords.altitudeAccuracy !== null && !isNaN(position.coords.altitudeAccuracy) && position.coords.altitudeAccuracy !== 0) {
+      data += "&altitudeAccuracy=" + position.coords.altitudeAccuracy;
+    }
+
+    if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
+      data += "&heading=" + position.coords.heading;
+    }
+
+    if (position.coords.speed !== null && !isNaN(position.coords.speed)) {
+      data += "&speed=" + position.coords.speed;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "/a/location",
+      data: data
+    });
+  }, function() {
+    //ignore errors
+  }, { maximumAge:600000/*, timeout: 3*/ });
+}
+
+function isIdeaForm() {
+	return document.getElementById('idea-title-field') !== null;
+}
+
+function enableDynamicSearch() {
+	if(document.getElementById('dynamic-search-results')) {
+		var duration = 400;
+		var resultsDivExpanded = false;
+		var resultsContainer = $('#dynamic-search-results');
+		var resultsFullHeight = resultsContainer.outerHeight(true);
+		var otherIdeaFieldsWrapper = $('#other-idea-fields-wrapper');
+		var otherFieldsHeight = 0;
+		var ideaDetailsDiv = otherIdeaFieldsWrapper.parent();
+		var ideaDetailsHeight = ideaDetailsDiv.height();
+		var timer = null;
+		var lastTitle = null;
+
+    var cancelLastSearch = function () {
+      clearTimeout(timer);
+    };
+
+		var receiveSearchResults =function (msg, status, response) {
+			if (!resultsDivExpanded) {
+				return;
+			}
+
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual') {
+				resultsContainer.removeClass('processing');
+
+				var resultsDiv = $('#dynamic-search-results > div');
+
+				if (data.length === 0) {
+					resultsDiv.html('<p>' + resultsContainer.attr('data-msg-not-found') + '</p>');
+				}
+				else{
+					var ideaList = '<ul>';
+
+					for(var i = 0; i < data.length; i++) {
+						var idea = data[i];
+
+						ideaList += '<li><a href="';
+						ideaList += idea.url;
+						ideaList += '" target="_blank" tabindex="9999">';
+						ideaList += idea.title;
+						ideaList += "</a></li>";
+					}
+
+					ideaList += "</ul>";
+
+					resultsDiv.html(ideaList);
+				}
+
+				resultsDiv.addClass('change-alert');
+				resultsContainer.attr('role', 'alert');
+
+				setTimeout(function () {
+					resultsDiv.removeClass('change-alert');
+					resultsContainer.removeAttr('role');
+					}, 1000);
+			}
+		};
+
+		var performDynamicSearch = function () {
+			$.ajax({
+				type: "GET",
+				url: "/a/dynamicSearch.do?query=" + encodeURI($('#idea-title-input').attr('value')),
+				success: receiveSearchResults
+			});
+		};
+
+		//We don't want the server to be queried immediately after the user types something. but we want the user to feel that they are getting immediate response
+		var prepareToSearch = function () {
+      cancelLastSearch();
+
+      timer = setTimeout(performDynamicSearch, 2000);
+
+      resultsContainer.addClass('processing');
+
+      if (resultsContainer.css('display') !== 'none') {
+        return;
+      }
+
+      if (!ie7orBelow) {
+        otherIdeaFieldsWrapper.append('<div class="hidden-hint"></div>');
+      }
+
+      otherFieldsHeight = otherIdeaFieldsWrapper.height();
+
+      var otherIdeaFieldsAnimating = true;
+      var resultsContainerAnimating = true;
+
+      ideaDetailsDiv.css('height', ideaDetailsHeight);
+      ideaDetailsDiv.addClass('no-scrollbar');
+
+      //prevent scrollbar from appearing in webkit browers
+      function restoreIdeaDetailsDivIfAnimationFinished() {
+        if (otherIdeaFieldsAnimating || resultsContainerAnimating) return;
+
+        ideaDetailsDiv.removeClass('no-scrollbar');
+        ideaDetailsDiv.css('height', 'auto');
+      }
+
+      otherIdeaFieldsWrapper.animate({ height: (otherFieldsHeight - resultsFullHeight) + 'px' }, duration, 'swing', function() {
+        otherIdeaFieldsAnimating = false;
+
+        restoreIdeaDetailsDivIfAnimationFinished();
+      });
+
+      resultsContainer.append('<h6>' + resultsContainer.attr('title') + ':</h6><div></div>').slideDown(duration, function() {
+        resultsContainerAnimating = false;
+
+        restoreIdeaDetailsDivIfAnimationFinished();
+      });
+
+      resultsDivExpanded = true;
+    };
+
+		var checkTitleChange = function (){
+			var currentTitle = $.trim($('#idea-title-input').attr('value'));
+			if(currentTitle == lastTitle) {
+				return;
+			}
+
+			lastTitle = currentTitle;
+
+			if((currentTitle + '').length > 2) {
+				prepareToSearch();
+			}
+		};
+
+		//Cannot use keypress event here because it doesn't fire when typing backspace
+		$('#idea-title-input').keydown(function(e) {
+			if($(this.form).find('.validation-error').length > 0) {
+				//we don't need dynamic search results if the user has decided to submit new idea
+				return;
+			}
+
+			//use settimeout because the title can only change after the event
+			setTimeout(checkTitleChange, 0);
+		});
+
+		var hideDynamicResultsIfActingOutsideTitleWrapper = function (e) {
+			if($(e.target).closest('#idea-title-field-wrapper').length === 1) {
+				return;
+			}
+
+			cancelLastSearch();
+
+			if(!resultsDivExpanded) {
+				return;
+			}
+
+			resultsDivExpanded = false;
+
+			otherIdeaFieldsWrapper.animate({ height: otherFieldsHeight + 'px' }, duration, 'swing', function () {
+				if(!ie7orBelow) { $('#other-idea-fields-wrapper > .hidden-hint').remove(); }
+
+				otherIdeaFieldsWrapper.css('height', 'auto');
+			});
+
+			resultsContainer.slideUp(duration, function() { resultsContainer.html(null); });
+		};
+
+		//event delegation
+		$('#idea-form-new').click(hideDynamicResultsIfActingOutsideTitleWrapper).focusin(hideDynamicResultsIfActingOutsideTitleWrapper);
+	}
+}
+
+function enableTagEditor(tagEditor) {
+  if ($(document.body).hasClass('sec-508')) {
+    return;
+  }
+
+  tagEditor.tagit({availableTags: "/a/idea/tag/autocomplete"});
+}
+
+function disableNyroModalSubmitButton() {
+	disableSubmitButton($('#nyroModalContent form'));
+}
+
+function disableSubmitButton(form) {
+  setTimeout(function () {
+    form.find('[type="submit"], .submit[type="button"]').attr('disabled', 'disabled').addClass('awaiting-response');
+  }, 0);
+}
+
+function enableSubmitButton(formid) {
+	var oButton;
+	if(formid) {
+		oButton = $('#' + formid + ' .awaiting-response');
+	}
+	else {
+		oButton = $('#nyroModalContent .awaiting-response');
+	}
+
+	oButton.removeAttr('disabled').removeClass('awaiting-response');
+}
+
+var initNyroModalDefaults = function() {
+	$.nyroModalSettings({
+		processHandler: function(settings) {hideMenus();pauseFocusTracking();},
+		autoSizable: true,
+		title: null,
+		padding: 10,
+    zIndexStart: 10000,
+		titleFromIframe: false,
+	    gallery: null,
+	    galleryLinks: null,
+	    galleryCounts: null,
+	    galleryLoop: false,
+	    //endFillContent: function(elts, settings) {  },
+	    endShowContent: function(elts, settings) {
+        selectDropDownIEbehavior($('#nyroModalContent'));
+
+        focusPopup();
+
+	    	if(isIdeaForm()) {
+          $('#nyroModalContent .character-counter').each(function() {
+            var counter = $(this);
+            var input = counter.closest('.form-field').find('input[type="text"], textarea');
+            var counterId = uniqueId();
+            counter.find('span').attr('id', counterId);
+            input.NobleCount('#' + counterId, {
+              on_negative: 'go_red',
+              on_positive: 'go_green',
+              max_chars: input.attr('data-maxlength')
+            });
+          });
+
+	    		enableDynamicSearch();
+	    	}
+
+        $('#nyroModalContent form').
+                bind('submit', disableNyroModalSubmitButton).
+                find('[type="submit"], .submit[type="button"]').bind('click', disableNyroModalSubmitButton);
+
+        if ($('#nyroModalContent .geo-enabled').length > 0) { requestCurrentPosition(); }
+
+        $('#nyroModalContent').initializeFeatures();
+    	},
+	    endRemove: function(elts, settings) {
+        if(onNyroModalRemoved !== null) {
+          var onNyroModalRemovedTmp = onNyroModalRemoved;
+          onNyroModalRemoved = null;
+          onNyroModalRemovedTmp();
+        }
+        resetFocus();
+      }
+	});
+};
+$(function() { initNyroModalDefaults(); });
+
+var mergeIdeas = function(url,prompt) {
+	if (!confirm(prompt)) { return; }
+	$.ajax({
+		type: "POST",
+		url: url,
+    data: 'target-content-type=json',
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual' && data.action == 'merge') {
+				$(".merge-ideas").fadeOut("slow");
+				$('#ideas-merge-submit').fadeOut("slow");
+				inform('#message',data.message);
+			} else {
+				handleGenericJSONResponse(json,"#message");
+			}
+		},
+		error : handleAjaxError
+    });
+};
+
+var genericAction = function(url) {
+  $.ajax({
+    type: "GET",
+    url: url,
+    success: function(msg, status, response) {
+      handleGenericJSONResponse(JSON.parse(msg));
+    },
+    error : handleAjaxError
+  });
+};
+
+var emailIdeaSwitchToChoices = function(url) {
+	$.ajax({
+		type: "GET",
+		url: url,
+		success: function(msg, status, response) {
+		    var json = JSON.parse(msg);
+		    var data = json.data;
+		    if (json.type == 'contextual') {
+		    	var choices = "";
+				$('#idea-email-to-choices-target').empty();
+				for (var fieldIdx in data.memberFields) {
+					if (true) { // http://www.jslint.com/ said to do this
+						var field = data.memberFields[fieldIdx];
+						if (field.type.name === "choice") {
+							choices += "<div class=\"form-field select-field\">";
+							choices += "  <label for=\""+field.name+"\">"+field.title+"</label>";
+							choices += "  <select id=\""+field.name+"\" name=\""+field.name+"\">";
+							choices += "    <option value=\"-1\">--</option>";
+							for (var choiceIdx in field.choices) {
+								if (true) { // http://www.jslint.com/ said to do this
+									var choice = field.choices[choiceIdx];
+									choices += "    <option value=\""+choice.id+"\">"+choice.name+"</option>";
+								}
+							}
+							choices += "  </select>";
+							choices += "</div>";
+						}
+					}
+				}
+				if (choices !== "") {
+				  $('#idea-email-to-emails-block').fadeOut("slow");
+				  $('#idea-email-to-choices-target').append("<input type=\"hidden\" name=\"panelMemberCustomField\" value=\"true\"/>");
+				  $('#idea-email-to-choices-target').append(choices);
+				  $('#idea-email-to-choices-block').fadeIn("slow");
+				  $.nyroModalResize();
+				}
+		    }
+		},
+		error : handleAjaxError
+    });
+};
+
+var emailIdeaSwitchToEmails = function() {
+	$('#idea-email-to-choices-block').fadeOut("slow");
+  $('#idea-email-to-choices-block').empty();
+	$('#idea-email-to-emails-block').fadeIn("slow");
+	$.nyroModalResize();
+};
+
+var doFormSubmit = function(elem){
+	while (elem.parentNode && elem.parentNode.tagName != "FORM") {
+		elem = elem.parentNode;
+	}
+	var form = elem.parentNode;
+	form.submit();
+};
+
+var localizationCustomize = function(addurl, deleteurl, trigger) {
+  if (trigger.form.customize.checked) {
+    localizationAdd(addurl, trigger);
+  } else {
+    localizationDelete(deleteurl, trigger);
+  }
+};
+
+function disableElement(target) {
+  $(target).attr('disabled', 'disabled');
+}
+
+function enableElement(target) {
+  $(target).removeAttr('disabled');
+}
+
+var localizationAdd = function(url, trigger) {
+  disableElement(trigger);
+
+  var form = trigger.form;
+	var id = form.formID.value;
+	var selector = "#" + id;
+  $.ajax({
+		type: "POST",
+		id: id,
+		localization: form,
+		selector: selector,
+		url: url,
+		data: $('#form'+id).serialize(true),
+		success: function(msg, status, response) {
+      enableElement(trigger);
+      
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'contextual') {
+				form.defaultPattern.value = data.pattern;
+				form.pattern.value = form.defaultPattern.value;
+				form.pattern.disabled = null;
+				$(selector).addClass("flagged");
+				$(selector).removeClass("saved");
+				$(trigger).closest('form').find('.customized-actions').fadeIn("slow");
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : function (XMLHttpRequest, textStatus, errorThrown) {
+      enableElement(trigger);
+      handleAjaxError(XMLHttpRequest, textStatus, errorThrown);
+    }
+	});
+};
+
+var localizationSave = function(url,trigger) {
+  disableElement(trigger);
+
+  var form = trigger.form;
+	var id = form.formID.value;
+	var selector = "#" + id;
+	$(selector).addClass("flagged").removeClass("saved");
+  $.ajax({
+		type: "POST",
+		id: id,
+		localization: form,
+		selector: selector,
+		url: url,
+		data: $('#form'+id).serialize(true),
+		success: function(msg, status, response) {
+      enableElement(trigger);
+
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type === 'success') {
+				$(selector).removeClass("flagged");
+				$(selector).addClass("saved");
+			} else if (json.type === 'message' && data.type === 'error') {
+			  //we use native alert here because the page could be very long and we should not auto-scroll the page to the top to display the message
+			  alert(data.text);
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : function (XMLHttpRequest, textStatus, errorThrown) {
+      enableElement(trigger);
+      handleAjaxError(XMLHttpRequest, textStatus, errorThrown);
+    }
+	});
+};
+
+var localizationDelete = function(url,trigger) {
+  disableElement(trigger);
+  
+  var form = trigger.form;
+	var id = form.formID.value;
+	var selector = "#" + id;
+	form.pattern.disabled = "yes";
+	$(selector).addClass("flagged");
+	$(selector).removeClass("saved");
+	$(trigger).closest('form').find('.customized-actions').fadeOut("slow");
+  $.ajax({
+		type: "POST",
+		id: id,
+		localization: form,
+		selector: selector,
+		url: url,
+		data: $('#form'+id).serialize(true),
+		success: function(msg, status, response) {
+      enableElement(trigger);
+
+			var json = JSON.parse(msg);
+			if (json.type == 'success') {
+				$(selector).removeClass("flagged");
+				form.pattern.value = form.defaultPattern.value;
+			} else {
+				handleGenericJSONResponse(json);
+				form.pattern.disabled = null;
+				$(selector).addClass("flagged");
+				$(selector).removeClass("saved");
+        $(trigger).closest('form').find('.customized-actions').fadeIn("slow");
+			}
+		},
+		error : function (XMLHttpRequest, textStatus, errorThrown) {
+      enableElement(trigger);
+      handleAjaxError(XMLHttpRequest, textStatus, errorThrown);
+    }
+	});
+};
+
+var apiAction = function(url,formid) {
+	var form = $('#'+formid);
+	$.ajax({
+		type: "POST",
+		formid: formid,
+		url: url,
+		data: form.serialize(true),
+		success: function(msg, status, response) {
+			var json = JSON.parse(msg);
+			var data = json.data;
+			if (json.type == 'errors') {
+				handleNyroModalValidationErrors(this.formid,data.errors);
+			} else if (json.type == 'message') {
+				$.nyroModalRemove();
+				handleGenericJSONResponse(json);
+			} else {
+				handleGenericJSONResponse(json);
+			}
+		},
+		error : handleAjaxError
+    });
+};
+
+function showAddTags(activatorTag) {
+	var activator = $(activatorTag);
+	var form = activator.parent().find('.add-tags-form');
+	activator.remove();
+	form.show();
+	enableTagEditor(form.find("input[name='tags']"));
+
+	form.bind('submit', function(e) {
+		form.addClass('processing');
+		form.find(' > div').hide();
+		e.preventDefault();
+
+		$.ajax({
+			type: "POST",
+			url: form.attr('action'),
+			data: form.serialize(true),
+			success: function(data) {
+				form.parent().replaceWith(data);
+			},
+			error: reloadPage
+	    });
+	});
+}
+
+function onDeletingTag(e) {
+	if(e.target.tagName.toUpperCase() !== 'A') {
+		return;
+	}
+
+	e.preventDefault();
+
+	if(!confirm($('#manage-tags-activator').attr('data-delete-alert'))) {
+		return;
+	}
+
+	var tagLink = $(e.target);
+	tagLink.fadeOut(1000, function() { tagLink.remove(); });
+
+	$.ajax({
+		type: "POST",
+		url: "/a/removeIdeaTagGlobally.do",
+		data: 'name=' + encodeURIComponent(tagLink.html())
+    });
+}
+
+function allowToDeleteTags() {
+	$('#manage-tags-activator').hide();
+	$('#manage-tags-deactivator').show();
+
+	$('#tag-cloud-items').addClass('manage-mode').bind('click', onDeletingTag);
+}
+
+function disallowToDeleteTags() {
+	$('#manage-tags-deactivator').hide();
+	$('#manage-tags-activator').show();
+
+	$('#tag-cloud-items').removeClass('manage-mode').unbind('click', onDeletingTag);
+}
+
+function toggle(action, type) {
+  var form = document.createElement('form');
+  form.action = action;
+  form.method = 'POST';
+  var field = document.createElement('input');
+  field.name = 'type';
+  field.type = 'hidden';
+  field.value = type;
+  form.appendChild(field);
+  form.submit();
+}
+
+function runAfterClosingNyroModal(task, isInNyroModal) {
+  if (isInNyroModal) {
+    onNyroModalRemoved = task;
+    $.nyroModalRemove();
+  }
+  else {
+    task();
+  }
+}
+
+function clickLoginLink() {
+  $('#community-login-link').click();
+}
+
+var jsonResponseHandlers = {
+  'authenticated' : function () {
+    if (window.location.href.match(/logout/)) {
+      window.location = "/";
+      return;
+    }
+
+    reloadPage();
+  },
+  'signup-message' : function (form, json) {
+    if (json.data.type === 'success') {
+
+      runAfterClosingNyroModal(function () {
+        handleGenericJSONResponse(json);
+      }, true);
+
+      return;
+    }
+
+    var formId = form.attr('id');
+    clearValidationErrors(formId);
+    handleGenericJSONResponse(json, '.' + formId + ' #message');
+    $.nyroModalResize();
+  },
+  'categories-list-item-deleted' : function (form) {
+    form.closest('li').fadeOut();
+  },
+  'categories-tree-item-updated' : function (form, json, isInNyroModal) {
+    var data = json.data;
+    var nodeSelector = '#' + json.attr.id;
+
+    $(nodeSelector + ' > a').html(data.title).attr('title', data.attr.title);
+
+    markAsChanged(nodeSelector);
+
+    runAfterClosingNyroModal(function () {
+      notifyChange(categoryTreeAdmin);
+    }, isInNyroModal);
+  },
+  'categories-tree-item-created' : function (form, json, isInNyroModal) {
+    var parentCategoryId = form.find('[name="parent_cat_id"]').attr('value');
+    var parentNode = parentCategoryId > 0 ? categoryTreeAdmin.find('[data-id=' + parentCategoryId + ']') : $('#categories-admin-impl-tree .categories-tree > ul > li');
+
+    categoryTreeAdmin.jstree('open_node', parentNode, function () {
+      var nodeId = json.attr.id;
+
+      function notifyNewItem() {
+        markAsChanged('#' + nodeId);
+        runAfterClosingNyroModal(function () {
+          notifyChange(categoryTreeAdmin);
+        }, isInNyroModal);
+      }
+
+      //if parent node was closed, calling 'open_node' will cause the new item to be loaded automatically
+      if (document.getElementById(nodeId) !== null) {
+        notifyNewItem();
+        return;
+      }
+
+      categoryTreeAdmin.jstree('create', parentNode, 'last', {
+        attr: json.attr,
+        data: json.data
+      }, notifyNewItem, true);
+    }, true);
+  },
+  'categories-tree-item-moved' : function(form) {
+    categoryTreeAdmin.find('[data-id=' + form.find('input[name="cat_id"]').attr('value') + ']').parent().removeClass('processing');
+  },
+  'categories-tree-item-deleted' : function (form) {
+    categoryTreeAdmin.jstree('delete_node', categoryTreeAdmin.find('[data-id=' + form.find('input[name="cat_id"]').attr('value') + ']'));
+  },
+  'handle-follow-response' : function(form, json) {
+    if (json.data.type === 'success') {
+      form.fadeOut(1000, function() {
+        form.remove();
+      });
+    }
+
+    handleGenericJSONResponse(json);
+  },
+  'forgot-password-response' : function(form, json) {
+    inform('#forgot-password-message', json.data.message);
+    enableSubmitButton();
+  },
+  'visitor-joined' : function () {
+    reloadPage();
+  },
+  'anonymous-joined' : function () {
+    clickLoginLink();
+  },
+  'comment-voted' : function (trigger, json) {
+    var commentActions = trigger.closest('.comment-actions');
+    commentActions.html(json.data.html).initializeFeatures();
+    markAsChanged(commentActions);
+
+    return false;
+  },
+  'comment-status-changed' : function (trigger) {
+    if (trigger.hasClass('approve')) {
+      trigger.closest('.comment').removeClass('flagged');
+      trigger.closest('.status').remove();
+
+      return;
+    }
+
+    if (trigger.hasClass('reject')) {
+      trigger.closest('.comment').fadeOut('slow');
+      return;
+    }
+
+    alert('Unknown comment status change!');
+  },
+  'idea-status-changed' : function (trigger, json) {
+    var data = json.data;
+    updateIdeaStatus(data);
+
+    if (data.oldStatus) {
+      $('#idea-' + data.idea.id + '-moderator-actions li.' + data.oldStatus.cssClass + ' a').removeClass();
+    }
+    $('#idea-' + data.idea.id + '-moderator-actions li.' + data.idea.status.cssClass + ' a').removeClass().addClass("current-status");
+    if (data.message) {
+      showMessage('#message-user', data.message.text, data.message.type);
+    }
+    $('#idea-' + data.idea.id + " a.moderate-idea").removeClass("display-menu");
+    $('#idea-' + data.idea.id + " div.admin-idea").fadeOut("fast");
+  },
+  'idea-approved' : function (trigger, json) {
+    var data = json.data;
+    var ideaID = data.idea.id;
+    var inboundIdeaBlock = $('#idea-' + ideaID + "-pending-auth");
+
+    function updateIdea() {
+      $('#idea-' + ideaID + ' .verify.approve, #idea-' + ideaID + ' .verify.reject').remove();
+      updateIdeaStatus(data);
+    }
+
+    if (inboundIdeaBlock.length === 0) {
+      updateIdea();
+    }
+    else {
+      inboundIdeaBlock.fadeOut('slow', function() {
+        $(this).remove();
+        updateIdea();
+      });
+    }
+
+    return false;
+  },
+  'idea-rejected' : function (trigger, json) {
+    var data = json.data;
+    var ideaID = data.idea.id;
+    $('#idea-' + ideaID + "-pending-auth, " + '#idea-' + ideaID).fadeOut('slow');
+
+    return false;
+  },
+  'member-assignment-changed' : function (trigger) {
+    trigger.fadeOut('slow');
+  },
+  'assignee-unassigned' : function (trigger) {
+    trigger.closest('li').fadeOut('slow');
+  },
+  'merge-cart-updated' : function (trigger, json) {
+    $('#nyroModalContent').html(json.data.html).initializeFeatures();
+    $.nyroModalResize();
+  },
+  'idea-voted' : function (trigger, json) {
+    var old = trigger.closest('.voting');
+    old.after(json.data.html);
+    var updated = old.next();
+    old.remove();
+
+    updated.initializeFeatures();
+
+    var scoreBars = updated.find('.score-bars > div');
+
+    if (scoreBars.length === 0) {
+      updated.find('.vote-number').pulse(
+              {opacity: [0,1]},
+              {
+                times:2,
+                duration: 125,
+                complete: function () {
+                  removeFilterForIE($(this));
+                }
+              });
+    }
+    else {
+      scoreBars.each(function() {
+        var bar = $(this);
+        var oldBar = old.find('.score-bars > div.' + (bar.hasClass('agreements') ? 'agreements' : 'disagreements'));
+
+        var width = bar.css('width');
+        bar.css('width', oldBar.css('width')).animate({ width: width }, 'fast');
+      });
+    }
+
+    markAsChanged(updated);
+
+    return false;
+  },
+  'changed-default-localization' : function (trigger) {
+    trigger.html('Saved!');
+    trigger.effect('pulsate', function() {
+      trigger.html(trigger.data('label'));
+      trigger.removeAttr('on-hold');
+    });
+
+    return false;
+  }
+};
+
+var inProgressHandlers = {
+  'voting-on-comment' : {
+    on : function (trigger) {
+      trigger.closest('.comment-action').addClass('comment-vote-in-progress').
+              siblings('.comment-vote-up, .comment-vote-down').find('a').attr('on-hold', true);
+    },
+    off : function (trigger) {
+      trigger.closest('.comment-action').removeClass('comment-vote-in-progress').
+              siblings('.comment-vote-up, .comment-vote-down').find('a').removeAttr('on-hold');
+    }
+  },
+  'voting-on-idea' : {
+    on : function (trigger) {
+      trigger.closest('.voting').find('.agree, .disagree').attr('on-hold', true);
+    },
+    off : function (trigger) {
+      trigger.closest('.voting').find('.agree, .disagree').removeAttr('on-hold');
+    }
+  },
+  'comment-status-changing' : {
+    on : function (trigger) {
+      trigger.closest('li').siblings('li').find('a').attr('on-hold', true);
+    },
+    off : function (trigger) {
+      trigger.closest('li').siblings('li').find('a').removeAttr('on-hold');
+    }
+  },
+  'idea-status-changing' : {
+    on : function (trigger) {
+      trigger.addClass('updating-status').closest('li').siblings('li').find('a').attr('on-hold', true);
+    },
+    off : function (trigger) {
+      trigger.removeClass('updating-status').closest('li').siblings('li').find('a').removeAttr('on-hold');
+    }
+  },
+  'idea-approval-rejection-in-progress' : {
+    on : function (trigger) {
+      trigger.siblings('a.verify').attr('on-hold', true);
+    },
+    off : function (trigger) {
+      trigger.siblings('a.verify').removeAttr('on-hold');
+    }
+  },
+  'changing-default-localization' : {
+    on : function (trigger) {
+      trigger.data('label', trigger.html());
+      trigger.html('Saving...');
+    },
+    off : function (trigger) {
+      trigger.html(trigger.data('label'));
+    }
+  }
+};
+
+//we can use # as url url prefix to make sure that the form can only be processed when javascript is enabled
+function getActionUrl(target) {
+  var actionUrl = target.attr('data-action-url');
+
+  if (!actionUrl) {
+    switch (target.get(0).tagName.toLowerCase()) {
+      case 'form':
+        actionUrl = target.attr('action');
+        break;
+      case 'a':
+        actionUrl = target.attr('href');
+        break;
+      default:
+        break;
+    }
+  }
+
+  return actionUrl.charAt(0) === '#' ? actionUrl.substring('1') : actionUrl;
+}
+
+function sendSmartJsonRequest(formEl) {
+  var form = $(formEl);
+  var isInNyroModal = form.closest('#nyroModalContent').length === 1;
+
+  $.ajax({
+    type: form.attr('method').toUpperCase(),
+    url: getActionUrl(form),
+    data: form.serialize(),
+    success: function(msg) {
+      if(Recaptcha.get_challenge() && form.find('.recaptcha').length > 0) {
+        Recaptcha.reload('t');//pass 't' to prevent Recaptcha from messing with the focus
+      }
+
+      var json = JSON.parse(msg);
+      var data = json.data;
+
+      var customHandler = form.attr('data-json-handler-' + json.type);
+      if (customHandler !== undefined) {
+        jsonResponseHandlers[customHandler](form, json, isInNyroModal);
+        return;
+      }
+
+      if (json.type === 'errors') {
+        if (isInNyroModal) {
+          handleNyroModalValidationErrors(form.attr('id'), data.errors);
+        } else {
+          handleValidationErrors(form.attr('id'), data.errors);
+        }
+
+        return;
+      }
+
+      runAfterClosingNyroModal(function () {
+        handleGenericJSONResponse(json);
+      }, isInNyroModal);
+    },
+    error : function (XMLHttpRequest, textStatus, errorThrown) {
+      runAfterClosingNyroModal(function () {
+        handleAjaxError(XMLHttpRequest, textStatus, errorThrown);
+      }, isInNyroModal);
+    }
+  });
+
+  return false;
+}
+
+function sendFragmentUpdateRequest(formEl) {
+  var form = $(formEl);
+  var isInNyroModal = form.closest('#nyroModalContent').length === 1;
+
+  $.ajax({
+    type: form.attr('method').toUpperCase(),
+    url: form.attr('action').substring('1'),//all fragment update forms' actions should start with '#', so that they don't work when javascript is disabled
+    data: form.serialize(true),
+    success: function(msg) {
+      var json = JSON.parse(msg);
+      var data = json.data;
+
+      if (json.type === 'errors') {
+        if(isInNyroModal) {
+          handleNyroModalValidationErrors(form.attr('id'), data.errors);
+        } else {
+          handleValidationErrors(form.attr('id'), data.errors);
+        }
+
+        return;
+      }
+
+      if (json.type !== 'success') {
+        handleGenericJSONResponse(json);
+        return;
+      }
+
+      var targetFragmentSelector = '#' + form.attr('data-target-fragment-id');
+      var sourceFragmentId = form.attr('data-source-fragment-id');//data-source-fragment-id can be used when the source fragment (the one to be replaced) 's container  has a different id
+      var sourceFragmentSelector = sourceFragmentId === undefined ? targetFragmentSelector : ('#' + sourceFragmentId);
+
+      $(sourceFragmentSelector).replaceWith(data.html);
+      $(targetFragmentSelector).initializeNyroModal().initializeFeatures();
+
+      runAfterClosingNyroModal(function () {
+        notifyChange(targetFragmentSelector);
+      }, isInNyroModal);
+    },
+    error : function (XMLHttpRequest, textStatus) {
+      runAfterClosingNyroModal(function () {
+        handleAjaxError(XMLHttpRequest, textStatus);
+      }, isInNyroModal);
+    }
+  });
+}
+
+$.fn.initializeNyroModal = function () {
+  this.find($.fn.nyroModal.settings.openSelector).nyroModal();
+  return this;
+};
+
+var categoryTreeAdmin = null;
+
+//Each feature initialization function will be passed a DOM element (on which initializeFeatures is called). *Notice* it may *not* be the same element where the feature is declared (via data-features).
+var featureInitializations = {
+  'user-message' : function (container) {
+    var userMessages = container.hasClass('user-message') ? container : container.find('.user-message');
+    userMessages.each(function() {
+      var msgBoard = $(this);
+      if (msgBoard.hasClass('invisible')) {
+        return;
+      }
+
+      flash(msgBoard);
+    });
+  },
+  'ajax-post-link' : function (container) {
+    container.find('.ajax-post-link').click(function () {
+      var trigger = $(this);
+
+      var confirmMsg = trigger.attr('data-confirm');
+      if (confirmMsg && !confirm(confirmMsg)) {
+        return false;
+      }
+
+      if (trigger.attr('on-hold')) {
+        return false;
+      }
+
+      trigger.attr('on-hold', true);
+
+      var inProgressHandlerKey = trigger.attr('data-in-progress-handler');
+      var inProgressHandler = inProgressHandlerKey === undefined ? undefined : inProgressHandlers[inProgressHandlerKey];
+      if (inProgressHandler !== undefined) {
+        inProgressHandler.on(trigger);
+      }
+
+      function reEnable() {
+        trigger.removeAttr('on-hold');
+
+        if (inProgressHandler !== undefined) {
+          inProgressHandler.off(trigger);
+        }
+      }
+
+      var method = trigger.attr('data-action-method');
+      if (!method) {
+        method = 'POST';
+      }
+
+      $.ajax({
+        type: method,
+        url: getActionUrl(trigger),
+        data: 'target-content-type=json',
+        success: function(msg) {
+          var json = JSON.parse(msg);
+
+          var customHandler = trigger.attr('data-json-handler-' + json.type);
+          if (customHandler !== undefined) {
+            if (jsonResponseHandlers[customHandler](trigger, json) !== false) {
+              //Returning false from the jsonresponsehandler would prevent auto re-enabling.
+              //This is useful if there are ajax requests made in the handler, or the disabled UI elements have been removed from DOM
+              //If we do this, it will be the handler's responsibility to re-enable the UI elements, if necessary
+              reEnable();
+            }
+
+            return;
+          }
+
+          reEnable();
+
+          handleGenericJSONResponse(json, null);
+        },
+        error : function(XMLHttpRequest, textStatus) {
+          reEnable();
+
+          handleAjaxError(XMLHttpRequest, textStatus);
+        }
+      });
+
+      return false;
+    });
+  },
+  'categories-list-deletion' : function () {
+    $('#categories-admin-impl-list').click(function(e) {
+      var target = e.target;
+      if(target.tagName.toUpperCase() !== 'INPUT') {
+        return;
+      }
+
+      if($(target).hasClass('delete')) {
+        if(confirm($(this).attr('data-category-delete-confirm'))) {
+          sendSmartJsonRequest(target.form);
+        }
+
+        e.preventDefault();
+      }
+    });
+  },
+  'categories-list-sorting' : function () {
+    var container = $('#categories-admin-impl-list');
+    container.find('ul').sortable({
+      axis: 'y',
+      handle: '.move',
+      connectWith: '#categories-admin-impl-list ul',
+      stop: function() {
+        var groupIdx = 0;
+
+        var data = '';
+        container.find('ul').each(function () {
+          var group = $(this);
+
+          data += '&g' + groupIdx + '=';
+          var groupName = group.prev('h5').attr('data-name');
+
+          data += groupName === undefined ? '' : encodeURIComponent(groupName);
+
+          var catIdx = 0;
+          group.find('li').each(function () {
+            data += '&g' + groupIdx + 'c' + catIdx + '=' + $(this).attr('data-id');
+            ++catIdx;
+          });
+
+          data += '&g' + groupIdx + 'cnum=' + catIdx;
+
+          ++groupIdx;
+        });
+
+        data += '&gnum=' + groupIdx;
+
+        $.ajax({
+          type: 'POST',
+          url: '/a/reorderCategories.do',
+          data: data,
+          error: handleAjaxError
+        });
+      }
+    });
+  },
+  'fragment-update' : function (container) {
+    container.find('form[data-target-fragment-id]').submit(function () {
+      sendFragmentUpdateRequest(this);
+      return false;
+    });
+  },
+  'smart-json-form' : function (container) {
+    container.find('.smart-json-form').submit(function () {
+      sendSmartJsonRequest(this);
+      return false;
+    });
+  },
+  'date-picker' : function (container) {
+    container.find('.date-field').datepicker();
+  },
+  'inline-help' : function (container) {
+    container.find('.inline-help').tipTip({
+      maxWidth: '360px',
+      attribute: 'data-help-content',
+      //hoverActivation: true,
+      enter: function (contentHolder) {
+        contentHolder.content = '<h6>' + this.html() + '</h6>' + contentHolder.content;
+      }
+    });
+  },
+  'categories-tree' : function (container) {
+    container.find('.categories-tree').each(function () {
+      var tree = $(this);
+      eval('var data = ' + tree.attr('data-jstree-source'));
+      configureCategoryTree(tree, data);
+      tree.removeAttr('data-jstree-source');
+    });
+  },
+  'categories-tree-admin' : function () {
+    $('#categories-admin-impl-tree .categories-tree').each(function () {
+      var tree = $(this);
+      eval('var data = ' + tree.attr('data-jstree-source'));
+
+      categoryTreeAdmin = configureCategoryTreeAdmin(tree, data);
+      tree.removeAttr('data-jstree-source');
+    });
+  },
+  'link-button-preferred': function(container) {
+    container.find('.link-button-preferred').each(function () {
+      var btn = $(this);
+      var link = document.createElement('A');
+      link.href = 'javascript:void(0)';
+      link.innerHTML = btn.html();
+      btn.parent().append(link);
+      btn.remove();
+      $(link).click(function() {
+        var target = $(this);
+        setTimeout(function() {
+          //timeout is for IE6
+          target.closest('form').submit();
+        }, 0);
+      });
+    });
+  },
+  'dropdown-menus': function(container) {
+    function onMouseOut() {
+      $(this).removeClass('hover').data('out-ts', new Date().getTime());
+    }
+
+    var menus = container.find('.utb-dropdown-menu');
+
+    menus.hoverIntent({
+      timeout: 300,
+      over: function() {
+        var target = $(this);
+        var outTs = target.data('out-ts');
+        if (!outTs || new Date().getTime() - outTs > 200) {
+          target.addClass('hover');
+        }
+      },
+      out: onMouseOut
+    });
+
+    $(document).mouseout(function(event) {
+      if (event.relatedTarget === null) {
+        menus.each(onMouseOut);
+      }
+    });
+  },
+  'notifications': function(container) {
+    container.find('#utb-msg-indicator').click(function() {
+      var wrapper = $('#utb-messages');
+      wrapper.toggleClass('expanded');
+      if(wrapper.hasClass('expanded') && wrapper.find('#utb-msg-loading').length > 0) {
+        wrapper.load(wrapper.attr('data-loading-url'), new Array(), function() {
+          wrapper.initializeFeatures();
+        });
+      }
+
+      return false;
+    });
+  },
+  'with-custom-settings': function (container) {
+    var duration = 0;
+
+    container.find('.custom-settings').prev('.field').find('select').bind('change',
+            function () {
+              var customSettings = $(this).closest('form').find('.custom-settings');
+
+              var onComplete = function() { $.nyroModalResize(); };
+              if (this.value === 'custom') {
+                customSettings.slideDown(duration, onComplete);
+              }
+              else {
+                customSettings.slideUp(duration, onComplete);
+              }
+            }).trigger('change');
+
+    //duration = 500; Disabled the animation because it causes scrollbar in the nyroModal
+  },
+  'gravatar-link': function (container) {
+    container.find('.gravatar-link').click(function () {
+      var link = $(this);
+      var f = document.createElement('form');
+      f.action = link.attr('href');
+      f.method = 'POST';
+
+      var h = document.createElement('input');
+      h.type = 'hidden';
+      h.name = 'user';
+      h.value = link.siblings('[name="gravatar"]').val();
+      f.appendChild(h);
+
+      document.body.appendChild(f);
+      f.submit();
+
+      return false;
+    });
+  },
+  'ajax-form-update': function(container) {
+    container.find('[data-form-update-target-id]').bind('submit', function () {
+      var form = $(this);
+      form.append('<input type="hidden" name="fromCommunity" value="true" />');
+      $('#' + form.attr('data-form-update-target-id')).parent().load(form.attr('action'), form.serializeArray(),
+              function (responseText, textStatus) {
+                if (textStatus !== 'success' && textStatus !== 'notmodified') {
+                  alert('Oops, something went wrong!\nPlease refresh the page and try again.');
+                  return;
+                }
+
+                $(this).initializeFeatures();
+	              $.nyroModalResize();
+              });
+      return false;
+    });
+  },
+  'close-dialog': function(container) {
+    container.find('.close-dialog').click(function () {
+      $.nyroModalRemove();
+    });
+  },
+  'close-dialog-now': function(container) {
+    $.nyroModalRemove();
+  },
+  'reload-page': function(container) {
+    container.find('.page-reloading-trigger').click(function() {
+      reloadPage();
+    });
+  },
+  'placeholder-text': function() {
+    $('[data-placeholder-text]').bind('focus',
+            function () {
+              var input = $(this);
+
+              if ($.trim(input.val()) === input.attr('data-placeholder-text')) {
+                input.val('');
+                input.removeClass('with-placeholder-text');
+              }
+            }).
+            bind('blur',
+            function() {
+              var input = $(this);
+              if ($.trim(input.val())) {
+                return;
+              }
+
+              input.val(input.attr('data-placeholder-text'));
+              input.addClass('with-placeholder-text');
+            }).
+            trigger('blur');
+  },
+  'collapse-expand': function (container) {
+    container.find('.collapse-expand').click(
+            function () {
+              var link = $(this);
+              var text = link.html();
+              var altText = link.attr('data-alt-text');
+              link.html(altText);
+              link.attr('data-alt-text', text);
+
+              collapseExpandHandlers[link.attr('data-collapse-expand-type')](link);
+            }).filter('[data-target-collapsed="true"]').trigger('click');
+  },
+  'tag-editing': function (container) {
+    enableTagEditor(container.find('.tag-editor'));
+  },
+  'with-comment-action': function (container) {
+    container.find('.create-comment').bind('click', function() {
+      clickLoginLink();
+
+      focus('#new-comment-form', '#new-comment-text');
+    });
+  }
+};
+
+var collapseExpandHandlers = {
+  'single-list': function (trigger) {
+    var target = $('#' + trigger.attr('data-target-id'));
+    target.stop(true, true);
+
+    if (target.hasClass('collapsed')) {
+      target.slideDown(function () {
+        target.removeClass('collapsed');
+      });
+    }
+    else {
+      target.slideUp(function () {
+        target.addClass('collapsed');
+      });
+    }
+  },
+  'categories': function (trigger) {
+    var targets = trigger.closest('.section').children().not(trigger.parent());
+    if (targets.first().hasClass('collapsed')) {
+      targets.removeClass('collapsed');
+    }
+    else {
+      targets.addClass('collapsed');
+    }
+  }
+};
+
+function unique(arr) {
+  var hash = {}, result = [];
+  for (var i = 0, l = arr.length; i < l; ++i) {
+    if (!hash.hasOwnProperty(arr[i])) { //it works with objects! in FF, at least
+      hash[ arr[i] ] = true;
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
+
+$.fn.initializeFeatures = function() {
+  var containerFeatures = this.attr('data-features');
+
+  //We aggregate all features to avoid duplication initialization. The price is that all featureInitialization functions will be called on the outmost DOM element (the element on which initializeFeatures is called) instead the ones on which data-features attribute is declared.
+  //We trade it for code maintainability. Besides, it might even be faster than having to check and exclude features already initialized on the ancestor nodes
+  var allFeatures = containerFeatures === undefined ? '' : containerFeatures;
+
+  this.find('[data-features]').each(function (){
+    allFeatures += ' ' + $(this).attr('data-features');
+  });
+
+  allFeatures = $.trim(allFeatures + ' user-message').replace(/ +/, ' ');
+
+  if (allFeatures === '') {
+    return this;
+  }
+
+  var featureArray = unique(allFeatures.split(' '));
+
+  for (var i = 0, len = featureArray.length; i < len; ++i) {
+    var feature = featureArray[i];
+    featureInitializations[feature](this);
+  }
+
+  return this;
+};
+
+$(function() {
+  $(document.documentElement).initializeFeatures();
+
+  function isTopbarModified() {
+    var topbar = $('#universal-top-bar');
+    if (topbar.css('display') === 'none' || topbar.css('visibility') === 'hidden') {
+      return true;
+    }
+
+    if (topbar.width() < $(window).width() || topbar.height() < 29 - 3) {//we need to minus 3 because when the page is zoomed in/out, the height reported by some browsers (like chrome) will be slightly different
+      return true;
+    }
+
+    if (parseInt(topbar.css('left')) !== 0 || parseInt(topbar.css('top')) !== 0) {
+      return true;
+    }
+
+    if (parseInt(topbar.css('margin-top')) !== 0 || parseInt(topbar.css('margin-bottom')) !== 0 ||
+            parseInt(topbar.css('margin-left')) !== 0 || parseInt(topbar.css('margin-right')) !== 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  setTimeout(function() {
+    if (isTopbarModified()) {
+      showMessage('#message-user', "Modifying the top navigation bar (like resizing, moving, hiding etc) via Custom CSS is in violation of IdeaScale's Terms of Service!", "error");
+    }
+  }, 1000);
+});

@@ -1,0 +1,414 @@
+body {
+  padding-top: 32px !important;
+}
+
+#universal-top-bar {
+  width: 100%;
+  height: 29px;
+  background-color: #000;
+  border-bottom: 3px #666 solid;
+  padding: 0;
+  box-shadow: 0 1px 6px #333;
+  -webkit-box-shadow: 0 1px 6px #333;
+  -moz-box-shadow: 0 1px 6px #333;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 13px;
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+.ie6 #universal-top-bar {
+  position: absolute;
+}
+
+#universal-top-bar div {
+  font-size: 12px;
+  line-height: 1.4em;
+}
+
+#universal-top-bar li {
+  margin: 0;
+  padding: 0;
+}
+
+#universal-top-bar a {
+  padding: 0;
+  text-decoration: none;
+}
+
+#universal-top-bar a:hover {
+  background: none;
+}
+
+#utb-logo {
+  float: left;
+  margin-left: 10px;
+}
+
+#utb-logo img {
+  border: none;
+  outline: none;
+}
+
+#community-selector {
+  float: left;
+  min-width: 200px;
+  height: 15px;
+  margin-left: 18px;
+}
+
+#current-community {
+  color: #ddd;
+  font-size: 12px;
+}
+
+.utb-dropdown-menu {
+  position: relative;
+  padding: 7px 7px 7px 3px;
+  border-left: solid 4px transparent;
+}
+
+.ie6 .utb-dropdown-menu {
+  border-left-color: #000;
+}
+
+.utb-dropdown-menu:hover, .utb-dropdown-menu:focus, .utb-dropdown-menu.hover {
+  background: #555;
+  border-left-color: #555;
+}
+
+.utb-arrow {
+  color: #7FC242;
+  font-size: 10px;
+}
+
+.utb-menu, .utb-menu li:last-child a {
+  -moz-border-radius: 0 0 0.7em 0.7em !important;
+  -webkit-border-radius: 0 0 0.7em 0.7em !important;
+  -khtml-border-radius: 0 0 0.7em 0.7em !important;
+  border-radius: 0 0 0.7em 0.7em !important;
+}
+
+.utb-menu {
+  font-size: 12px;
+  display: none;
+  border: solid 2px #666;
+  background: rgb(51, 51, 51);
+  background: rgba(51, 51, 51, 0.9);
+  position: absolute;
+  top: 29px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  max-height: 540px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 1px 6px #333;
+  -webkit-box-shadow: 0 1px 6px #333;
+  -moz-box-shadow: 0 1px 6px #333;
+  *list-style-image: none;
+}
+
+.ie6 .utb-menu {
+  width: 250px;
+  overflow: auto;
+}
+
+#community-selector .utb-menu {
+  left: -4px;
+}
+
+.ie6 .utb-menu li, .ie6 .utb-menu a {
+  zoom: 1;
+}
+
+.utb-menu a, .utb-menu span {
+  display: block;
+  padding: 0.5em 1em !important;
+  color: #fff !important;
+  white-space: nowrap;
+}
+
+.utb-menu a:hover, .utb-menu a:focus {
+  background: rgb(34, 34, 34) !important;
+  background: rgba(34, 34, 34, 0.5) !important;
+}
+
+.utb-separator {
+  border-top: solid 1px #666;
+  border-bottom: solid 1px #333;
+  height: 0;
+  overflow: hidden;
+  *line-height: 0;
+  *font-size: 0;
+  *width: 100%;
+}
+
+.utb-dropdown-menu:hover .utb-menu, .utb-dropdown-menu:focus .utb-menu, .utb-dropdown-menu.hover .utb-menu {
+  display: block;
+}
+
+#utb-messages {
+  float: right;
+  text-align: right;
+  position: relative;
+}
+
+#utb-msg-indicator {
+  color: #7FC242;
+  font-size: 12px;
+  min-height: 16px;
+  font-weight: bold;
+  border-right: 1px solid #333;
+  padding: 0 7px 0 24px !important;
+  margin-top: 7px;
+  display: block;
+  background: url(../i/messages.png) no-repeat 0 1px;
+}
+
+#utb-msg-indicator span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#utb-msg-indicator:hover, #utb-msg-indicator.with-unread {
+  background: url(../i/messages-active.png) no-repeat 0 1px !important;
+}
+
+.expanded #utb-msg-indicator {
+  border-bottom: none;
+  background: #fff url(../i/messages-active.png) no-repeat 6px 4px !important;
+  padding: 3px 7px 20px 30px!important;
+  margin-top: 3px !important;
+}
+
+#utb-msg-loading {
+  background: url(../i/search-spinner.gif) no-repeat 50% 50%;
+  height: 29px;
+}
+
+.expanded #utb-msg-indicator, #utb-msg-menu {
+  border: solid 1px #818386;
+}
+
+#utb-msg-menu, #utb-msg-all {
+  -moz-border-radius: 0 0 0.7em 0.7em;
+  -webkit-border-radius: 0 0 0.7em 0.7em;
+  -khtml-border-radius: 0 0 0.7em 0.7em;
+  border-radius: 0 0 0.7em 0.7em;
+}
+
+#utb-msg-menu {
+  display: none;
+  font-size: 12px;
+  border-top: none;
+  background: #fff;
+  position: absolute;
+  top: 32px;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 332px;
+  text-align: left;
+}
+
+.expanded #utb-msg-menu {
+  display: block;
+}
+
+#utb-msg-menu h3, #utb-msg-new {
+  line-height: 2em !important;
+}
+
+#utb-msg-menu h3, #utb-msg-new, #utb-msg-all a {
+  font-weight: bold;
+}
+
+#utb-msg-menu h3 {
+  font-size: 13px;
+  padding: 0 0 0 1em;
+  margin: 0;
+}
+
+#utb-msg-new {
+  position: absolute;
+  right: 0.5em;
+  top: 0;
+}
+
+#utb-msg-new a, #utb-msg-all a {
+  color: #3e8e32 !important;
+}
+
+#utb-msg-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #666;
+}
+
+#utb-msg-list li, #utb-msg-all, #utb-msg-no-new {
+  border-top: solid 1px #cecece;
+  padding: 0.5em 1em;
+}
+
+#utb-msg-no-new {
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+}
+
+#utb-msg-list li:hover {
+  background: #7ec242;
+  color: #fff;
+}
+
+#utb-msg-list li:hover a {
+  color: #fff;
+}
+
+#utb-msg-list h4 {
+  margin: 0;
+}
+
+#utb-msg-list div {
+  font-size: 12px;
+  margin: 0.5em 0 0;
+}
+
+#utb-msg-list a {
+  color: #444;
+}
+
+#utb-msg-list h4 a {
+  font-size: 13px;
+  display: block;
+  font-weight: bold;
+}
+
+#utb-msg-menu a:hover, #utb-msg-list li:hover a {
+  text-decoration: underline !important;
+}
+
+.utb-msg-ts {
+  float: left;
+}
+
+.utb-msg-community {
+  text-align: right;
+}
+
+#utb-msg-all {
+  background: #f0f7e8;
+  text-align: center;
+}
+
+#utb-msg-all span {
+  font-size: .8em;
+}
+
+#utb-session {
+  float: right;
+  text-align: right;
+  width: auto;
+  height: 15px;
+  margin-right: 15px;
+  white-space: nowrap;
+}
+
+#utb-session .utb-menu {
+  right: 0;
+}
+
+.ie7 #utb-session > .utb-menu {
+  min-width: 150px;
+}
+
+#utb-sudoerpic, #utb-userpic {
+  vertical-align: top;
+}
+
+#utb-sudoerpic {
+  height: 15px;
+  width: 15px;
+  margin: 0 5px 0 0;
+  padding: 0;
+}
+
+#utb-sudoer {
+  color: #ddd;
+  font-size: 12px;
+}
+
+#utb-userpic {
+  height: 15px;
+  width: 15px;
+  margin: 0 5px 0 0;
+  padding: 0;
+}
+
+#utb-user {
+  color: #ddd;
+  font-size: 12px;
+}
+
+#utb-login {
+  float: right;
+  margin-right: 8px;
+  line-height: 29px !important;
+  color: #666;
+}
+
+#utb-login a {
+  color: #fff;
+  padding: 0 8px;
+}
+
+#utb-login a:hover {
+  text-decoration: underline;
+}
+
+#menu-item-new-community {
+  color: #7FC242 !important;
+  font-weight: bold;
+}
+
+.sudo-action a, .sudo-action span {
+  color: orange !important;
+  font-weight: bold;
+}
+
+.utb-menu .locked a {
+  padding-right: 20px;
+  background-image: url(../i/lock.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: 99% 50% !important;
+}
+
+.ie7 #utb-logout {
+  zoom: 1;
+}
+
+#utb-visitor-join {
+  float: left;
+}
+
+#utb-visitor-join a {
+  line-height: 29px;
+  color: #7FC242;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 1em;
+}
+
+#utb-visitor-join a:hover {
+  color: #9ff252;
+}

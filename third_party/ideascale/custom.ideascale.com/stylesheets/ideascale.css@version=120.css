@@ -1,0 +1,4488 @@
+@charset "UTF-8";   /* CSS Document
+Eric Meyer's css reset v1.0 | 20080212 */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+}
+
+ol,ul {
+	list-style: none;
+}
+
+blockquote,q {
+	quotes: none;
+}
+
+blockquote:before,blockquote:after,q:before,q:after {
+	content: none;
+}
+
+:focus {
+	
+}
+
+ins {
+	text-decoration: none;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*============Common=============*/
+body {
+	line-height: 1;
+	background: #eee;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+  line-height: normal;
+}
+
+pre {
+	margin: 10px;
+}
+
+.outer {
+	margin: 15px 22px 0 22px;
+}
+
+.highlighted {
+  color: #006800;
+}
+
+/* ====== Headings ====== */
+h1,.h1 {
+	font-size: 2em;
+	color: #353437;
+}
+
+h2,.h2 {
+	font-size: 1.67em;
+	color: #414142;
+}
+
+h3,.h3 {
+	font-size: 1.46em;
+	color: #505050;
+}
+
+h4,.h4 {
+	font-size: 1.23em;
+	color: #575757;
+}
+
+.or .h4 {
+	font-size: 1.08em;
+	font-weight: 600;
+	padding: 0.33em 0px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	color: #444;
+}
+
+h5,.h5 {
+	font-size: 1.08em;
+	color: #59595e;
+}
+
+h6,.h6 {
+	font-size: 1.08em;
+	color: #333;
+}
+
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6 {
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* ====== Default spacing ====== */
+h1,h2,h3,h4,h5,h6 {
+	padding: .33em 0 .33em;
+	font-style: normal;
+}
+
+p {
+	line-height: 1.2em;
+	margin: 5px 0;
+}
+
+a {
+	color: #145b82;
+	padding: 0 2px;
+}
+
+a:hover {
+	background-color: #145b82;
+	color: #FFF;
+	text-decoration: none;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px;
+}
+
+/*============header =============*/
+.message {
+	width: 960px;
+	height: 34px;
+	-webkit-box-shadow: 8px 8px 5px #cdcdc;
+	-moz-box-shadow: 8px 8px 5px #ccc;
+	box-shadow: 8px 8px 5px #ccc;
+	margin: 2px auto;
+}
+
+.message p {
+	font-size: .94em;
+	line-height: 1em;
+	margin: 9px 30px;
+}
+
+.confirmation {
+	background: #E6EFC2;
+	color: #264409;
+	border-color: #C6D880;
+}
+
+#page .message {
+	width: 80%;
+	height: 34px;
+	color: #fff;
+	-webkit-box-shadow: 0px 0px 0px #cdcdcd;
+	-moz-box-shadow: 0px 0px 0px #ccc;
+	box-shadow: 0px 0px 0px #ccc;
+	margin: 15px auto;
+}
+
+/*------------*/
+#page {
+  position: relative;
+	background: #fff;
+	width: 960px;
+	border: 1px solid #ccc;
+	min-height: 100%;
+	-webkit-box-shadow: 8px 8px 5px #ccc;
+	-moz-box-shadow: 8px 8px 5px #ccc;
+	box-shadow: 8px 8px 5px #ccc;
+	margin: 2px auto;
+	border-bottom-left-radius: 9px;
+	border-bottom-right-radius: 9px;
+	-moz-border-radius-bottomleft: 9px;
+	-moz-border-radius-bottomright: 9px;
+	-webkit-border-bottom-left-radius: 9px;
+	-webkit-border-bottom-right-radius: 9px;
+	-khtml-border-bottom-left-radius: 9px;
+	-khtml-border-bottom-right-radius: 9px;
+}
+
+.main-overflow-fix {
+	padding-bottom: 300px !important;
+}
+
+#skip:hover {
+	background-color: #145b82;
+	color: #FFF;
+	text-decoration: none;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px;
+}
+
+#header {
+	position: relative;
+	min-height: 110px;
+	border-bottom: 1px solid #ddd;
+	background: url(http://custom.ideascale.com/images/header-bg.png) no-repeat bottom center;
+	margin-bottom: 25px;
+	padding-left: 25px;
+}
+
+.ie6 #header {
+  height: 110px;
+}
+
+#header a {
+	text-decoration: none;
+}
+
+#header:hover a {
+	text-decoration: underline;
+}
+
+#logo {
+	clear: both;
+	max-width: 300px;
+	height: 75px;
+	float: left;
+	margin: 15px 5px 0 0;
+}
+
+.main-title {
+	height: 36px;
+	display: inline-block;
+	margin: 25px 0 3px;
+	font-weight: 700;
+	max-width: 600px;
+}
+
+.ideascale-bw {
+	display: block;
+	height: 35px;
+	width: 140px;
+	text-indent: -10000px;
+	background: url(http://custom.ideascale.com/images/ideascale-logo-bw.png) no-repeat left top;
+	margin: -9px 0 0 190px;
+}
+
+.ideascale-bw:hover {
+	background: url(http://custom.ideascale.com/images/ideascale-logo-bw.png) no-repeat left top;
+}
+
+#search {
+	font-size: .75em;
+	width: 350px;
+	text-align: right;
+	position: absolute;
+	right: 10px;
+	top: 55px;
+}
+
+#search-field {
+	width: 160px;
+	color: #777;
+}
+
+/*------- official header layout ------- */
+
+#official-header {
+  padding: 5px;
+  margin-left: -25px;
+  overflow: hidden;
+  position: relative;
+}
+
+#official-header #skip {
+  left: 50%;
+}
+
+#official-header #logo {
+  float: left;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#official-header #logo img {
+  vertical-align: middle;
+}
+
+#main-title {
+  float: left;
+  width: 100px;
+  padding: 8px;
+}
+
+#header-content {
+  float: right;
+  width: 742px;
+  position: relative;
+  padding-top: 30px;
+}
+
+#header-content:first-child {/*logo is not available*/
+  float: none;
+  width: auto;
+  margin-left: 22px;
+}
+
+#community-name, #slogan {
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+#community-name {
+  font-size: 30px;
+  color: #504c4d;
+}
+
+#slogan {
+  font-size: 16px;
+  color: #918f90;
+  margin: 0.5em 0;
+}
+
+#main-nav {
+  font-size: 11px;
+  position: absolute;
+  top: 10px;
+  line-height: 1.8em;
+  left: 0;
+  color: #999;
+}
+
+#main-nav > a {
+  text-decoration: underline;
+}
+
+#home-link {
+  padding-left: 12px;
+  background-image: url(http://custom.ideascale.com/images/home.png);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+
+#header-content #search {
+  right: -5px;
+  top: -5px;
+  width: auto;
+  padding: 2px 4px 4px 6px;
+  border-color: #ddd;
+  border-style: none none solid solid;
+  border-width: 1px;
+	-moz-border-radius-bottomleft: 9px;
+	-webkit-border-bottom-left-radius: 9px;
+	-khtml-border-bottom-left-radius: 9px;
+  border-bottom-left-radius: 9px;
+  box-shadow: #CCC -1px 1px 7px;
+}
+
+/*-----client and skip links-----*/
+#skip,#client-link {
+	position: absolute;
+	top: 8px;
+	font-size: .88em;
+}
+
+#skip {
+	color: #000;
+	left: 100px;
+	margin: 0;
+}
+
+#client-link {
+	left: 210px;
+}
+
+#client-link:hover {
+	color: #fff;
+}
+
+/*----------*/ /*==================
+============ intro,client text and simple submit form =============*/
+/*-----Submit new idea button-----*/
+.submit-new-idea {
+	position: relative;
+	font-size: 1.2em;
+	color: #fff;
+	margin: 0 0 18px 0;
+	display: block;
+	width: 250px;
+	height: 30px;
+	font-family: "Trebuchet MS", arial, helvetica, sans-serif;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	background: url(http://custom.ideascale.com/images/bg-submit-idea.png) repeat-x left top;
+	text-align: center;
+	padding-top: 8px;
+	text-decoration: none;
+}
+
+@-moz-document url-prefix() {
+  .submit-new-idea:focus {
+    outline-color: black;
+  }
+}
+
+.submit-new-idea:hover {
+	color: #333;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+#about .submit-new-idea {
+	float: right;
+	margin-right: 192px;
+}
+
+/*----------*/ /*----- Remainig votes counter -----*/
+.remaining-votes {
+	position: relative;
+	font-size: 1.2em;
+	color: #333;
+	margin: 5px 0 18px -8px;
+	display: block;
+	width: 252px;
+	height: 30px;
+	font-family: "Trebuchet MS", arial, helvetica, sans-serif;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	background: #affb95;
+	border: 1px solid #379516;
+	text-align: center;
+	padding-top: 8px;
+	text-decoration: none;
+}
+
+.remaining-votes span {
+	color: #379516;
+}
+
+/*----------*/
+#about {
+	position: relative;
+	width: 910px;
+	margin: 0 0 10px 29px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#about form,#about #client-txt {
+	margin-left: 287px;
+}
+
+#intro {
+	float: left;
+	width: 255px;
+	border: 1px solid #ccc;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+}
+
+#intro ul {
+	background-color: #e1f3f7;
+	margin: 0 3px 3px;
+	padding: 10px;
+	-moz-border-radius-bottomleft: 9px;
+	-moz-border-radius-bottomright: 9px;
+	-webkit-border-radius-bottom-left: 9px;
+	-webkit-border-radius-bottom-right: 9px;
+}
+
+#intro h3 {
+	background-color: #e1f3f7;
+	font-size: 1.25em;
+	font-weight: 700;
+	color: #333;
+	margin: 3px 3px 0;
+	border-top-radius: 9px;
+	-moz-border-radius-topleft: 9px;
+	-moz-border-radius-topright: 9px;
+	-webkit-border-radius-top-left: 9px;
+	-webkit-border-radius-top-right: 9px;
+	-khtml-border-radius-top: 9px;
+	padding-left: 10px;
+}
+
+#intro li {
+	list-style: none;
+	font-size: .85em;
+	color: #474747;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	padding: 8px 0 0 52px;
+}
+
+#client-txt h2 {
+	font-size: 1.38em;
+	color: #414142;
+}
+
+#client-txt p {
+	font-size: .88em;
+	color: #575757;
+	margin-bottom: 20px;
+}
+
+.big-field {
+	color: #474747;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .88em;
+	border: 1px solid #ccc;
+	width: 99%;
+	padding: 5px;
+}
+
+/*#got-an-idea-home {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 630px;
+    margin-bottom: -500px;
+    padding-bottom: 500px;
+    float: left;
+}
+*/
+#got-an-idea-home>.big-field {
+	width: 98%;
+}
+
+.idea-form .big-field {
+	width: 218px;
+}
+
+.submit {
+	float: right;
+	margin: 10px;
+}
+
+/*==================
+============sidebar=============*/
+#sidebar {
+	width: 250px;
+	float: left;
+	margin: 0 29px 80px;
+}
+
+.section {
+	display: block;
+	position: relative;
+	margin-bottom: 35px;
+	padding-bottom: 10px;
+	background: url(http://custom.ideascale.com/images/sidebar-section-bg.png) no-repeat left bottom;
+}
+
+.section a {
+	text-decoration: none;
+}
+
+.section:hover a, .section:hover .link-btn {
+	text-decoration: underline;
+}
+
+.section h3 {
+	font-size: 1.13em;
+	border-bottom: 1px solid #ccc;
+	margin: 0 0 10px;
+	padding-bottom: 2px;
+	background: #fff;
+}
+
+.section h4 {
+	font-size: 1.13em;
+	border-bottom: 1px solid #ccc;
+	margin: 0 0 10px;
+	padding-bottom: 2px;
+	background: #fff;
+  position: relative;
+}
+
+.ie6 .section h4 {
+  zoom: 1;
+}
+
+.section h5 {
+	font-size: 1em;
+	margin: 15px 0 -5px 7px;
+	padding-bottom: 2px;
+	font-weight: 500;
+}
+
+.section ul {
+	list-style: none;
+	font-size: .88em;
+	margin: 5px;
+	padding: 0;
+}
+
+.section li {
+	color: #474747;
+	margin-bottom: 6px;
+}
+
+.section li img {
+	position: relative;
+	top: 3px;
+	margin-right: 1px;
+}
+
+/*--------old tags--------*/
+#tags,#stats {
+	margin: 5px;
+}
+
+#tags p {
+	font-size: .88em;
+	margin-bottom: 6px;
+	text-align: justify;
+}
+
+.b a {
+	color: #5FA8D8;
+}
+
+.c a {
+	color: #80B6DF;
+}
+
+.d a {
+	color: #9EC5E5;
+}
+
+.e a {
+	color: #BDD6ED;
+}
+
+.b a:hover,.c a:hover,.d a:hover,.e a:hover {
+	color: #FFF;
+}
+
+/*----- Tag Cloud ------*/
+.tag-cloud h3 {
+	margin: 0 -8px 5px -5px;
+}
+
+#tag-cloud-items {
+	padding: 5px; 
+}
+
+.tag-cloud a {
+	line-height: 1.2em;
+	display: inline-block;
+}
+
+.tag-cloud a:hover {
+	color: #fff !important;
+}
+
+.tag-cloud a.very-high {
+	font-size: 1.5em;
+}
+
+.tag-cloud a.high {
+	color: #2F6F93;
+	font-size: 1.375em;
+}
+
+.tag-cloud a.medium-high {
+	color: #4B83A4;
+	font-size: 1.25em;
+}
+
+.tag-cloud a.medium {
+	color: #6697B5;
+	font-size: 1.125em;
+}
+
+.tag-cloud a.medium-low {
+	color: #82ABC6;
+	font-size: 1em;
+}
+
+.tag-cloud a.low {
+	color: #9DBFD7;
+	font-size: .875em;
+}
+
+.tag-cloud a.very-low {
+	color: #B9D3E9;
+	font-size: .75em;
+}
+
+.tag-cloud a.active,.tag-cloud a.active:hover {
+	background: #145b82;
+	color: #FFF;
+	text-decoration: none;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px; /*background: #f2f2f3;
+    border-top: 1px solid #00507d;
+    border-bottom: 1px solid #00507d;
+    padding: 6px 0;*/
+}
+
+/*.b a:hover,.c a:hover,.d a:hover,.e a:hover {
+    color: #FFF;
+}
+*/
+#stats {
+	text-align: center;
+}
+
+#ideas-stats, .user-stats .ideas-stats {
+	font-size: 1.38em;
+	color: #474747;
+	border-bottom: 1px dashed #ccc;
+	padding: 4px 0;
+}
+
+#other-stats, .user-stats .other-stats {
+	font-size: .81em;
+	color: #575757;
+	padding: 4px 0;
+}
+
+.number {
+	font-weight: 700;
+	color: #373737;
+	margin-left: 8px;
+}
+
+#top-contributors-link {
+	font-size: 12px;
+	padding-left: 1em;
+	text-align: center;
+}
+
+.current-category {
+	background: #145b82;
+	text-decoration: none;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px; /*background: #f2f2f3;
+    border-top: 1px solid #00507d;
+    border-bottom: 1px solid #00507d;
+    width: 70%;*/
+	padding: 6px 5px;
+}
+
+.section li.current-category {
+	color: #fff;
+}
+
+.current-category a {
+	color: #FFF !important;
+	display: inline-block;
+	height: 100%;
+}
+
+/*============ main content =============*/
+#main {
+	position: relative;
+	width: 630px;
+	float: left;
+	padding-bottom: 50px;
+}
+
+.no-sidebar #main {
+  width: auto;
+  float: none;
+  margin: 0 2em;
+}
+
+#content-language {
+	position: absolute;
+	color: #575757;
+	font-size: .75em;
+	text-align: right;
+	top: 10px;
+	right: 10px;
+}
+
+.listing-title {
+	display: inline-block;
+	padding: 5px 0 15px 0;
+}
+
+/*--------Idea nav----------*/
+#listing-nav {
+	list-style: none;
+	margin: 0 0 0 -2px;
+	padding: 0;
+  clear: both;
+}
+
+#listing-nav li {
+	position: relative;
+	background: #f7f7f7;
+	display: inline;
+	font-size: .75em;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-khtml-border-top-left-radius: 5px;
+	-khtml-border-top-right-radius: 5px;
+	margin: 0 2px;
+	padding: 4px 5px 2px 8px;
+	border: 1px solid #aaa;
+	border-bottom: 1px solid #f7f7f7;
+	cursor: pointer;
+}
+
+#listing-nav li a {
+	text-decoration: none;
+	color: #474747;
+	padding: 0;
+}
+
+#listing-nav li:hover {
+	text-decoration: none;
+	background: #eee;
+}
+
+#listing-nav li:hover a {
+	color: #00507d;
+}
+
+#listing-nav .active {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-bottom: 1px solid #eee;
+	z-index: 99;
+	padding-bottom: 3px;
+}
+
+#listing-nav .active a {
+	font-weight: 700;
+	color: #00507d;
+}
+
+#listing-nav li a:hover {
+	text-decoration: none;
+	background: #eee;
+}
+
+#listing-nav li.active a:hover {
+	text-decoration: none;
+	background: #eee;
+	color: #00507d;
+}
+
+/*--------Idea list----------*/
+#ideas, #inbound-ideas {
+	position: relative;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 3px 0;
+	margin: 3px 0;
+}
+
+#inbound-ideas {
+	margin-bottom: 15px;
+}
+
+.hanging {
+	position: absolute !important;
+	margin: 0 !important;
+}
+
+.idea {
+	position: relative;
+	width: 610px;
+	min-height: 130px;
+	border: 1px solid #CCC;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	margin: 5px auto;
+	background-color: #fff;
+}
+
+.idea .title {
+	margin-top: 5px;
+	margin-right: 30px;
+}
+
+.idea .content {
+	z-index: 1;
+}
+
+.content .report {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -426px;
+	position: absolute;
+	top: 4px;
+	font-size: .75em;
+	z-index: 100;
+	display: none;
+	height: 16px;
+	padding: 3px 5px 0 25px;
+}
+
+.content a.report:hover {
+	background-color: #145b82;
+	color: #FFF;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px;
+}
+
+.idea .report.abuse {
+	right: 40px;
+}
+
+.idea .report.duplicate {
+	right: 160px;
+}
+
+/* ------ Verification of new ideas created while not authorized ----- */
+
+.content .verify {
+    position: absolute;
+    top: 4px;
+    font-size: .75em;
+    z-index: 100;
+    height: 16px;
+    padding: 3px 5px 0 5px;
+}
+
+.idea .verify.approve {
+	right: 36px;
+}
+
+.idea .verify.reject {
+	right: 108px;
+}
+
+/*----------*/
+.idea .content { /*position: relative;*/
+	margin-left: 125px;
+	width: 480px;
+	padding: 6px 0 35px 0;
+	min-height: 89px;
+}
+
+.content h3 {
+	font-size: 1.31em;
+	line-height: 1.1em;
+	margin: 0;
+	padding: 2px 0;
+}
+
+.content h3 a {
+	text-decoration: none;
+}
+
+.content a {
+	text-decoration: none;
+}
+
+.content:hover a {
+	text-decoration: underline;
+}
+
+.content h3 a:hover {
+	text-decoration: underline;
+}
+
+.content p {
+	padding-top: 2px;
+}
+
+.content .error {
+	margin: 1em 0 0;
+}
+
+.content img {
+	max-width: 100%;
+}
+
+/*------- idea voting -------*/
+.voting {
+	width: 120px;
+	height: 130px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/*----- Regular Voting ------*/
+
+.agree,.disagree,.vote-invitation {
+	color: #00507d;
+	font-weight: 700;
+	font-size: .88em;
+	text-decoration: none;
+	height: 15px;
+	padding: 10px 0;
+	display: block;
+	text-align: center;
+}
+
+.agree,.disagree {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+	text-indent: 20px;
+}
+
+.disagree, .disagreed, .vote-invitation {
+	position: absolute;
+	bottom: 0;
+	width: 120px;
+}
+
+.agreed {
+	color: #006800;
+	text-decoration: none;
+	font-weight: 700;
+	display: block;
+	font-size: .81em;
+	height: 23px;
+	width: 119px;
+	padding: 12px 0 0 33px;
+	margin: 0 0 0 -9px;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+}
+
+.agreed:hover {
+	color: #006800;
+	text-decoration: none;
+	font-weight: 700;
+	display: block;
+	font-size: .81em;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+}
+
+.disagreed,.disagreed:hover {
+	color: #8b181a;
+	font-weight: 700;
+	font-size: .81em;
+	text-decoration: none;
+	height: 22px;
+	width: 141px;
+	margin: -4px 0 0 -9px;
+	padding: 9px 0 0 33px;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+}
+
+.idea:hover .agree,.idea:hover .disagree {
+	background-color: #00507d;
+	color: #fff;
+	cursor: pointer;
+}
+
+.idea:hover .agree:hover,.idea:hover .disagree:hover {
+	background-color: #145b82;
+}
+
+.agree:hover,.unvoted:hover .agree,.idea:hover .agree {
+	border-top-left-radius: 9px;
+	border-bottom-right-radius: 9px;
+	-moz-border-radius-topleft: 9px;
+	-moz-border-radius-bottomright: 9px;
+	-webkit-border-top-left-radius: 9px;
+	-webkit-border-bottom-right-radius: 9px;
+	-khtml-border-top-left-radius: 9px;
+	-khtml-border-bottom-right-radius: 9px;
+}
+
+.disagree:hover,.unvoted:hover .disagree,.idea:hover .disagree {
+	border-top-right-radius: 9px;
+	border-bottom-left-radius: 9px;
+	-moz-border-radius-topright: 9px;
+	-moz-border-radius-bottomleft: 9px;
+	-webkit-border-top-right-radius: 9px;
+	-webkit-border-bottom-left-radius: 9px;
+	-khtml-border-top-right-radius: 9px;
+	-khtml-border-bottom-left-radius: 9px;
+}
+
+.idea:hover .voting-disabled {
+  background: #e1e1e2;
+}
+
+.voting-disabled-notice {
+  display: none;
+  position: absolute;
+  width: 82px;
+  padding: 4px 4px;
+  height: 34px;
+  top: 44px;
+  left: 15px;
+  background: #939598;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.3em;
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+}
+
+.idea:hover .voting-disabled-notice {
+  display: block;
+}
+
+.voting-disabled .agree, .voting-disabled .disagree {
+  background-position: 8px 50%;
+  color: #bec0c2 !important;
+  background-color: transparent !important;
+  cursor: default !important;
+}
+
+.voting-disabled .agree {
+  background-image: url(http://custom.ideascale.com/images/agree-disabled.png);
+}
+
+.voting-disabled .disagree {
+  background-image: url(http://custom.ideascale.com/images/disagree-disabled.png);
+}
+
+.voting-disabled .vote-number {
+  color: #737577;
+}
+
+.voting-disabled .unit {
+  color: #abadaf;
+}
+
+/*------- feedback score -------*/
+.votes, .feedback-score {
+	position: absolute;
+	top: 34px;
+	left: 0;
+	text-align: center;
+	background: url(http://custom.ideascale.com/images/idea-bg.png) left top no-repeat;
+	height: 62px;
+}
+
+.votes {
+	padding: 15px 0 5px 0;
+}
+
+p.votes, .feedback-score {
+	line-height: 1.1em;
+	margin: 0;
+	width: 100%;
+}
+
+.vote-number {
+	font-size: 2em;
+	color: #373737;
+	font-weight: 700;
+	margin: 3px 0 0;
+	display: block;
+}
+
+.unit {
+	font-size: .81em;
+	color: #575757;
+}
+
+.feedback-score > h6 {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+}
+
+.feedback-score > .vote-number {
+  color: #666;
+  font-size: 2.2em;
+  line-height: 1em;
+  margin: -0.2em 0 0;
+}
+
+.score-bars {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 90%;
+  margin: 0 5%;
+  font-size: 11px;
+  line-height: 1em;
+  border-bottom: solid 3px #ddd;
+  overflow: visible;
+}
+
+.score-bars > div {
+  border-style: none none solid none;
+  border-width: 3px;
+  overflow: visible !important/*for animation*/;
+  position: absolute;
+  bottom: -3px;
+}
+
+.agreements {
+  color: #0b9444;
+  border-color: #0b9444;
+  text-align: left;
+  left: 0;
+}
+
+.disagreements {
+  color: #bf1e2d;
+  border-color: #bf1e2d;
+  text-align: right;
+  text-indent: -11px;
+  right: 0;
+}
+
+/*----- Poker Chips Voting ------*/
+.voting.poker-chips {
+	z-index: 2;
+}
+
+.poker-chips .votes {
+	position: absolute;
+	top: 76px;
+	height: 57px;
+	margin-top: -45px;
+}
+
+.poker-chips .manage-chips-button {
+	position: absolute;
+	top: 76px;
+}
+
+.poker-chips .manage-chips-button .add-chips {
+	color: #00507d;
+	font-weight: 700;
+	font-size: .88em;
+	height: 15px;
+	padding: 8px 10px 10px;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	margin: 20px 0 0 -1px;
+}
+
+.poker-chips p {
+	color: #6d6f71;
+	font-size: .88em;
+}
+
+.poker-chips .chips-allocated.invisible {
+	display: none;
+}
+.screen-focus .chips-allocated.invisible {
+	display: block;
+}
+
+.poker-chips .chips-allocated {
+	position: relative;
+	color: #6d6f71;
+	border: 2px solid #bdbec1;
+	background: #fff;
+	padding: 2px;
+	margin: 0 5px 0 -27px;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	display: inline-block;
+	min-width: 30px;
+	width: 50px;
+	text-align: center;
+	z-index: 100;
+}
+
+.poker-chips .chip-number {
+	font-size: 1.25em;
+	font-weight: bold;
+	display: block;
+	min-width: 30px;
+	text-align: center;
+	color: #6d6f71;
+}
+
+.poker-chips .idea-chips .chip-number,.poker-chips  .idea-chips .allocated {
+	color: #39b54a;
+}
+
+.poker-chips .remaining-chips .chip-number {
+	z-index: 9999;
+}
+
+.poker-chips .chips-allocated.idea-chips {
+	color: #39b54a;
+	border-color: #39b54a;
+	background: #fff;
+}
+
+.poker-chips .allocated {
+	font-size: .68em;
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	color: #a7aaac;
+}
+
+.poker-chips .chips-allocated.idea-chips.modified {
+	border: dotted;
+}
+
+.poker-chips .chips-allocated.modified {
+	border: 2px dotted #bdbec1;
+}
+
+.poker-chips .chips-allocated.idea-chips p {
+	color: #39b54a;
+}
+
+.poker-chips .remaining-chips {
+	border: 3px solid #bdbec1;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	position: absolute;
+	right: 5px;
+	top: 3px;
+	color: #39b54a;
+	font-size: 1em;
+	text-align: center;
+	border: none;
+	background: url(http://custom.ideascale.com/images/poker-chips-left-bg.png) no-repeat left top;
+	width: 74px;
+	height: 69px;
+}
+
+.poker-chips .remaining-chips.modified {
+	border: 2px dotted #bdbec1;
+	right: 3px;
+	top: 1px;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+}
+
+.poker-chips .remaining-chips {
+	color: #666;
+}
+
+.poker-chips .remaining-chips .chip-number {
+	font-weight: 700;
+	margin: 0;
+	margin-top: -5px;
+	margin-bottom: -3px;
+	display: block;
+	font-size: 2.5em;
+}
+
+.poker-chips .manage-chips-button .add-chips:hover, .vote-invitation:hover {
+	background-color: transparent;
+	text-decoration: underline;
+	color: #444;
+}
+
+.poker-chips .manage-chips-button .add-chips.display-menu {
+	position: relative;
+	z-index: 102;
+	margin-top: 19px;
+	height: 15px;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	background: #fff;
+	/*border radius*/
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-khtml-border-top-left-radius: 5px;
+	-khtml-border-top-right-radius: 5px; /*---*/ /*box shadow*/
+	-webkit-box-shadow: 15px 0 15px -10px #999;
+	-moz-box-shadow: 15px 0 15px -10px #999;
+	box-shadow: 15px 0 15px -10px #999;
+}
+
+.poker-chips .manage-chips {
+	display: none;
+	background: #fff;
+	position: relative;
+	top: -1px;
+	left: -1px;
+	z-index: 101;
+	padding: 10px;
+	border: 1px solid #ccc;
+	width: 590px;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	-webkit-box-shadow: 4px 2px 15px -5px #999;
+	-moz-box-shadow: 4px 2px 15px -5px #999;
+	box-shadow: 4px 2px 15px -5px #999;
+	border-top-right-radius: 0px;
+	-moz-border-radius-topleft: 0;
+	-webkit-border-top-left-radius: 0px;
+	-khtml-border-top-left-radius: 0px;
+}
+
+.poker-chips .chosable-chips {
+	margin: 10px auto 3px 20px;
+}
+
+.poker-chips .chosable-chips ul {
+	display: inline;
+}
+
+.poker-chips .chosable-chips ul.take-chips-back {
+	margin-left: -2px;
+}
+
+.poker-chips .chosable-chips li {
+	display: inline;
+	border: 2px solid;
+	border-left: none;
+	padding: 2px 6px 1px 6px;
+	font-size: 1em;
+	margin: 0;
+}
+
+.poker-chips .chosable-chips li:first-child {
+	border: 2px solid;
+}
+
+.poker-chips .chosable-chips li a {
+	display: inline-block;
+	text-decoration: none;
+}
+
+.poker-chips .chosable-chips .allocate-chips li {
+	border-color: #39b54a;
+}
+
+.poker-chips .chosable-chips .allocate-chips li a {
+	color: #39b54a;
+}
+
+.poker-chips .chosable-chips .allocate-chips li:hover {
+	background-color: #39b54a;
+}
+
+.poker-chips .chosable-chips .take-chips-back li {
+	border-color: #bf1e2d;
+}
+
+.poker-chips .chosable-chips .take-chips-back li a {
+	color: #bf1e2d;
+}
+
+.poker-chips .chosable-chips .take-chips-back li:hover {
+	background-color: #bf1e2d;
+}
+
+.poker-chips .chosable-chips li.unavailable {
+	border: 2px solid #bdbec1;
+	margin-left: -2px;
+	background: #f2f2f3;
+}
+
+.poker-chips .chosable-chips li.unavailable  a {
+	color: #bdbec1;
+}
+
+.poker-chips .chosable-chips li.unavailable:hover a {
+	color: #bdbec1;
+}
+
+.poker-chips .chosable-chips li.unavailable:hover {
+	cursor: default;
+	background: #f2f2f3;
+}
+
+.poker-chips .chosable-chips li:hover a {
+	color: #fff;
+}
+
+.poker-chips .chosable-chips li:hover a:hover {
+	background: transparent;
+}
+
+.poker-chips  p.buttons {
+	min-width: 100px;
+	font-size: .81em;
+	margin: 15px 0 0 100px;
+}
+
+.poker-chips  p.buttons a {
+	margin: 0 8px;
+}
+
+.poker-chips  p.buttons a.save {
+	background-color: #145b82;
+	color: #FFF;
+	text-decoration: none;
+	padding: 1px 6px;
+	font-size: 1.12em;
+	border: 1px solid #ccc;
+	font-weight: bold;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+
+.poker-chips .other-ideas-link {
+	color: #6d6f71;
+	font-size: .94em;
+	border-bottom: 1px solid #ccc;
+	margin: 25px 0 -20px;
+}
+
+.poker-chips .other-ideas-link:hover {
+	background: transparent;
+}
+
+.poker-chips .other-idea h4 {
+	margin-right: 40px;
+}
+
+.poker-chips .other-idea {
+	margin: 20px 0;
+	background: url(http://custom.ideascale.com/images/other-idea-bg.png) no-repeat left top;
+	margin-left: -10px;
+}
+
+.poker-chips .other-idea .chips-allocated {
+	float: left;
+}
+
+.poker-chips .other-idea h4 {
+	font-size: 1em;
+	color: #575757;
+}
+
+.poker-chips .other-idea h4 .chip-number {
+	position: relative;
+	float: left;
+}
+
+/*======== idea status ========*/
+.idea-status {
+	position: absolute;
+	display: block;
+	width: 35px;
+	height: 35px;
+	text-indent: -10000px;
+	top: 0;
+	right: 0;
+	z-index: 100;
+	border-top-right-radius: 9px;
+	-moz-border-radius-topright: 9px;
+	-webkit-border-top-right-radius: 9px;
+	-khtml-border-top-right-radius: 9px;
+}
+
+.idea-status:hover {
+	border-top-right-radius: 9px;
+	-moz-border-radius-topright: 9px;
+	-webkit-border-top-right-radius: 9px;
+	-khtml-border-top-right-radius: 9px;
+}
+
+.other-idea .idea-status {
+	position: static;
+	float: right;
+	margin: -26px -10px 0 0;
+}
+
+.completed,.completed:hover {
+	background: #fff url(http://custom.ideascale.com/images/flag-completed.png) no-repeat right top;
+	/*checkered flag*/
+	color: #000;
+}
+
+.completed a {
+	color: #000;
+}
+
+.offtopic,.offtopic:hover {
+	background: #fff url(http://custom.ideascale.com/images/flag-offtopic.png) no-repeat right top;
+	/*checkered flag*/
+	color: #000;
+}
+
+.offtopic a {
+	color: #000;
+}
+
+.inbound,.inbound:hover {
+    background: #fff url(http://custom.ideascale.com/images/flag-inbound.png) no-repeat right top;
+    /*arrow flag*/
+    color: #000;
+}
+
+.offtopic a {
+    color: #000;
+}
+
+.closed,.closed:hover {
+    background: #000 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*BLACK*/ 
+	color: #fff;
+}
+
+.closed a {
+	color: #fff;
+}
+
+.under-review,.under-review:hover {
+    background: #FFD324 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*YELLOW*/
+	color: #000;
+}
+
+.under-review a {
+	color: #000;
+}
+
+.in-progress,.in-progress:hover {
+    background: #008900 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*GREEN*/ 
+	color: #000;
+}
+
+.in-progress a {
+	color: #000;
+}
+
+.active,.active:hover {
+    background: #f7f7f7 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*light,light-grey (hardly visible)*/ 
+	color: #474747;
+}
+
+.active a {
+	color: #474747;
+}
+
+.new-pending,.new-pending:hover {
+    background: #cc0100 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*RED*/ 
+	color: #fff;
+}
+
+.new-pending a {
+	color: #fff;
+}
+
+/* ------- Global Moderation Menu -----*/
+.moderate {
+	position: relative;
+	z-index: 101;
+	height: 16px;
+	padding: 3px 5px 0 5px;
+}
+
+.moderate:hover {
+	background-color: transparent;
+	text-decoration: underline;
+	color: #145b82;
+}
+
+.moderate-menu .moderate-tab {
+	position: absolute;
+	right: -3px;
+	top: -18px;
+	text-decoration: underline;
+	padding: 3px 8px 0 8px;
+	z-index: 101;
+	height: 15px;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	background: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-khtml-border-top-left-radius: 5px;
+	-khtml-border-top-right-radius: 5px;
+}
+
+.moderate-menu .moderate-tab:hover {
+	text-decoration: underline;
+	color: #145b82;
+}
+
+.moderate-menu {
+	max-width: 200px;
+	display: none;
+	background: #fff;
+	position: absolute;
+	right: 67px;
+	top: 17px;
+	z-index: 102;
+	padding: 10px;
+	margin-top: 0px;
+	border: 1px solid #ccc;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	-webkit-box-shadow: -4px 2px 15px #999;
+	-moz-box-shadow: -4px 2px 15px #999;
+	box-shadow: -4px 2px 15px #999;
+	border-top-right-radius: 0px;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0px;
+	-khtml-border-top-right-radius: 0px;
+	text-align: left;
+}
+
+.moderate-menu h4 {
+	border-bottom: 1px solid #CCCCCC;
+	color: #00507d;
+	font-size: 1.13em;
+	padding-bottom: 2px;
+}
+
+.moderate-menu ul {
+	padding: 10px;
+}
+
+.moderate-menu ul:first-child,.moderate-menu li:first-child {
+	border: none;
+}
+
+.moderate-menu li {
+	height: 18px;
+	border-bottom: 1px solid #fcfcfc;
+	border-top: 1px solid #ccc;
+	background-position: right top;
+	padding: 8px 0px 9px 0px;
+}
+
+.moderate-menu li a {
+	text-decoration: none;
+	display: block;
+	height: 100%;
+	width: 100%;
+	color: #444;
+	padding: 5px 0 10px 30px;
+}
+
+.moderate-menu li a:hover {
+	background: transparent;
+	text-decoration: underline;
+}
+
+.moderate-menu li a.current {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -4px;
+}
+
+.moderate-menu li a.updating {
+	background: url(http://custom.ideascale.com/images/spinner.gif) no-repeat 0 4px;
+}
+
+/* ------- Admin idea menu -----*/
+.moderate-idea {
+	position: absolute;
+	right: 40px;
+	top: 4px;
+	font-size: .75em;
+	text-decoration: none;
+	z-index: 100;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 5px -492px;
+	height: 16px;
+	padding: 3px 5px 0 25px;
+}
+
+.moderate-idea:hover {
+	background-color: transparent;
+	text-decoration: underline;
+	color: #145b82;
+}
+
+.moderate-idea.display-menu {
+	z-index: 102;
+	height: 15px;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	background: #fff url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 5px -492px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-khtml-border-top-left-radius: 5px;
+	-khtml-border-top-right-radius: 5px;
+}
+
+.admin-idea {
+	display: none;
+	background: #fff;
+	position: absolute;
+	right: 40px;
+	z-index: 101;
+	padding: 10px;
+	margin-top: 15px;
+	border: 1px solid #ccc;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	-webkit-box-shadow: -4px 2px 15px #999;
+	-moz-box-shadow: -4px 2px 15px #999;
+	box-shadow: -4px 2px 15px #999;
+	border-top-right-radius: 0px;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0px;
+	-khtml-border-top-right-radius: 0px;
+}
+
+.admin-idea h4 {
+	border-bottom: 1px solid #CCCCCC;
+	color: #00507d;
+	font-size: 1.13em;
+	padding-bottom: 2px;
+}
+
+.admin-idea ul {
+	padding: 0 10px;
+	margin: 10px 0;
+	width: 177px;
+    /*trick for removing the top border for the first menu item (which works for IE6)*/
+	overflow: hidden;
+	position: relative;
+	zoom: 1;
+}
+
+.admin-idea ul:first-child,.admin-idea li:first-child {
+	border: none;
+}
+
+.admin-idea li 
+{
+	border-bottom: 1px solid #fcfcfc;
+	border-top: 1px solid #ccc;
+	background-position: right top;
+    /*trick for removing the top border for the first menu item (which works for IE6)*/
+	position: relative;
+	top: -1px;
+}
+
+.admin-idea li a {
+	font-size: .81em;
+	text-decoration: none;
+	display: block;
+	height: 35px;
+	line-height: 38px;
+	overflow: hidden;
+	color: #444;
+	padding-left: 40px;
+}
+
+.admin-idea li a:hover {
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+.admin-idea li a.current-status {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 10px 4px;
+}
+
+.admin-idea li a.updating-status {
+	background: url(http://custom.ideascale.com/images/spinner.gif) no-repeat 10px 11px;
+}
+
+/*--------- vtip css ---------*/
+/* NOTICE: if a new idea status is introduced, we need to update allStatus array in vtip.js as well as the stylesheet */
+p#vtip {
+	display: none;
+	position: absolute;
+	padding: 10px;
+	left: 5px;
+	font-size: 0.8em;
+	background-color: white;
+	border: 1px solid #a6c9e2;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	z-index: 9999
+}
+
+p#vtip.completed-tip {
+	background: #affb95;
+	color: #333;
+	border: 1px solid #379516;
+}
+
+p#vtip.closed-tip {
+	background: #ced0cc;
+	color: #000;
+	border: 1px solid #333;
+}
+
+p#vtip.under-review-tip {
+	background: #FFF6BF;
+	color: #514721;
+	border: 1px solid #FFD324;
+}
+
+p#vtip.in-progress-tip {
+	background: #9aff81;
+	color: #008900;
+	border: 1px solid #008900;
+}
+
+p#vtip.active-tip {
+	background: #f7f7f7;
+	color: #333;
+	border: 1px solid #333;
+}
+
+p#vtip.new-pending-tip {
+	background: #f89c99;
+	color: #cc0100;
+	border: 1px solid #f00;
+}
+
+p#vtip.inbound-tip {
+    background: #f89c99;
+    color: #cc0100;
+    border: 1px solid #f00;
+}
+
+p#vtip #vtipArrow {
+	position: absolute;
+	top: -10px;
+	right: 10px
+}
+
+/*==================*/ /*-------------*/
+.down {
+	position: relative;
+	top: 3px;
+}
+
+.check {
+	position: relative;
+	bottom: 15px;
+	float: left;
+	width: 43px;
+}
+
+.cross {
+	position: relative;
+	float: left;
+	bottom: 8px;
+	width: 30px;
+}
+
+/*----------*/
+.idea-category {
+	font-size: .63em;
+	color: #474747;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.arrow {
+	font-size: .69em;
+}
+
+.idea-category:hover {
+	cursor: pointer;
+}
+
+.idea-preview,.content p {
+	color: #474747;
+	font-size: .81em;
+}
+
+.entry-summary, .entry-full {
+	overflow: auto;
+}
+
+.ie6 .entry-full {
+  zoom: 1;
+}
+
+.entry-summary > p > iframe, .entry-full > p > iframe, .entry-content > p > iframe, .comment-content > p > iframe, .attachment-content > p > iframe {
+	margin-top: 0.5em;
+}
+
+.idea-thumbnail {
+	max-width: 150px;
+	max-height: 150px;
+	float: left;
+	margin: 10px 10px 0 0;
+}
+
+.comments {
+	padding-top: 2px;
+	width: 150px;
+	height: 16px;
+	font-size: .69em;
+	margin-top: 9px;
+	position: absolute;
+	bottom: 2px;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat  0 -213px;
+	text-indent: 20px;
+}
+
+.ie6 .comments {
+  clear: both;
+}
+
+.details {
+	position: absolute;
+	width: 300px;
+	color: #474747;
+	font-size: .69em;
+	text-align: right;
+	margin: 9px 10px 0 0;
+	bottom: 4px;
+	right: 0px;
+}
+
+/*-------*/
+.pagination {
+	width: 400px;
+	position: absolute;
+	text-align: right;
+	margin: 5px 0 0 5px;
+	right: 5px;
+	bottom: 20px;
+}
+
+.pagination li {
+	display: inline;
+	border: 1px solid #145b82;
+	padding: 1px 0 1px 2px;
+	font-size: .69em;
+	margin: 0 2px;
+}
+
+.pagination li.current {
+	padding: 1px 5px 1px 5px;
+}
+
+.pagination li a {
+	display: inline-block;
+	color: #145b82;
+	text-decoration: none;
+}
+
+.pagination li:hover {
+	background-color: #145b82;
+	cursor: pointer;
+}
+
+.pagination li:hover a {
+	color: #fff;
+}
+
+.displaying {
+	color: #333;
+	font-size: .75em;
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	width: 210px;
+	margin: 5px 0 0 5px;
+}
+
+/*============footer=============*/
+#footer {
+	position: relative;
+	clear: both;
+	width: 950px;
+	height: 45px;
+	margin: 15px auto 5px;
+}
+
+#footer p {
+	margin-top: 9px;
+	float: left;
+	width: 700px;
+	color: #474747;
+	font-size: .69em;
+}
+
+#footer img {
+	float: right;
+	width: 176px;
+}
+
+.ideascale-color {
+	display: block;
+	height: 38px;
+	width: 176px;
+	text-indent: -10000px;
+	background: url(http://custom.ideascale.com/images/ideascale-logo-color.png) no-repeat left top;
+}
+
+.ideascale-color:hover {
+	background: url(http://custom.ideascale.com/images/ideascale-logo-color.png) no-repeat left top;
+}
+
+#footer .ideascale-color {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
+
+#footer a {
+	color: #474747;
+}
+
+#footer a:hover {
+	color: #fff;
+}
+
+/*============Single idea=============*/
+* > .single.idea .content{
+	min-height: 160px;
+}
+
+.idea .stats {
+	text-align: center;
+	float: left;
+	width: 120px;
+	height: 100px;
+	position: relative;
+	top: 130px;
+}
+
+.idea .stats .rank {
+	font-size: 1.38em;
+	color: #474747;
+	border-bottom: 1px dashed #ccc;
+	padding: 4px 0;
+}
+
+.idea .stats .other {
+	font-size: .81em;
+	color: #aaa;
+	padding: 4px 0;
+}
+
+.idea-form {
+	overflow: hidden;
+	background: #f2f2f3;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	padding: 10px;
+}
+
+.idea-form .big-field {
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+}
+
+.idea-meta, .user-meta, .tag-meta {
+	margin-top: 5px;
+	padding: 5px 0;
+}
+
+.idea-meta, .tag-meta {
+	border-bottom: 1px solid #ccc;
+}
+
+.user-resume .user-meta {
+	margin: 0 0 5px 94px;
+}
+
+.idea-meta dl,.idea-meta dt,.idea-meta dd,.idea-meta p,.user-meta dl,.user-meta dt,.user-meta dd,.user-meta p,.idea-meta ul,.idea-meta li
+	{
+	display: inline;
+	color: #585858;
+	font: 11px helvetica, arial, sans-serif;
+}
+
+.idea-meta dd,.user-meta dd {
+	font-weight: 700;
+	margin: 0 10px 0 2px;
+}
+
+.idea-meta .long-description, .user-meta .long-description {
+	display: block;
+	margin: 5px 0;
+	line-height: 1.3em;
+}
+
+#idea-email-form {
+	width: 510px;
+}
+
+/*-----actions-----*/
+.idea .social-actions, .add-tags-form {
+	background: #f2f2f3;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+}
+.idea .social-actions {
+	height: 30px;
+	padding: 0;
+}
+
+.idea .social-actions li {
+	list-style: none;
+	float: left;
+	margin: 6px 4px 0 4px;
+}
+
+.idea .social-actions li a {
+	font-size: .69em;
+	margin: 8px 2px 0 18px;
+	white-space: nowrap;
+}
+
+.idea .social-actions li.tweet {
+	margin: 5px 4px 0 6px;
+}
+.idea .social-actions li.tweet iframe {
+	width: 88px;
+}
+
+.idea .social-actions li.like {
+	margin: 5px 4px 0 4px;
+}
+
+.idea .social-actions li.emailidea {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background-position: 0 -627px;
+}
+
+.idea .social-actions li.create-comment {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background-position: 0 -145px;
+}
+
+.idea .social-actions li.track {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background-position: 0 -694px;
+}
+
+.idea .social-actions li.edit {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background-position: 0 -490px;
+}
+
+/*------*/ /*------- idea tags -------*/
+.idea .tag-links, #tag-cloud-items.manage-mode a {
+	font-size: .69em;
+}
+
+.idea .tag-links {
+	margin-top: 10px;
+}
+
+.idea .tag-links a[rel~="tag"], #tag-cloud-items.manage-mode a {
+	color: #333;
+	background: #dde7f8;
+	text-transform: none;
+	font-weight: normal;
+	line-height: 1.3em;
+	border: 1px solid #a4bff0;
+	border-radius: .9em;
+	-webkit-border-radius: .9em;
+	-moz-border-radius: .9em;
+	white-space: nowrap;
+	display: inline-block;
+	margin: 0 4px 3px 0;
+}
+
+.idea .tag-links a[rel~="tag"] {
+	padding: 0 .6em;
+	margin-bottom: 5px;
+}
+
+#tag-cloud-items.manage-mode a {
+	line-height: 1.5em;
+	padding: 0 10px 0 18px;
+	background-image: url(http://custom.ideascale.com/images/minus.png);
+	background-repeat: no-repeat;
+	background-position: 2px 50%;
+	cursor: pointer;
+}
+
+.idea .content:hover .tag-links a[rel~="tag"] {
+	text-decoration: none;
+}
+
+#tag-cloud-items.manage-mode a {
+	text-decoration: none !important;
+}
+
+.idea .tag-links a[rel~="tag"]:hover, #tag-cloud-items.manage-mode a:hover {
+	background-color: #00507d;
+	border-color: #a4bff0;
+	color: #fff;
+}
+
+#tags-field {
+  min-height: 75px;
+}
+
+.ie7 #tags-field {
+  min-height: 80px;
+}
+
+#tags-field > .tagit, #tags-field > .tag-editor {
+  max-height: 46px;
+  margin-top: 3px;
+}
+
+.with-moderator-fields > #tags-field > .tagit, .with-moderator-fields > #tags-field > .tag-editor {
+  max-height: 23px;
+}
+
+.feature-activator {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -492px;
+	font-size: 0.69em;
+	line-height: 1.5em;
+	padding-left: 2em;
+}
+
+.section .feature-activator { margin-left: 6px; }
+
+.feature-activator a { padding: 0; }
+
+#manage-tags-deactivator {
+	display: none;
+}
+
+.feature-activator, .add-tags-form {
+	margin-top: 1em;
+}
+
+.add-tags-form {
+	display: none;
+	padding: 0.6em 12px;
+	overflow: auto;
+}
+
+.add-tags-form label {
+	color: #333;
+	font-size: 0.9em;
+	display: block;
+	margin-bottom: 4px;
+}
+
+.add-tags-form button {
+  margin-top: 8px;
+}
+
+/*------*/
+.extras {
+	clear: left;
+	width: 584px;
+	border: 1px solid #ccc;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	background: #f2f2f3;
+	margin: 8px auto;
+	padding: 8px 13px;
+}
+
+.extras > .h2 {
+  font-size: 22px;
+  color: #4d4c4e;
+  font-weight: bold;
+  padding: 0;
+}
+
+.extras > ul, .extras > ol {
+  margin-top: 0.6em;
+}
+
+.h2 > span {
+  color: #abadaf;
+  font-weight: normal;
+}
+
+/* avatar */
+.avatar, .avatar img {
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+}
+
+.avatar a, .avatar img {
+	display: block;
+}
+
+.avatar a {
+	padding: 0;
+}
+
+/*============comments=============*/
+.comment,.attachment,.localization {
+	position: relative;
+	clear: both;
+	background: #FAFAFA;
+	overflow: hidden;
+	min-height: 40px;
+	border: 1px solid #CCC;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	color: #474747;
+	list-style-type: none;
+	margin: 5px 0;
+	padding: 8px 8px 8px;
+}
+
+.comment,.attachment {
+	padding: 0 8px 8px 0;
+}
+
+.localization {
+	padding: 8px;
+}
+
+.comment .avatar,.attachment .avatar {
+	float: left;
+	padding: 5px 0 0 5px;
+}
+
+.comment-author-name, .comment-date {
+  margin: 8px 0;
+  color: #96989b;
+}
+
+.comment-author-name > a {
+  padding: 0 2px 0 0;
+}
+
+.comment p,.attachment p, .comment-author-name, .comment-date, .sub-comment {
+	margin-left: 92px;
+}
+.ie6 .comment-date {
+  left: 92px;
+  margin-left: 0;
+}
+
+.comment p,.attachment p, .comment-author-name, .comment-date {
+	font-size: .75em;
+}
+
+.comment .comment-meta, .comment-actions, .attachment .attachment-meta {
+	position: absolute;
+	bottom: 5px;
+	font-size: .69em;
+}
+
+.ie7 .comment-meta {
+  left: 0;
+}
+
+.comment-actions {
+  left: 180px;
+}
+
+.comment-action {
+  float: left;
+  padding: 6px 12px 6px 22px;
+  background: no-repeat 0 50%;
+}
+
+.comment-action > strong {
+  font-size: 1.2em;
+  margin: 0 2px;
+}
+
+.comment-action > a {
+  vertical-align: text-top;
+}
+
+.comment-reply {
+  background-image: url(http://custom.ideascale.com/images/comment-reply.png);
+}
+
+.comment-vote-up {
+  background-image: url(http://custom.ideascale.com/images/vote-up.png);
+  background-position: 0 0;
+}
+
+.comment-vote-up > strong {
+  color: #1f984f;
+}
+
+.comment-vote-down {
+  background-image: url(http://custom.ideascale.com/images/vote-down.png);
+  background-position: 0 100%;
+}
+
+.comment-vote-down > strong {
+  color: #c1343e;
+}
+
+.comment-vote-in-progress {
+  background-image: url(http://custom.ideascale.com/images/spinner.gif);
+  background-position: 0 50%;
+}
+
+.comment .comment-content,.attachment .attachment-content {
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+.comment.moderator .avatar,.attachment.moderator .avatar {
+	background: url(http://custom.ideascale.com/images/bg-avatar-moderator.png) no-repeat left top;
+}
+
+/* Comments > Status Corner */
+.comment div.status,.user-resume div.status,.attachment div.status {
+	font-size: .69em;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	white-space: nowrap;
+}
+
+/* Comments > Status Corner > Moderation */
+.comment .status ul.actions li,.user-resume .status ul.actions li,.attachment .status ul.actions li
+	{
+	display: inline;
+	font-weight: 700;
+}
+
+.comment .status .approve,.user-resume .status .approve {
+	color: #006800;
+}
+
+.comment .status .reject,.user-resume .status .reject, .attachment .status .delete {
+}
+
+/* Comments > Status Corner > Moderator Annotation */
+.comment.moderator .status,.attachment.moderator .status {
+	text-transform: uppercase;
+	font-weight: 700;
+	color: #86ad4c;
+}
+
+.comment .status .actions .report-abuse {
+	display: none;
+  background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -426px;
+  height: 16px;
+}
+
+.comment .report-abuse a {
+	margin: 2px 6px 0 17px;
+}
+
+.comment .status .actions .delete {
+	text-transform: uppercase;
+}
+
+.comment.moderator,.attachment.moderator {
+	background: #fffef4;
+}
+
+.comment.moderator.sticky {
+	background: #eeeeff;
+}
+
+/*==================*/ /*============ Overlays =============*/
+.overlay {
+	background: #f7f9f9;
+	border: 2px solid #ccc;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	overflow: hidden;
+	position: relative;
+	padding: 15px 20px 36px 34px;
+}
+
+.overlay input[type=password],.overlay input[type=text],.overlay textarea
+	{
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+}
+
+.overlay textarea {
+	min-width: 100%;
+}
+
+.overlay h3 {
+	border-bottom: 2px solid #ccc;
+	padding-bottom: 3px;
+}
+
+.overlay h4 {
+	margin: 25px;
+	color: #444;
+	font-size: 1.08em;
+	font-weight: 600;
+}
+
+.overlay p {
+	color: #939598;
+	font-size: .75em;
+	font-weight: 400;
+	margin: 2px 0 5px;
+}
+
+.overlay .form-field input[type=password],.overlay .form-field input[type=text] {
+	height: 19px;
+	font-size: .75em;
+}
+
+.overlay .form-augmentation {
+	font-size: .75em;
+}
+
+.overlay label {
+	color: #444;
+	display: block;
+	font: bold .81em helvetica, arial, sans-serif;
+	text-transform: capitalize;
+}
+
+.overlay .required {
+	color: #c33;
+	margin-left: 2px;
+}
+
+.overlay .aclaration {
+	font-weight: 400;
+	margin-left: 3px;
+	font-size: .63em;
+	color: #b7b8ba;
+}
+
+.overlay .legend {
+	position: absolute;
+	bottom: 4px;
+	left: 20px;
+	font-size: .69em;
+}
+
+.overlay .form-field input[type=password],.overlay .form-field input[type=text],.overlay .form-field textarea
+	{
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .88em;
+	border: 1px solid #ccc;
+}
+
+.overlay .form-field {
+	margin: 10px 0;
+}
+
+.overlay .form-field input[type="checkbox"] {
+	vertical-align: text-top;
+}
+
+.overlay label.checkbox-label {
+	font-weight: normal;
+	display: inline;
+	margin-left: 5px;
+	text-transform: none;
+}
+
+.overlay .form-field input[type="text"].zip {
+	min-width: 50px;
+	max-width: 55px;
+}
+
+.field-with-counter {
+  position: relative;
+}
+.form-field .character-counter {
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: right;
+}
+
+/*------ Form Errors ------*/
+.validation-error input,.validation-error textarea,.form-field.validation-error input[type=password],.form-field.validation-error input[type=text],.form-field.validation-error textarea
+	{
+	background: #fff url(http://custom.ideascale.com/images/txt-error.gif) repeat-x left top;
+	border: 1px solid #D35757;
+}
+
+.validation-error,.validation-error label {
+	color: #B70B0B !important;
+}
+
+.validation-error .aclaration {
+	color: #B70B0B !important;
+}
+
+/*------ Submit form ------*/
+.submit-form.overlay {
+	width: 450px;
+}
+
+.submit-form.overlay.dual {
+	width: 780px;
+}
+
+* > .submit-form.overlay.single {
+	width: 400px;
+}
+
+.submit-form.overlay .idea-details {
+	position: relative;
+	float: left;
+	width: 360px;
+	padding-right: 20px;
+}
+
+.submit-form.overlay .idea-custom {
+	position: relative;
+	float: right;
+	width: 360px;
+}
+
+.submit-form.overlay .or {
+	position: relative;
+	width: 20px;
+	height: 420px;
+	float: left;
+	text-align: center;
+	margin: 0 0 0 0;
+}
+
+.submit-form.overlay h4 {
+	margin: 25px 0;
+}
+
+.submit-form.overlay .or h4 {
+	margin: 25px 4px 0 0;
+	position: relative;
+}
+
+.submit-form.overlay .or .divider {
+	height: 400px;
+	width: 2px;
+	margin: 20px 0 0 8px;
+	border-left: 1px dashed #ccc;
+}
+
+.submit-form.overlay textarea {
+	min-height: 112px;
+}
+
+.ie7 .submit-form.overlay textarea {
+  min-height: 100px;
+}
+
+.submit-form.overlay textarea,.overlay .form-field input[type=text],.overlay .form-field input[type=password] {
+	min-width: 100%;
+}
+
+.submit-form.overlay textarea,.overlay .form-field input[type=text],.overlay .form-field input[type=password], .textbox {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+.textbox {
+  padding: 2px 0;
+}
+
+.submit-form.overlay select {
+	width: 150px;
+}
+
+.submit-form.overlay textarea,.overlay .form-field input[type=text],.overlay .form-field input[type=password], .submit-form.overlay select {
+	margin: 2px 0 0;
+	padding: 0;
+}
+
+.overlay .form-field input[type=text],.overlay .form-field input[type=password] {
+	padding: 1px 0;
+}
+
+.submit-form.overlay .submit {
+	float: none;
+	position: absolute;
+	right: 21px;
+	bottom: 10px;
+	margin: 0;
+}
+
+/*------ Forgot password ------*/
+.forgot-password.overlay {
+	width: 640px;
+}
+
+.forgot-password.overlay .error {
+	padding: 5px 10px;
+	margin-bottom: 10px;
+}
+
+.forgot-password.overlay .error h4 {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+}
+
+.forgot-password.overlay .error h4,.forgot-password.overlay .error p {
+	color: #8a1f11;
+}
+
+.forgot-password.overlay input[type="text"] {
+	margin-bottom: 5px;
+	min-width: 320px;
+	display: block;
+}
+
+.forgot-password.overlay input[type="button"]:after {
+	font-size: .75em;
+}
+
+/*------ Idea form ------*/
+
+#idea-title-field {
+	margin-bottom: 0;
+}
+
+#dynamic-search-results {
+	position: relative;
+	display: none;
+	height: 94px;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #fff;
+	border: dashed 1px #ccc;
+	border-top: none;
+	font-size: 12px;
+}
+
+.processing {
+	background-image: url(http://custom.ideascale.com/images/search-spinner.gif);
+	background-repeat: no-repeat;
+	background-position:  50% 50%;
+}
+
+.processing div {
+	opacity: 0.3;
+} 
+
+#dynamic-search-results h6 {
+	font-weight: bold;
+	color: green;
+}
+
+#dynamic-search-results h6, #dynamic-search-results a, #dynamic-search-results p {
+	font-size: 12px;
+	padding: 4px;
+	margin: 0;
+}
+
+#dynamic-search-results li {
+	border-top: solid 1px #eee;
+}
+
+#dynamic-search-results a {
+	display: block;
+	text-decoration: none;
+}
+
+#dynamic-search-results a:hover {
+	color: #145B82;
+	background: #eee;
+}
+
+#dynamic-search-results a:focus {
+  outline: none;
+  background: #FFFFBB;
+}
+
+#dynamic-search-results p {
+	color: #333;
+}
+
+.change-alert {
+	background-color: #FFFFBB;
+}
+
+#idea-title-field-wrapper, #other-idea-fields-wrapper {
+  padding-left: 2px;
+  width: 358px;
+}
+
+#other-idea-fields-wrapper {
+	padding-right: 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+.hidden-hint {
+	cursor: pointer;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+	background: linear-gradient(top, rgba(247, 249, 249, 0), #f7f9f9);
+	background: -moz-linear-gradient(top, rgba(247, 249, 249, 0), #f7f9f9);
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(247, 249, 249, 0)), to(#f7f9f9));
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00f7f9f9', EndColorStr='#FFf7f9f9');
+}
+
+.no-scrollbar {
+	overflow: hidden !important;
+}
+
+/*------ Edit idea form ------*/
+.edit-idea-form.overlay {
+	width: 395px;
+	padding-bottom: 35px;
+}
+
+/*---------*/ /*------ Login form ------*/
+.login-form.overlay.dual {
+	width: 780px;
+}
+
+* > .login-form.overlay.single {
+	width: 390px;
+}
+
+.login-form .rpx-login {
+	position: relative;
+	width: 374px;
+	height: 316px;
+	float: left;
+}
+
+.login-form .rpx-login h4 span {
+	color: #666;
+	font-weight: bold;
+	margin-left: 97px;
+	position: absolute;
+}
+
+.login-form .ideascale-login {
+	width: 374px;
+	height: 316px;
+	float: left;
+}
+
+.login-form .ideascale-login form {
+	padding: 30px 0 0 25px;
+	margin-top: -30px;
+	height: 212px;
+	width: 313px;
+}
+
+.login-form .forgot-password {
+	text-align: right;
+}
+
+.login-form .register-now {
+	font-size: .88em;
+	color: #333;
+	margin-left: 48px;
+	margin-bottom: 5px;
+}
+
+.login-form .submit {
+	margin-top: 0;
+}
+
+.login-form input[type=checkbox] {
+	margin-left: 106px;
+}
+
+.login-form .or {
+	position: relative;
+	width: 20px;
+	height: 316px;
+	float: left;
+	text-align: center;
+	margin: 0 0 0 0;
+}
+
+.login-form .or h4 {
+	margin: 25px 4px 0 0;
+	position: relative;
+}
+
+.login-form .or .divider {
+	height: 220px;
+	width: 2px;
+	margin: 20px 0 0 8px;
+	border-left: 1px dashed #ccc;
+}
+
+/*---------*/ /*------ Register form ------*/
+.register-form {
+	width: 314px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.register-form form {
+	width: 311px;
+	margin: 0 auto;
+}
+
+.register-form .recaptcha {
+	width: 311px;
+	height: 132px;
+  margin-left: -3px;
+}
+
+/*==================*/
+.tag-row a,.thumb {
+	margin-right: 5px;
+}
+
+#listing-nav a:hover,.inactive:hover,.current {
+	color: #fff;
+	background-color: #145b82;
+}
+
+.submit-form.overlay .form-field.select-field label {
+	display: inline;
+}
+
+.go_red {
+	color: red;
+}
+
+.go_green {
+	color: green;
+}
+
+/*============New comment form=============*/
+
+#new-comment-form {
+  overflow: hidden;
+  margin: 20px -1px 0 0;
+}
+
+#new-comment-form .h3 {
+  color: #2578b3;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+#new-comment-form textarea {
+  border: none;
+  height: 75px;
+  width: 471px;
+  padding: 10px 10px 10px 20px;
+  margin-bottom: 5px;
+  background: url(http://custom.ideascale.com/images/comment-box.png) no-repeat;
+  resize: none;
+  overflow: auto;
+}
+
+#new-comment-form label,#idea-file-attachment-form label,#idea-file-attachment-form textarea
+	{
+	display: block;
+	margin: 5px 0;
+}
+
+.with-placeholder-text {
+  color: #bec0c2;
+}
+
+#idea-file-attachment-form textarea {
+	width: 83%;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #ccc;
+}
+.localization textarea {
+	width: 99%;
+  margin-bottom: 2px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#new-comment-form .photo,#idea-file-attachment-form .photo {
+	float: left;
+	clear: left;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+}
+
+#new-comment-form .photo {
+  margin-left: 5px;
+}
+
+#idea-file-attachment-form .photo {
+	margin: 0 10px;
+}
+
+.ie7 #idea-file-attachment-form .photo {
+  margin-top: 20px;
+}
+
+#new-comment-form .form-field,#idea-file-attachment-form .form-field {
+	margin: 20px 0 0 20px;
+}
+
+#idea-file-attachment-file-field {
+	float: left;
+	margin: 0 !important;
+}
+
+#new-comment-form .checkbox {
+	margin: 0 0 0 94px;
+  float: left;
+}
+
+#new-comment-form .checkbox-label {
+  font-size: 14px;
+  color: #4d4c4e;
+	display: inline;
+}
+
+#new-comment-form .submit {
+  margin-top: 2px;
+}
+
+/*============css sprites=============*/
+.agreed {
+	background-position: 0 0;
+	height: 31px;
+}
+
+.disagree {
+	background-position: 10px -1105px;
+}
+
+.agree {
+	background-position: 10px -1174px;
+	text-align: left;
+	text-indent: 35px;
+}
+
+.attach-file {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background-position: 0 -81px;
+	padding: 3px 0 0 20px;
+	height: 16px;
+}
+
+.comments.create-comment {
+	background-position: 0 -147px;
+}
+
+.disagreed,.disagreed:hover {
+	background-position: 0 -279px;
+}
+
+.edit-profile {
+	background-position: 0 -360px;
+	height: 16px;
+}
+
+.twitter,.email,.feed {
+	padding-left: 22px;
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+}
+
+.feed {
+	background-position: 0 -558px;
+	height: 19px;
+}
+
+.email {
+	background-position: 0 -627px;
+	height: 19px;
+}
+
+.twitter {
+	background-position: 0 -764px;
+	height: 19px;
+}
+
+#intro li.user-step-1 {
+	background-position: 0 -831px;
+	height: 46px;
+	padding-top: 17px;
+}
+
+#intro li.user-step-2 {
+	background-position: 0 -927px;
+	height: 42px;
+}
+
+#intro li.user-step-3 {
+	background-position: 0 -1019px;
+	height: 46px;
+}
+
+/*============ TOS and contact =============*/
+.tos,.contact {
+	padding: 6px 0 35px 0;
+	width: 90%;
+}
+
+.no-sidebar .tos {
+  width: auto;
+}
+
+.tos p, #register-tos-content p, .contact p {
+	margin: 0 0 10px;
+	line-height: 1.3em;
+	font-size: .81em;
+	color: #666;
+}
+
+.tos h2,.contact h2 {
+	font-size: 1.46em;
+}
+
+.tos h3,.contact h3 {
+	margin: 20px 0 0;
+	font-size: 1.23em;
+}
+
+.tos ol, #register-tos-content ol {
+	margin: 10px;
+}
+
+.tos ol li, #register-tos-content ol li ,.contact ul li {
+	color: #666;
+	font-size: .81em;
+	line-height: 1.3em;
+	margin: 10px;
+}
+
+.tos ol li, #register-tos-content ol li {
+	list-style-type: decimal;
+}
+
+.contact em {
+	font-weight: bold;
+	width: 60px;
+	display: inline-block;
+}
+
+.contact .email {
+	padding: 0 0 0 20px;
+}
+
+/*============ User profile =============*/
+.user-resume {
+	border: 1px solid #ccc;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	background: #f4f4f4;
+	margin: 0px auto 15px auto;
+	padding: 8px;
+	color: #474747;
+	position: relative;
+	min-height: 78px;
+}
+
+.user-resume div.avatar {
+	float: left;
+  margin-bottom: 3px;
+}
+
+.user-resume h2 {
+	margin-left: 92px;
+	padding-top: 2px;
+	font-size: 1.46em;
+}
+
+.user-resume a {
+	text-decoration: none;
+}
+
+.user-resume p {
+	margin-left: 94px;
+	font-size: .75em;
+}
+
+.user-resume p.adr {
+	font-size: .81em;
+	margin: -5px 0 0 94px;
+	color: #666;
+}
+
+.user-resume p.member-since {
+	margin: -1px 0 5px 94px;
+}
+
+.user-stats {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: .9em;
+	text-align: center;
+}
+
+.user-resume .user-stats p {
+	margin-left: 0;
+}
+
+.user-stats .ideas-stats {
+	padding-top: 0;
+	margin-top: 0;
+}
+
+.user-stats .other-stats {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.user-stats-details, .user-stats-points {
+	float: left;
+}
+
+.user-stats-details {
+	margin-right: 8px;
+	padding-right: 12px;
+	border-right: dashed 1px #ccc; 
+}
+
+.user-stats-points {
+	color: #999;
+	position: relative;
+}
+
+.user-stats-points strong {
+	display: block;
+	font-family: Georgia, Arial, sans-serif;
+	font-weight: normal;
+	font-size: 1.8em;
+	color: #373737;
+	margin: 0 0 5px;
+}
+
+.user-stats-points a {
+	padding: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+.user-stats-points a:hover {
+	background-color: transparent;
+}
+
+.activity-stream {
+	border: 2px solid #ccc;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	margin: -10px auto 15px auto;
+	padding: 8px;
+	position: relative;
+	min-height: 20px;
+}
+
+.activity-stream, #idea-event-list {
+  color: #474747;
+  font-size: .9em;
+}
+
+.activity:first-child {
+	border-top: none;
+}
+
+.activity {
+	border-top: 1px dashed #ccc;
+	padding: 5px;
+	min-height: 16px;
+	position: relative;
+}
+
+#idea-event-list > .activity {
+  padding: 5px 0;
+}
+
+.what-activity {
+	display: inline-block;
+	font-size: 1em;
+	max-width: 530px;
+}
+
+.what-activity > em {
+  font-style: normal;
+  color: #1C6131;
+}
+
+.when-activity {
+	position: absolute;
+	right: 2px;
+	bottom: 0.5em;
+	font-size: .75em;
+}
+
+/*============ Category and search =============*/
+select.category {
+	width: 100%;
+}
+
+.category-description,.no-results {
+	font-size: .88em;
+	color: #474747;
+	margin: -10px 0 20px;
+}
+
+/* ============ Private Community =============*/
+.private-community,.generic-info {
+	position: relative;
+	min-height: 130px;
+	margin: 20px 16px 16px;
+	padding: 20px;
+	background-color: #fff;
+}
+
+.private-community p,.generic-info p {
+	color: #4a4a4c;
+}
+
+.private-community p em,.generic-info p em {
+	font-weight: bold;
+	font-style: normal;
+	color: #4a4a4c;
+}
+
+/* --------- Private Community + Popup DIVs telling users they need to log in ---------*/
+.private-community .links,.need-login .links,.generic-info .links {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.private-community a,.need-login a,.generic-info a, .dialog-link-btn {
+	margin: 0 30px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	background: url(http://custom.ideascale.com/images/bg-button-off.jpg) repeat-x scroll center
+		bottom transparent;
+	border: 1px solid;
+	border-color: #D6D6D6 #D6D6D6 #CCCCCC;
+	color: #4a4a4c;
+	padding: 2px 7px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.private-community a:hover,.need-login a:hover,.generic-info a:hover, .dialog-link-btn:hover {
+  color: #4a4a4c;
+	text-decoration: underline;
+}
+
+/* --------- Global Status messages ---------*/
+.invisible {
+	display: none;
+}
+
+.error,.notice,.success {
+	padding: .8em;
+	border: 2px solid #ddd;
+	margin: 15px 22px 0 22px;
+}
+
+.overlay .error,.overlay .notice,.overlay .success {
+	margin: 15px 0 0 0;
+}
+
+.error, .ie7 .error p, .ie6 .error p {
+	background: #FBE3E4;
+	color: #8a1f11;
+	border-color: #FBC2C4;
+}
+
+.notice, .ie7 .notice p, .ie6 .notice p {
+	background: #FFF6BF;
+	color: #514721;
+	border-color: #FFD324;
+}
+
+.success, .ie7 .success p, .ie6 .success p {
+	background: #E6EFC2;
+	color: #264409;
+	border-color: #C6D880;
+}
+
+.error a {
+	color: #8a1f11;
+}
+
+.notice a {
+	color: #514721;
+}
+
+.success a {
+	color: #264409;
+}
+
+#message-user {
+	margin: -15px auto 15px auto;
+	width: 90%;
+}
+
+.user-message p {
+  margin: 0;
+  line-height: inherit;
+  color: inherit;
+  font-size: inherit;
+}
+
+.ie7 .user-message p, .ie6 .user-message p {
+  font-size: 17px;
+}
+
+/* ------------- Global Flagged ------------- */
+.flagged {
+	background: #FBE3E4;
+	color: #8a1f11;
+	border: 2px solid #8a1f11;;
+}
+
+.flagged a {
+	color: #8a1f11;
+}
+
+.flagged a:hover {
+	background-color: #8a1f11;
+	color: #FBE3E4;
+}
+
+.flagged a.approve {
+	color: #006800;
+}
+
+.flagged a.approve:hover {
+	background-color: #006800;
+	color: #E6EFC2;
+}
+
+/* ------------- Global Saved ------------- */
+.saved {
+    background: #E6EFC2;
+    color: #264409;
+    border: 2px solid #C6D880;
+}
+
+/* ------------- Global Screen ------------- */
+#screen {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #000;
+	z-index: 3000;
+}
+
+.screen-focus {
+	z-index: 3001;
+}
+
+/* ------------- Moderate Idea Status Corners ------------- */
+.admin-idea .active,.admin-idea .active:hover,.admin-idea .closed,.admin-idea .closed:hover,.admin-idea .in-progress,.admin-idea .in-progress:hover,.admin-idea .new-pending,.admin-idea .new-pending:hover,.admin-idea .under-review,.admin-idea .under-review:hover
+	{
+	background: #fff url(http://custom.ideascale.com/images/status-corners-sprite.png) no-repeat
+		right top;
+}
+
+.admin-idea .active,.admin-idea .active:hover {
+	background-position: right 0;
+}
+
+.admin-idea .closed,.admin-idea .closed:hover {
+	background-position: right -84px;
+}
+
+.admin-idea .in-progress,.admin-idea .in-progress:hover {
+	background-position: right -168px;
+}
+
+.admin-idea .new-pending,.admin-idea .new-pending:hover {
+	background-position: right -252px;
+}
+
+.admin-idea .under-review,.admin-idea .under-review:hover {
+	background-position: right -336px;
+}
+
+/* -------------- Attachments -----------------*/
+.attachment img.file {
+	height: auto;
+	width: 470px;
+}
+
+.attach-file {
+	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background-position: 0 -81px;
+	padding: 3px 0 0 20px;
+	height: 24px;
+}
+
+#idea-file-attachment-form #idea-file-attachment-file {
+	margin: 8px 0 0 98px;
+}
+
+#idea-file-attachment-file-field p {
+	margin-left: 98px;
+}
+
+/* -------------- Merge Ideas -----------------*/
+.merge-ideas {
+	border: 2px solid #CCC;
+	border-bottom-left-radius: 9px;
+	border-bottom-right-radius: 9px;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	color: #474747;
+	min-height: 20px;
+	padding: 8px;
+	margin: 15px 0 0 0;
+}
+
+.merge-ideas li.target-idea:first-child {
+	border-top: none;
+}
+
+.merge-ideas li.target-idea {
+	border-top: 1px dashed #CCC;
+	min-height: 16px;
+	padding: 5px;
+}
+
+.merge-ideas .target-idea .info {
+	display: inline-block;
+	max-width: 270px;
+}
+
+.merge-ideas .target-idea .actions {
+	float: right;
+	vertical-align: middle;
+}
+
+.merge-ideas .target-idea .actions > strong {
+  margin: 0;
+  padding: 0 2px;
+}
+
+/* -------------- IdeaScale Badges Ideas -----------------*/
+.badges {
+	margin: 5px 0 5px 94px;
+}
+
+.badges ul {
+	overflow: auto;
+	margin: 0 -10px 0 -10px;
+	padding: 0 0 5px 5px;/*add some padding so that focus outline on the badges is not cut off*/
+}
+
+.badges li {
+	float: left;
+	margin: 5px 5px 0 0;
+}
+
+.badges li a {
+	background: url(http://custom.ideascale.com/images/badges-sprite.png) no-repeat top left;
+	display: block;
+	width: 48px;
+	height: 48px;
+	text-indent: -10000px;
+	overflow: hidden;
+	padding: 0;
+}
+
+.badges li .badge-chatter {
+	background-position: 0 0;
+}
+
+.badges li .badge-einstein {
+	background-position: 0 -98px;
+}
+
+.badges li .badge-foul-mouth {
+	background-position: 0 -196px;
+}
+
+.badges li .badge-genius {
+	background-position: 0 -294px;
+}
+
+.badges li .badge-idea-hater {
+	background-position: 0 -392px;
+}
+
+.badges li .badge-innovator {
+	background-position: 0 -490px;
+}
+
+.badges li .badge-moderator {
+	background-position: 0 -588px;
+}
+
+.badges li .badge-newbie {
+	background-position: 0 -686px;
+}
+
+.badges li .badge-off-topic {
+	background-position: 0 -784px;
+}
+
+.badges li .badge-on-the-fence {
+	background-position: 0 -882px;
+}
+
+.badges li .badge-overshare1 {
+	background-position: 0 -980px;
+}
+
+.badges li .badge-overshare2 {
+	background-position: 0 -1078px;
+}
+
+.badges li .badge-pushover1 {
+	background-position: 0 -1176px;
+}
+
+.badges li .badge-pushover2 {
+	background-position: 0 -1274px;
+}
+
+.badges li .badge-smart-alec {
+	background-position: 0 -1372px;
+}
+
+.badges li .badge-spammer {
+	background-position: 0 -1470px;
+}
+
+.badges li .badge-mayor {
+	background-position: 0 -1568px;
+}
+
+.badges h3 {
+	font-size: 1em;
+	font-weight: bold;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.badges-powered-by {
+  font-size: 11px;
+  margin: 10px 0 0 -2px;
+}
+
+.badges > .badges-powered-by {
+  margin-top: 0;
+}
+
+/* -------------- List other communities -----------------*/
+.user-communities {
+	margin: 20px 0 5px 94px;
+}
+
+.user-communities h3 {
+	font-size: 1em;
+	font-weight: bold;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.user-communities ul {
+	font-size: 0.75em;
+	line-height: 1.4em;
+	margin-top: 0.3em;
+}
+
+.profile-action, html.ie7 .follow-action, html.ie6 .follow-action {
+	float: left;
+	position: relative;
+	clear: left;
+}
+
+.profile-action {
+	font-size: 0.75em;
+	width: 80px;
+	margin: 3px 0 0;
+}
+
+.profile-action a {
+  padding: 0;
+  vertical-align: middle;
+}
+
+.simple-profile-action {
+  width: 78px;
+}
+
+.simple-profile-action > a {
+  display: block;
+  border: solid 1px #ccc;
+  padding: 2px 0;
+  background: #fff;
+  text-align: center;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.simple-profile-action > a:hover {
+  background: #145b82;
+}
+
+/* -------------- category tree using jstree -----------------*/
+
+.section .jstree {
+	background: none;
+}
+
+.section .jstree ul {
+	font-size: 100%;
+}
+
+.section .jstree li {
+	padding-left: 0;
+}
+
+.jstree-icon {
+	cursor: pointer;
+	float: left;
+}
+
+.section .jstree a .jstree-icon {
+	display: none;
+}
+
+.section .jstree a {
+    color: #145B82;
+    white-space: normal;
+    height: auto;
+    margin-right: 18px;
+}
+
+.section .jstree a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.section .jstree a:focus, .section .jstree a:active {
+	outline: 1px dotted;
+	outline: auto 5px -webkit-focus-ring-color;
+}
+
+.section .jstree li.current-category {
+	background-color: #145B82; 
+}
+
+/* -------------- Top Contributors leaderboard -----------------*/
+
+#top-contributors {
+	margin-top: 1em;
+}
+
+.contributor {
+	padding: 8px 8px 8px 100px;
+	min-height: 108px;
+	background: #f4f4f4;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	position: relative;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+}
+
+#top-contributors h2 {
+	font-size: 1.46em;
+	padding-top: 0;
+  width: 292px;
+  overflow: hidden;
+}
+
+#top-contributors h2 a {
+	padding: 0;
+}
+
+#top-contributors .member-since {
+	font-size: 0.75em;
+	margin: 0;
+}
+
+#top-contributors .avatar {
+	position: absolute;
+	left: 8px;
+	top: 8px;
+}
+
+#top-contributors .badges {
+	margin: 0;
+}
+
+#top-contributors .badges h3 {
+	display: none;
+}
+
+#top-contributors .badges ul {
+	padding-top: 15px;/*use padding instead of margin so that focus outline on the badges is not cut off*/
+}
+
+#top-contributors .badges li {
+	margin: 0;
+}
+
+/* Developer Central */
+#developer-central h2 { padding: 0; }
+#developer-central h3 { color: #414142; margin: 1em 0 0.5em; font-size: 20px; border-bottom: solid 1px #ddd; }
+#developer-central p { font-size: 13px; color: #575757; margin: 0.5em 0; }
+#developer-central code { display: block; font-size: 12px; line-height: 1.4em; border: solid 1px #ddd; background: #f1f1f1; padding: 0.5em 1em; margin: 0.5em 0; overflow: auto; color: #413F3F; }
+#developer-central code.multi { white-space: pre; }
+.api-table { font-size: 12px; }
+.api-table th { background: #f0f0f0; text-transform: uppercase; }
+.api-table td { color: #444; }
+.api-table th, .api-table td { border: solid 1px #ccc; padding: 4px; }
+#category-id-list { margin-bottom: 0.5em; }
+#category-id-list th { text-align: left; }
+#api-tos h4 { padding: 0; margin: 0.5em 0 0.2em; font-weight: bold; }
+#api-tos, #api-tos p { color: #505050; font-size: 12px; line-height: 1.3em; }
+#api-tos li, #data-download-details li { list-style: disc outside none; margin: 0.3em 0 0.3em 16px; }
+#data-download-details { display: none; font-size: 13px; margin: 0.5em 0 0; border-style: solid; border-width: 1px; }
+#data-download-details h4 { padding: 0; font-size: 14px; font-weight: bold; }
+
+/* nyroModal */
+#nyroModalTitle { display: none !important; }
+#closeBut { right: -11px !important; }
+
+#tiptip_content { font-size: 13px; padding: 5px 13px 15px; line-height: 1.3em; }
+#tiptip_content h6 { font-size: 14px; font-weight: bold; padding-left: 3px; border-bottom: solid 1px #ccc; line-height: 1em; }
+#tiptip_content li { margin-top: 1em; list-style: circle outside none; }
+#tiptip_content ul { margin-left: 1.4em; }
+
+/* Vote Activity*/
+#vote-activities li {
+	position: relative;
+	clear: both;
+	background: #FAFAFA;
+	overflow: hidden;
+	min-height: 40px;
+	border: 1px solid #CCC;
+	border-radius: 9px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	color: #474747;
+	list-style-type: none;
+	margin: 5px 0;
+	padding: 8px 8px 8px;
+}
+#vote-activities .voter {
+  float: left;
+  width: 400px;
+}
+#vote-activities .photo {
+  vertical-align: middle;
+  margin: 0 1em 0 0.5em;
+}
+#vote-activities .vote {
+  float: right;
+  width: 140px;
+  text-align: right;
+  font-size: 0.8em;
+  margin-right: 0.5em;
+}
+#vote-activities .what strong {
+  font-size: 2em;
+}
+.what .up, .what .down {
+  display: block;
+  font-size: 1.2em !important;
+  line-height: 1.8em;
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  padding-right: 20px;
+}
+.up { background-image: url(http://custom.ideascale.com/images/ideascale/vote_up.png); }
+.down { background-image: url(http://custom.ideascale.com/images/ideascale/vote_down.png); }
+#vote-activities .when {
+  color: #666;
+}
+
+/* TOS in register form */
+#register-tos-caption {
+  font-size: 0.81em;
+  margin: 0;
+}
+#register-tos-content {
+  height: 110px;
+  overflow: auto;
+  border: solid 1px #ccc;
+  font-family: serif;
+  padding: 0.5em;
+}
+#register-tos-content .tos { padding: 0; width: auto; }
+#register-tos-content h1, #register-tos-content h2, #register-tos-content h3, #register-tos-content h4, #register-tos-content h5 { border: none; margin: 0.2em 0; padding: 0; }
+#register-tos-content h1 { font-size: 1em; }
+#register-tos-content h2 { font-size: 0.95em; }
+#register-tos-content h3 { font-size: 0.9em; }
+#register-tos-content h4 { font-size: 0.85em; }
+#register-tos-content h5 { font-size: 0.81em; }
+
+.collapse-expand { font-size: 0.5em; position: relative; top: -.2em; }
+#categories-sections .collapse-expand { font-size: 0.6em; position: absolute; top: auto; right: 0; bottom: 0.4em; }
+.collapsed { display: none; }
+
+.hidden-fields, .hidden-form { display: none; }
+
+#categories-admin { background: none; }
+#categories-admin .feature-activator { margin-top: 0.3em; }
+#ungrouped-categories-title { color: #999; font-style: italic; }
+#categories-admin-impl-list h5, #categories-admin-impl-list ul { font-size: 0.88em; }
+#categories-admin-impl-list h5, #categories-admin-impl-list ul, #categories-admin-impl-list li { margin: 0; }
+#categories-admin-impl-list h5, #categories-admin-impl-list li, .category-actions { line-height: 1.4em; }
+#categories-admin-impl-list h5, #categories-admin-impl-list li { margin: 3px 0; position: relative; padding: 4px; }
+#categories-admin-impl-list li, .category-actions { -moz-border-radius: 0.5em; -webkit-border-radius: 0.5em; border-radius: 0.5em; }
+#categories-admin-impl-list li { background: #eee; border: solid 1px #ddd; }
+#categories-admin-impl-list .current { background: #145B82; color: #fff; }
+#categories-admin-impl-list ul { padding: 1px 3px; border: dashed 1px #ccc; }
+.category-actions { position: absolute; right: 1px; top: 1px; border: solid 1px #ccc; padding: 2px; background: #fff; opacity: 0.2; }
+.inline { display: inline; }
+.category-action-icon { vertical-align: text-top; }
+li:hover .category-actions, h5:hover .category-actions { opacity: 1; }
+.ungrouped-categories-title {}
+#categories-admin-impl-list .move { position: static; cursor: move; }
+
+#ui-datepicker-div { font-size: 13px; }
+
+.link-btn { display: inline-block; border: none; padding: 0; margin: 0; background: none; color: #145B82; cursor: pointer; font-size: 1em; }
+.link-btn:hover { text-decoration: underline; background: #145B82; color: #fff; }
+
+.inline-help { position: relative; display: inline-block; padding: 0; width: 18px; height: 18px; vertical-align: bottom; text-indent: -9999px; overflow: hidden; background: url(http://custom.ideascale.com/images/help-18.png) no-repeat; }
+
+#categories-admin-impl-tree { padding: 0.5em; margin-top: 0.5em; border: dotted 1px #ccc; }
+#categories-admin-impl-tree .processing { background: url(http://custom.ideascale.com/images/spinner.gif) no-repeat 100% 0; }
+
+#categories-admin p { font-size: 12px; color: #444; }
+
+#vakata-contextmenu li { font-size: 12px; border-bottom: solid 1px #ccc; border-top: solid 1px #fff; }
+#vakata-contextmenu li a { margin-top: 0 !important; }
+
+/********************* for UL forms  ***********************/
+
+.clear {
+  clear: both;
+}
+
+.as-block {
+  display: block !important;
+}
+
+.field-error {
+  font-size: 13px;
+  color: #B70B0B;
+  clear: both;
+  display: block;
+  line-height: 1.2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.field-error:before {
+  padding-right: 5px;
+  position: relative;
+  top: 2px;
+  content: url(../unified/i/exclamation.png);
+}
+
+.checkbox-field, .no-label, .field-error {
+  margin-left: 185px;
+}
+
+.checkbox-field .field-error {
+  margin-left: 0 !important;
+}
+
+.checkbox-field input, .checkbox-field label {
+  vertical-align: middle;
+}
+
+.checkbox-field label {
+  font-weight: normal;
+  display: inline;
+}
+
+.field, .fake-field {
+  overflow: hidden;
+}
+
+.field label, .fake-label, .fake-input {
+  float: left;
+  padding: 10px 7px 0 0;
+  font-weight: bold;
+  /*white-space: nowrap; can't use nowrap here, because the label content could be very long */
+}
+
+.field label, .fake-label {
+  font-size: 13px;
+  color: #444;
+  text-align: right;
+  clear: both;
+  width: 180px;
+}
+
+.field input[type="text"], .field input[type="password"], .field input.text, .field input.title, .field textarea, .field select {
+  margin: 0.5em 0;
+}
+
+input.text, .field textarea {
+  min-width: 0;
+  width: 310px;
+  font-size: 13px;
+  padding: 0 5px;
+}
+
+input.text {
+  height: 24px;
+  line-height: 24px;
+}
+
+input.text, .field textarea {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.field select {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 2px 0 0 5px;
+  border: 1px solid #aaa;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  height: 24px;
+  float: left;
+  width: 321px;
+}
+
+.avatar-field-wrapper .field-vertical {
+  float: left;
+  position: relative;
+  padding-left: 72px;
+  margin-top: 1em;
+  min-height: 80px;
+}
+
+.avatar-field-wrapper .field-vertical label:first-child {
+  margin-top: -3px;
+}
+
+.avatar-field-wrapper select {
+  width: 248px;
+  margin: 0;
+}
+
+.avatar-field-wrapper a {
+  font-size: 12px;
+}
+
+.avatar-field-wrapper .avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.ie7 .unified-form {
+  width: 509px;
+}
+
+.unified-form form {
+  margin: 1em 0 -1em;
+}
+
+.unified-form .save, .unified-form .save-disabled, .unified-form .button {
+  margin: 1em 0 0;
+  padding: 3px 1em;
+  float: right;
+}
+
+.form-actions {
+  text-align: center;
+}
+
+.neat-block {
+  background: #F2F2F3;
+  padding: 1em;
+}
+
+.neat-block > .box-with-legend {
+  margin-top: 1em;
+  background: #fff;
+}
+
+.console-output {
+  width: 98%;
+  height: 100px;
+}
+
+/* powered by labels */
+
+#powered-by-plan {
+  display: block;
+  overflow: hidden;
+  background-color: transparent !important;
+  padding: 0;
+}
+
+#powered-by-plan img {
+  display: block;
+  width: 100%;
+}
+
+#localizations { margin: 10px 0; }
+
+/* moderator assignment */
+
+.box-with-legend {
+  padding: 14px 10px 6px 10px;
+  border: solid 1px #ccc;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  -khtml-border-radius: 9px;
+  position: relative;
+  background: #f2f2f3;
+}
+
+.box-legend {
+  font-size: 17px;
+  color: #777;
+  background: #fff;
+  position: absolute;
+  top: -1px;
+  padding: 0;
+  height: 1px;
+  line-height: 1px;
+}
+
+.ie7 .box-legend {
+  top: -10px;
+  height: auto;
+  line-height: normal;
+}
+
+#assignees {
+  margin-bottom: 20px;
+}
+
+#assignees > ul {
+  overflow: hidden;
+}
+
+#pm-moderators {
+  right: 10px;
+  font-size: 12px;
+}
+
+.assignee {
+  float: left;
+  position: relative;
+  border: solid 2px #ccc;
+  margin: 0 5px 5px 0;
+}
+
+.assignee button {
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #666;
+  background: #fff;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+}
+
+.assignee button:hover {
+  border-color: red;
+}
+
+.assignee > a, .assignee > a > img {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none !important;
+}
+
+#member-search {
+  clear: both;
+  font-size: 13px;
+}
+
+/* neat table */
+
+.neat-table {
+  width: 100%;
+  margin-top: 1em;
+}
+
+.neat-table thead th {
+  color: #fff;
+  background: #BDBEC1;
+}
+
+.neat-table thead th, .neat-table tbody th {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.neat-table thead th, .neat-table tbody td {
+  border: 1px none #cecece;
+  border-top-style: solid;
+}
+
+.neat-table tbody td {
+  background-color: transparent !important;
+}
+
+.neat-table tbody td img, .neat-table tbody td button {
+  margin: 2px;
+  vertical-align: middle;
+}
+
+.neat-table tbody tr:hover {
+  background: #fff;
+}
+
+.no-header td:first-child {
+  padding-left: 0;
+}
+
+.no-header tbody td:first-child {
+  font-size: 14px;
+}
+
+.neat-table tfoot {
+  font-style: normal;
+}
+
+.actions {
+  text-align: right;
+  padding-right: 0;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.actions > strong {
+  margin-right: 0.5em;
+}
+
+.actions form, .no-action, .link-action {
+  margin-left: 30px;
+}
+
+.no-action {
+  color: #666;
+}
+
+.dialog-actions {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 13px;
+}
+
+/*************      Tag It        ************/
+
+.tag-editor, ul.tagit {
+  min-height: 23px;
+}
+ul.tagit {
+  font-size: 12px;
+	padding:1px 5px;
+  border: 1px solid #C6C6C6;
+  overflow: auto;
+  background: #fff;
+}
+.ie7 ul.tagit {
+  overflow-x: hidden;
+}
+ul.tagit, ul.tagit li {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+}
+ul.tagit li {
+	display: block;
+	float: left;
+	margin:2px 5px 2px 0;
+  line-height: 1em;
+}
+ul.tagit li.tagit-choice {
+	background-color:#DEE7F8;
+	border:1px solid #CAD8F3;
+	padding:2px 4px 3px;
+  cursor: default;
+}
+ul.tagit li.tagit-choice:hover {
+	background-color:#bbcef1;
+	border-color:#6d95e0;
+}
+ul.tagit li.tagit-new {
+  padding: 2px 4px 1px 0;
+}
+
+ul.tagit li.tagit-choice input {
+	display:block;
+	float:left;
+	margin:2px 5px 2px 0;
+}
+ul.tagit li.tagit-choice a.close {
+	color:#777777;
+  background: transparent !important;
+	cursor:pointer;
+	font-size:12px;
+	font-weight:bold;
+	outline:medium none;
+	padding:2px 0 2px 3px;
+	text-decoration:none;
+}
+ul.tagit input[type="text"] {
+	-moz-box-sizing:border-box;
+	border:none !important;
+	margin:0 !important;
+	padding:0 !important;
+  outline:none !important;
+  height: auto !important;
+	width:inherit;
+  font-size: 12px !important;
+	background-color:#FFFFFF;
+	color:#333333;
+  vertical-align: middle;
+}
+
+.backing-field { display: none; }
+
+/*****************  end of Tag It  *****************/
+
+.customized-actions { font-size: 12px; }
+.customized-actions > .submit { margin: 0; }
+.flagged > form > .customized-actions > a { display: none; }
+
+/**********************  sorting  **********************/
+#sort-links { color: #666; text-align: right; font-size: 12px; font-weight: bold; margin: -15px 0 10px; }

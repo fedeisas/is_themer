@@ -1,0 +1,23 @@
+User-agent: *
+Disallow: /a/createTopic.do
+Disallow: /akira/createTopic.do
+Disallow: /a/discussionVote.do
+Disallow: /akira/discussionVote.do
+Disallow: /a/troubleshoot.do
+Disallow: /akira/troubleshoot.do
+Disallow: /a/showSurveyLibrary.do
+Disallow: /akira/showSurveyLibrary.do
+Disallow: /a/surveyTemplateInfo.do
+Disallow: /akira/surveyTemplateInfo.do
+Disallow: /a/showLibraryGettingStarted.do
+Disallow: /akira/showLibraryGettingStarted.do
+Disallow: /a/jsp/useradmin/forgot.jsp
+Disallow: /userimages
+Disallow: /images
+Disallow: /help
+Disallow: /home
+Disallow: /application
+
+Disallow: /partners
+
+Allow: /

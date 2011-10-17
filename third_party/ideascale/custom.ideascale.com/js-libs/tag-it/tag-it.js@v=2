@@ -1,0 +1,240 @@
+(function($) {
+  $.fn.autoGrowInput = function(o) {
+    o = $.extend({
+      maxWidth: 1000,
+      minWidth: 0,
+      comfortZone: 70
+    }, o);
+
+    this.filter('input:text').each(function() {
+
+      var minWidth = o.minWidth || $(this).width(),
+              val = '',
+              input = $(this),
+              testSubject = $('<tester/>').css({
+                position: 'absolute',
+                top: -9999,
+                left: -9999,
+                width: 'auto',
+                fontSize: input.css('fontSize'),
+                fontFamily: input.css('fontFamily'),
+                fontWeight: input.css('fontWeight'),
+                letterSpacing: input.css('letterSpacing'),
+                whiteSpace: 'nowrap'
+              }),
+              check = function() {
+
+                if (val === (val = input.val())) {
+                  return;
+                }
+
+                // Enter new content into testSubject
+                var escaped = val.replace(/&/g, '&amp;').replace(/\s/g, '&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                testSubject.html(escaped);
+
+                // Calculate new width + whether to change
+                var testerWidth = testSubject.width(),
+                        newWidth = (testerWidth + o.comfortZone) >= minWidth ? testerWidth + o.comfortZone : minWidth,
+                        currentWidth = input.width(),
+                        isValidWidthChange = (newWidth < currentWidth && newWidth >= minWidth)
+                                || (newWidth > minWidth && newWidth < o.maxWidth);
+
+                // Animate width
+                if (isValidWidthChange) {
+                  input.width(newWidth);
+                }
+
+              };
+
+      testSubject.insertAfter(input);
+
+      $(this).bind('keyup keydown blur update', check);
+    });
+
+    return this;
+  };
+
+  $.fn.tagit = function(options) {
+		var el = this;
+
+		var BACKSPACE	= 8;
+    var TAB       = 9;
+		var ENTER			= 13;
+		var COMMA			= 44;
+
+		// add the tagit CSS class.
+
+		// create the input field.
+		var html_input_field = "<li class=\"tagit-new\"><input class=\"tagit-input\" type=\"text\" /></li>\n";
+
+    var backingField = null;
+
+    if(el.get(0).tagName.toLowerCase() === 'input') {
+      backingField = el;
+		  backingField.addClass('backing-field');
+      el = $('<ul class="tagit">').insertBefore(backingField);
+      el.html(html_input_field).find('.tagit-input').attr('id', backingField.attr('id'));
+      backingField.removeAttr('id');
+    }
+    else {
+		  el.addClass("tagit");
+      el.html (html_input_field);
+    }
+
+    var tag_input = el.children(".tagit-new").children(".tagit-input");
+
+    tag_input.autoGrowInput({comfortZone:20});
+
+    if (backingField) {
+      var tags = backingField.val().split(',');
+      for(var i = 0; i < tags.length; ++i) {
+        var tagValue = tags[i];
+        if(tagValue) create_choice(tagValue);
+      }
+    }
+
+    function checkAndCreateTag() {
+      var typed = tag_input.val();
+      typed = typed.replace(/,+$/, "");
+      typed = typed.trim();
+
+      if (typed != "") {
+        tag_input.val("");
+        tag_input.css('width', 'auto');
+
+        if (is_new(typed)) {
+          create_choice(typed);
+          return;
+        }
+      }
+
+      justCreatedOnBlur = false;
+    }
+
+		$(el).click(function(e){
+			if (e.target.tagName == 'A') {
+				// Removes a tag when the little 'x' is clicked.
+				// Event is binded to the UL, otherwise a new tag (LI > A) wouldn't have this event attached to it.
+				$(e.target).parent().remove();
+        updateBackingField();
+			}
+			else {
+				// Sets the focus() to the input field, if the user clicks anywhere inside the UL.
+				// This is needed because the input field needs to be of a small size.
+				tag_input.focus();
+			}
+		});
+
+    tag_input.keydown(function (event) {
+      switch (event.which) {
+        case BACKSPACE:
+          if (tag_input.val() == "") {
+            // When backspace is pressed, the last tag is deleted.
+            removeLastTag();
+          }
+          break;
+        case TAB:
+          if (tag_input.val() != "") {
+            event.preventDefault();
+          }
+          break;
+        default:
+          break;
+      }
+    });
+
+		tag_input.keypress(function(event){
+      switch(event.which) {
+        case COMMA:
+          checkAndCreateTag();
+          event.preventDefault();
+          break;
+        case ENTER:
+          if (tag_input.val() != "") {
+            checkAndCreateTag();
+          }
+          break;
+        default:
+          break;
+      }
+		});
+
+    var justCreatedOnBlur = false;
+    tag_input.blur(function () { justCreatedOnBlur = true; checkAndCreateTag(); });
+
+		tag_input.autocomplete({
+              autoFocus: true,
+			source: options.availableTags,
+      minLength: 2,
+			select: function(event,ui){
+        if(justCreatedOnBlur) {
+          justCreatedOnBlur = false;
+
+          //the tag created on blur will be replaced by the one selected
+          clearTimeout(delayedHighlightOnExistingTag);
+          removeLastTag();
+        }
+        
+				if (is_new (ui.item.value)) {
+					create_choice (ui.item.value);
+				}
+				// Cleaning the input.
+				tag_input.val("");
+
+				// Preventing the tag input to be update with the chosen value.
+				return false;
+			}
+		});
+
+    var delayedHighlightOnExistingTag = null;
+
+		function is_new (value){
+			var is_new = true;
+			tag_input.parents("ul").children(".tagit-choice").each(function(i){
+        var tag = $(this);
+        n = tag.children("input").val();
+				if (value == n) {
+          delayedHighlightOnExistingTag = setTimeout(function() {tag.effect('pulsate');}, 100);
+					is_new = false;
+				}
+			});
+			return is_new;
+		}
+
+    function updateBackingField() {
+      if (backingField) {
+        var tagValues = '';
+        el.find('.tagit-choice > input').each(function() {
+          tagValues += ',' + $(this).val();
+        });
+
+        backingField.val(tagValues);
+      }
+    }
+
+    function removeLastTag() {
+      el.children(".tagit-choice:last").remove();
+
+      updateBackingField();
+    }
+
+    function create_choice (value){
+			var tag = "";
+			tag  = "<li class=\"tagit-choice\">\n";
+			tag += value + "\n";
+			tag += "<a class=\"close\">x</a>\n";
+			tag += "<input type=\"hidden\" style=\"display:none;\" value=\""+value+"\" name=\"item[tags][]\">\n";
+			tag += "</li>\n";
+			var li_search_tags = tag_input.parent();
+			$(tag).insertBefore (li_search_tags);
+			tag_input.val("");
+
+      updateBackingField();
+		}
+	};
+
+	String.prototype.trim = function() {
+		return this.replace(/^\s+|\s+$/g,"");
+	};
+
+})(jQuery);
