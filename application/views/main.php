@@ -68,7 +68,7 @@
             <?=form_open('generator')?>
 
             <h4>Color Widget</h4>
-            <input type="text" name="color3" class="colors" size="7" value="#005294" />
+            <input type="text" name="colors[main]" class="colors" size="7" value="#005294" />
 
             <hr>
 
@@ -83,7 +83,7 @@
                 </a> 
               </div>
               <input type="file" name="header" id="header" class="inputfile" style="display:none;"/>
-              <input type="text" name="header_filename" id="header_image" style="display:none;" />
+              <input type="text" name="url[header]" id="header_image" style="display:none;" />
             </div>
             
 
@@ -93,22 +93,22 @@
             <div class="multiplechoice">
               <ul class="media-grid">
                 <li>
-                  <a href="#" id="button_1" class="selected">
+                  <a href="#" id="main" class="selected">
                     <img alt="" src="http://placehold.it/210x150" class="thumbnail">
                   </a>
                 </li>
                 <li>
-                  <a href="#" id="button_2">
+                  <a href="#" id="main2">
                     <img alt="" src="http://placehold.it/210x150" class="thumbnail">
                   </a>
                 </li>
                 <li>
-                  <a href="#" id="button_3">
+                  <a href="#" id="main3">
                     <img alt="" src="http://placehold.it/210x150" class="thumbnail">
                   </a>
                 </li>
               </ul>
-              <input type="text" name="vote_widget" id="vote_widget" style="display:none;" value="button_1" />
+              <input type="text" name="import[vote_widget]" id="vote_widget" style="display:none;" value="button_1" />
             </div>
 
             <hr>                        
