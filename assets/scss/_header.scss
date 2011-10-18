@@ -1,0 +1,6 @@
+/* _header.scss */
+
+/* Set header background */
+#header {
+    background: url("../#{unquote($url_header)}") no-repeat scroll center bottom transparent;
+}

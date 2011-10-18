@@ -1,9 +1,21 @@
 /* _main.scss */
 
-.content-navigation {
-	border-color: $color_main;
-	color: $color_main; // This is another comment
+body {
+	background: unquote($color_body);
 }
-.border {
-	border-color: $color_main;
+#page { 
+	background: unquote($color_container);
+}
+
+a {
+  color: unquote($color_links);
+  &:hover { color: unquote($color_links); }
+  &:visited { color: unquote($color_links); }
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: unquote($color_paragraph);
+}
+p {
+	color: unquote($color_paragraph);
 }

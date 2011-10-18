@@ -17,6 +17,7 @@ class Generator extends CI_Controller {
 		}
 
 		$string .= "@import ".'"'.FCPATH.'assets/scss/main"'.";\n";
+		$string .= "@import ".'"'.FCPATH.'assets/scss/header"'.";\n";
 
 		foreach ( $this->input->post('import') as $key => $val ) {
     		$string.= "@import ".'"'.FCPATH.'assets/scss/'."$val".'";'."\n";
@@ -33,6 +34,11 @@ class Generator extends CI_Controller {
 			$compiled_css = shell_exec(escapeshellcmd('sass -t expanded --unix-newlines --no-cache '.FCPATH.'tmp/custom.scss'));
 		    $this->zip->read_dir(FCPATH.'third_party/ideascale/ideas.ideascale.com/',FALSE); 
 		    $this->zip->add_data('ideas.ideascale.com/css/custom.css', $compiled_css); 
+
+			foreach ( $this->input->post('url') as $key => $val ) {
+				$this->zip->add_data("ideas.ideascale.com/".$val, file_get_contents($val)); 
+			}
+
 		    $this->zip->download('demo_'.time().'.zip'); 
 		}
 	}
