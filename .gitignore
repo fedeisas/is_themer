@@ -7,3 +7,7 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+index.php
+uploads/*
+tmp/*
+assets/cache/*

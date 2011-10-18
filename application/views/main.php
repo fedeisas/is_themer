@@ -67,12 +67,7 @@
             
             <?=form_open('generator')?>
 
-            <h4>Color Widget</h4>
-            <input type="text" name="colors[main]" class="colors" size="7" value="#005294" />
-
-            <hr>
-
-            <h4>Image Widget</h4>
+            <h4>Header</h4>
             <div class="imageupload">
               <span class="help-block">
                 <strong>Note:</strong> Works best with 935x110 images.
@@ -83,9 +78,42 @@
                 </a> 
               </div>
               <input type="file" name="header" id="header" class="inputfile" style="display:none;"/>
-              <input type="text" name="url[header]" id="header_image" style="display:none;" />
+              <input type="text" name="url[header]" id="url_header" style="display:none;" />
             </div>
-            
+            <hr>
+
+
+            <h4>Colors</h4>
+            <div class="clearfix">
+              <label for="xlInput">Body Bg Color</label>
+              <div class="input">
+                <input type="text" name="colors[body]" class="colors" size="7" value="#005294" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="xlInput">Container Bg Color</label>
+              <div class="input">
+                <input type="text" name="colors[container]" class="colors" size="7" value="#005294" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="xlInput">Links Color</label>
+              <div class="input">
+                <input type="text" name="colors[links]" class="colors" size="7" value="#005294" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="xlInput">Headers Color</label>
+              <div class="input">
+                <input type="text" name="colors[headers]" class="colors" size="7" value="#005294" />
+              </div>
+            </div>
+            <div class="clearfix">
+              <label for="xlInput">Paragraph Color</label>
+              <div class="input">
+                <input type="text" name="colors[paragraph]" class="colors" size="7" value="#005294" />
+              </div>
+            </div>
 
             <hr>
             

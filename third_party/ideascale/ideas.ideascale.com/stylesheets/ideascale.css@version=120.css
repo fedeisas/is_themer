@@ -205,7 +205,7 @@ a:hover {
 	position: relative;
 	min-height: 110px;
 	border-bottom: 1px solid #ddd;
-	background: url(http://custom.ideascale.com/images/header-bg.png) no-repeat bottom center;
+	background: url(http://ideas.ideascale.com/images/header-bg.png) no-repeat bottom center;
 	margin-bottom: 25px;
 	padding-left: 25px;
 }
@@ -243,12 +243,12 @@ a:hover {
 	height: 35px;
 	width: 140px;
 	text-indent: -10000px;
-	background: url(http://custom.ideascale.com/images/ideascale-logo-bw.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/ideascale-logo-bw.png) no-repeat left top;
 	margin: -9px 0 0 190px;
 }
 
 .ideascale-bw:hover {
-	background: url(http://custom.ideascale.com/images/ideascale-logo-bw.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/ideascale-logo-bw.png) no-repeat left top;
 }
 
 #search {
@@ -343,7 +343,7 @@ a:hover {
 
 #home-link {
   padding-left: 12px;
-  background-image: url(http://custom.ideascale.com/images/home.png);
+  background-image: url(http://ideas.ideascale.com/images/home.png);
   background-repeat: no-repeat;
   background-position: 0 50%;
 }
@@ -399,7 +399,7 @@ a:hover {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-khtml-border-radius: 5px;
-	background: url(http://custom.ideascale.com/images/bg-submit-idea.png) repeat-x left top;
+	background: url(http://ideas.ideascale.com/images/bg-submit-idea.png) repeat-x left top;
 	text-align: center;
 	padding-top: 8px;
 	text-decoration: none;
@@ -499,7 +499,7 @@ a:hover {
 	list-style: none;
 	font-size: .85em;
 	color: #474747;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	padding: 8px 0 0 52px;
 }
 
@@ -560,7 +560,7 @@ a:hover {
 	position: relative;
 	margin-bottom: 35px;
 	padding-bottom: 10px;
-	background: url(http://custom.ideascale.com/images/sidebar-section-bg.png) no-repeat left bottom;
+	background: url(http://ideas.ideascale.com/images/sidebar-section-bg.png) no-repeat left bottom;
 }
 
 .section a {
@@ -905,7 +905,7 @@ a:hover {
 }
 
 .content .report {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -426px;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 0 -426px;
 	position: absolute;
 	top: 4px;
 	font-size: .75em;
@@ -1017,7 +1017,7 @@ a:hover {
 }
 
 .agree,.disagree {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat left top;
 	text-indent: 20px;
 }
 
@@ -1037,7 +1037,7 @@ a:hover {
 	width: 119px;
 	padding: 12px 0 0 33px;
 	margin: 0 0 0 -9px;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat left top;
 }
 
 .agreed:hover {
@@ -1046,7 +1046,7 @@ a:hover {
 	font-weight: 700;
 	display: block;
 	font-size: .81em;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat left top;
 }
 
 .disagreed,.disagreed:hover {
@@ -1058,7 +1058,7 @@ a:hover {
 	width: 141px;
 	margin: -4px 0 0 -9px;
 	padding: 9px 0 0 33px;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat left top;
 }
 
 .idea:hover .agree,.idea:hover .disagree {
@@ -1130,11 +1130,11 @@ a:hover {
 }
 
 .voting-disabled .agree {
-  background-image: url(http://custom.ideascale.com/images/agree-disabled.png);
+  background-image: url(http://ideas.ideascale.com/images/agree-disabled.png);
 }
 
 .voting-disabled .disagree {
-  background-image: url(http://custom.ideascale.com/images/disagree-disabled.png);
+  background-image: url(http://ideas.ideascale.com/images/disagree-disabled.png);
 }
 
 .voting-disabled .vote-number {
@@ -1151,7 +1151,7 @@ a:hover {
 	top: 34px;
 	left: 0;
 	text-align: center;
-	background: url(http://custom.ideascale.com/images/idea-bg.png) left top no-repeat;
+	background: url(http://ideas.ideascale.com/images/idea-bg.png) left top no-repeat;
 	height: 62px;
 }
 
@@ -1341,7 +1341,7 @@ p.votes, .feedback-score {
 	font-size: 1em;
 	text-align: center;
 	border: none;
-	background: url(http://custom.ideascale.com/images/poker-chips-left-bg.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/poker-chips-left-bg.png) no-repeat left top;
 	width: 74px;
 	height: 69px;
 }
@@ -1542,7 +1542,7 @@ p.votes, .feedback-score {
 
 .poker-chips .other-idea {
 	margin: 20px 0;
-	background: url(http://custom.ideascale.com/images/other-idea-bg.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/other-idea-bg.png) no-repeat left top;
 	margin-left: -10px;
 }
 
@@ -1590,7 +1590,7 @@ p.votes, .feedback-score {
 }
 
 .completed,.completed:hover {
-	background: #fff url(http://custom.ideascale.com/images/flag-completed.png) no-repeat right top;
+	background: #fff url(http://ideas.ideascale.com/images/flag-completed.png) no-repeat right top;
 	/*checkered flag*/
 	color: #000;
 }
@@ -1600,7 +1600,7 @@ p.votes, .feedback-score {
 }
 
 .offtopic,.offtopic:hover {
-	background: #fff url(http://custom.ideascale.com/images/flag-offtopic.png) no-repeat right top;
+	background: #fff url(http://ideas.ideascale.com/images/flag-offtopic.png) no-repeat right top;
 	/*checkered flag*/
 	color: #000;
 }
@@ -1610,7 +1610,7 @@ p.votes, .feedback-score {
 }
 
 .inbound,.inbound:hover {
-    background: #fff url(http://custom.ideascale.com/images/flag-inbound.png) no-repeat right top;
+    background: #fff url(http://ideas.ideascale.com/images/flag-inbound.png) no-repeat right top;
     /*arrow flag*/
     color: #000;
 }
@@ -1620,7 +1620,7 @@ p.votes, .feedback-score {
 }
 
 .closed,.closed:hover {
-    background: #000 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*BLACK*/ 
+    background: #000 url(http://ideas.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*BLACK*/ 
 	color: #fff;
 }
 
@@ -1629,7 +1629,7 @@ p.votes, .feedback-score {
 }
 
 .under-review,.under-review:hover {
-    background: #FFD324 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*YELLOW*/
+    background: #FFD324 url(http://ideas.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*YELLOW*/
 	color: #000;
 }
 
@@ -1638,7 +1638,7 @@ p.votes, .feedback-score {
 }
 
 .in-progress,.in-progress:hover {
-    background: #008900 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*GREEN*/ 
+    background: #008900 url(http://ideas.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*GREEN*/ 
 	color: #000;
 }
 
@@ -1647,7 +1647,7 @@ p.votes, .feedback-score {
 }
 
 .active,.active:hover {
-    background: #f7f7f7 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*light,light-grey (hardly visible)*/ 
+    background: #f7f7f7 url(http://ideas.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*light,light-grey (hardly visible)*/ 
 	color: #474747;
 }
 
@@ -1656,7 +1656,7 @@ p.votes, .feedback-score {
 }
 
 .new-pending,.new-pending:hover {
-    background: #cc0100 url(http://custom.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*RED*/ 
+    background: #cc0100 url(http://ideas.ideascale.com/images/idea-status-corner.png) no-repeat right top;/*RED*/ 
 	color: #fff;
 }
 
@@ -1767,11 +1767,11 @@ p.votes, .feedback-score {
 }
 
 .moderate-menu li a.current {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -4px;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 0 -4px;
 }
 
 .moderate-menu li a.updating {
-	background: url(http://custom.ideascale.com/images/spinner.gif) no-repeat 0 4px;
+	background: url(http://ideas.ideascale.com/images/spinner.gif) no-repeat 0 4px;
 }
 
 /* ------- Admin idea menu -----*/
@@ -1782,7 +1782,7 @@ p.votes, .feedback-score {
 	font-size: .75em;
 	text-decoration: none;
 	z-index: 100;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 5px -492px;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 5px -492px;
 	height: 16px;
 	padding: 3px 5px 0 25px;
 }
@@ -1798,7 +1798,7 @@ p.votes, .feedback-score {
 	height: 15px;
 	border: 1px solid #ccc;
 	border-bottom: none;
-	background: #fff url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 5px -492px;
+	background: #fff url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 5px -492px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -1879,11 +1879,11 @@ p.votes, .feedback-score {
 }
 
 .admin-idea li a.current-status {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 10px 4px;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 10px 4px;
 }
 
 .admin-idea li a.updating-status {
-	background: url(http://custom.ideascale.com/images/spinner.gif) no-repeat 10px 11px;
+	background: url(http://ideas.ideascale.com/images/spinner.gif) no-repeat 10px 11px;
 }
 
 /*--------- vtip css ---------*/
@@ -2017,7 +2017,7 @@ p#vtip #vtipArrow {
 	margin-top: 9px;
 	position: absolute;
 	bottom: 2px;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat  0 -213px;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat  0 -213px;
 	text-indent: 20px;
 }
 
@@ -2110,11 +2110,11 @@ p#vtip #vtipArrow {
 	height: 38px;
 	width: 176px;
 	text-indent: -10000px;
-	background: url(http://custom.ideascale.com/images/ideascale-logo-color.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/ideascale-logo-color.png) no-repeat left top;
 }
 
 .ideascale-color:hover {
-	background: url(http://custom.ideascale.com/images/ideascale-logo-color.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/ideascale-logo-color.png) no-repeat left top;
 }
 
 #footer .ideascale-color {
@@ -2247,22 +2247,22 @@ p#vtip #vtipArrow {
 }
 
 .idea .social-actions li.emailidea {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	background-position: 0 -627px;
 }
 
 .idea .social-actions li.create-comment {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	background-position: 0 -145px;
 }
 
 .idea .social-actions li.track {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	background-position: 0 -694px;
 }
 
 .idea .social-actions li.edit {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	background-position: 0 -490px;
 }
 
@@ -2298,7 +2298,7 @@ p#vtip #vtipArrow {
 #tag-cloud-items.manage-mode a {
 	line-height: 1.5em;
 	padding: 0 10px 0 18px;
-	background-image: url(http://custom.ideascale.com/images/minus.png);
+	background-image: url(http://ideas.ideascale.com/images/minus.png);
 	background-repeat: no-repeat;
 	background-position: 2px 50%;
 	cursor: pointer;
@@ -2336,7 +2336,7 @@ p#vtip #vtipArrow {
 }
 
 .feature-activator {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -492px;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 0 -492px;
 	font-size: 0.69em;
 	line-height: 1.5em;
 	padding-left: 2em;
@@ -2500,11 +2500,11 @@ p#vtip #vtipArrow {
 }
 
 .comment-reply {
-  background-image: url(http://custom.ideascale.com/images/comment-reply.png);
+  background-image: url(http://ideas.ideascale.com/images/comment-reply.png);
 }
 
 .comment-vote-up {
-  background-image: url(http://custom.ideascale.com/images/vote-up.png);
+  background-image: url(http://ideas.ideascale.com/images/vote-up.png);
   background-position: 0 0;
 }
 
@@ -2513,7 +2513,7 @@ p#vtip #vtipArrow {
 }
 
 .comment-vote-down {
-  background-image: url(http://custom.ideascale.com/images/vote-down.png);
+  background-image: url(http://ideas.ideascale.com/images/vote-down.png);
   background-position: 0 100%;
 }
 
@@ -2522,7 +2522,7 @@ p#vtip #vtipArrow {
 }
 
 .comment-vote-in-progress {
-  background-image: url(http://custom.ideascale.com/images/spinner.gif);
+  background-image: url(http://ideas.ideascale.com/images/spinner.gif);
   background-position: 0 50%;
 }
 
@@ -2532,7 +2532,7 @@ p#vtip #vtipArrow {
 }
 
 .comment.moderator .avatar,.attachment.moderator .avatar {
-	background: url(http://custom.ideascale.com/images/bg-avatar-moderator.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/bg-avatar-moderator.png) no-repeat left top;
 }
 
 /* Comments > Status Corner */
@@ -2567,7 +2567,7 @@ p#vtip #vtipArrow {
 
 .comment .status .actions .report-abuse {
 	display: none;
-  background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat 0 -426px;
+  background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat 0 -426px;
   height: 16px;
 }
 
@@ -2706,7 +2706,7 @@ p#vtip #vtipArrow {
 /*------ Form Errors ------*/
 .validation-error input,.validation-error textarea,.form-field.validation-error input[type=password],.form-field.validation-error input[type=text],.form-field.validation-error textarea
 	{
-	background: #fff url(http://custom.ideascale.com/images/txt-error.gif) repeat-x left top;
+	background: #fff url(http://ideas.ideascale.com/images/txt-error.gif) repeat-x left top;
 	border: 1px solid #D35757;
 }
 
@@ -2863,7 +2863,7 @@ p#vtip #vtipArrow {
 }
 
 .processing {
-	background-image: url(http://custom.ideascale.com/images/search-spinner.gif);
+	background-image: url(http://ideas.ideascale.com/images/search-spinner.gif);
 	background-repeat: no-repeat;
 	background-position:  50% 50%;
 }
@@ -3079,7 +3079,7 @@ p#vtip #vtipArrow {
   width: 471px;
   padding: 10px 10px 10px 20px;
   margin-bottom: 5px;
-  background: url(http://custom.ideascale.com/images/comment-box.png) no-repeat;
+  background: url(http://ideas.ideascale.com/images/comment-box.png) no-repeat;
   resize: none;
   overflow: auto;
 }
@@ -3171,7 +3171,7 @@ p#vtip #vtipArrow {
 }
 
 .attach-file {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	background-position: 0 -81px;
 	padding: 3px 0 0 20px;
 	height: 16px;
@@ -3192,7 +3192,7 @@ p#vtip #vtipArrow {
 
 .twitter,.email,.feed {
 	padding-left: 22px;
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat left top;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat left top;
 }
 
 .feed {
@@ -3473,7 +3473,7 @@ select.category {
 .private-community a,.need-login a,.generic-info a, .dialog-link-btn {
 	margin: 0 30px;
 	-moz-border-radius: 4px 4px 4px 4px;
-	background: url(http://custom.ideascale.com/images/bg-button-off.jpg) repeat-x scroll center
+	background: url(http://ideas.ideascale.com/images/bg-button-off.jpg) repeat-x scroll center
 		bottom transparent;
 	border: 1px solid;
 	border-color: #D6D6D6 #D6D6D6 #CCCCCC;
@@ -3598,7 +3598,7 @@ select.category {
 /* ------------- Moderate Idea Status Corners ------------- */
 .admin-idea .active,.admin-idea .active:hover,.admin-idea .closed,.admin-idea .closed:hover,.admin-idea .in-progress,.admin-idea .in-progress:hover,.admin-idea .new-pending,.admin-idea .new-pending:hover,.admin-idea .under-review,.admin-idea .under-review:hover
 	{
-	background: #fff url(http://custom.ideascale.com/images/status-corners-sprite.png) no-repeat
+	background: #fff url(http://ideas.ideascale.com/images/status-corners-sprite.png) no-repeat
 		right top;
 }
 
@@ -3629,7 +3629,7 @@ select.category {
 }
 
 .attach-file {
-	background: url(http://custom.ideascale.com/images/icons-sprite.png) no-repeat;
+	background: url(http://ideas.ideascale.com/images/icons-sprite.png) no-repeat;
 	background-position: 0 -81px;
 	padding: 3px 0 0 20px;
 	height: 24px;
@@ -3698,7 +3698,7 @@ select.category {
 }
 
 .badges li a {
-	background: url(http://custom.ideascale.com/images/badges-sprite.png) no-repeat top left;
+	background: url(http://ideas.ideascale.com/images/badges-sprite.png) no-repeat top left;
 	display: block;
 	width: 48px;
 	height: 48px;
@@ -4013,8 +4013,8 @@ select.category {
   background-position: 100% 50%;
   padding-right: 20px;
 }
-.up { background-image: url(http://custom.ideascale.com/images/ideascale/vote_up.png); }
-.down { background-image: url(http://custom.ideascale.com/images/ideascale/vote_down.png); }
+.up { background-image: url(http://ideas.ideascale.com/images/ideascale/vote_up.png); }
+.down { background-image: url(http://ideas.ideascale.com/images/ideascale/vote_down.png); }
 #vote-activities .when {
   color: #666;
 }
@@ -4068,10 +4068,10 @@ li:hover .category-actions, h5:hover .category-actions { opacity: 1; }
 .link-btn { display: inline-block; border: none; padding: 0; margin: 0; background: none; color: #145B82; cursor: pointer; font-size: 1em; }
 .link-btn:hover { text-decoration: underline; background: #145B82; color: #fff; }
 
-.inline-help { position: relative; display: inline-block; padding: 0; width: 18px; height: 18px; vertical-align: bottom; text-indent: -9999px; overflow: hidden; background: url(http://custom.ideascale.com/images/help-18.png) no-repeat; }
+.inline-help { position: relative; display: inline-block; padding: 0; width: 18px; height: 18px; vertical-align: bottom; text-indent: -9999px; overflow: hidden; background: url(http://ideas.ideascale.com/images/help-18.png) no-repeat; }
 
 #categories-admin-impl-tree { padding: 0.5em; margin-top: 0.5em; border: dotted 1px #ccc; }
-#categories-admin-impl-tree .processing { background: url(http://custom.ideascale.com/images/spinner.gif) no-repeat 100% 0; }
+#categories-admin-impl-tree .processing { background: url(http://ideas.ideascale.com/images/spinner.gif) no-repeat 100% 0; }
 
 #categories-admin p { font-size: 12px; color: #444; }
 

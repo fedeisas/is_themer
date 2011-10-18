@@ -13,8 +13,11 @@ $(document).ready( function() {
 
 		var elementID = $(this).attr('id');
 		var fieldName = $(this).attr('name');
+		var urlHolder = $(this).next();
 		var imageContainer = $(this).parent().children('.media-grid').children().children();
 		var imageField = $(this).siblings('.disabled');
+
+		console.log(urlHolder);
 
 		$.ajaxFileUpload({
 			url: './upload/upload_file/' + fieldName,
@@ -30,6 +33,7 @@ $(document).ready( function() {
 			   {
 			      imageContainer.attr('src',data.url);
 			      imageField.val(data.filename);
+			      urlHolder.val(data.filename);
 			   }
 			}
 		});
