@@ -32,6 +32,8 @@ class Generator extends CI_Controller {
 		{
 			$this->load->library('zip');
 			if (ENVIRONMENT == 'production') {
+				putenv('PATH=/home/fedeisas/bin:$PATH');
+				putenv('GEM_HOME=/home/fedeisas/gems');
 				$compiled_css = shell_exec(escapeshellcmd('/home/fedeisas/bin/sass -t expanded --unix-newlines --no-cache '.FCPATH.'tmp/custom.scss'));
 
 			} else {
