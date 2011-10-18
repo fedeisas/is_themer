@@ -11,3 +11,4 @@ index.php
 uploads/*
 tmp/*
 assets/cache/*
+.sass-cache
