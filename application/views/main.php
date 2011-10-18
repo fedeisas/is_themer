@@ -77,7 +77,7 @@
                   <img src="http://placehold.it/935x110" class="thumbnail" width="748" height="88" />
                 </a> 
               </div>
-              <input type="file" name="header" id="header" class="inputfile" style="display:none;"/>
+              <input type="file" name="header" id="header" class="inputfile" style="" />
               <input type="text" name="url[header]" id="url_header" style="display:none;" />
             </div>
             <hr>
